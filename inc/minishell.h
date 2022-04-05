@@ -1,5 +1,5 @@
-#ifndef MINISHELL.H
-# define MINISHELL.H
+#ifndef MINISHELL_H
+# define MINISHELL_H
 
 #include <curses.h>
 #include <dirent.h>
@@ -15,6 +15,7 @@
 #include <sys/wait.h>
 #include <unistd.h>
 #include "libft.h"
+#include "ft_printf.h"
 
 // MACROS
 #define PROMPT "minishell0.0$ " 

@@ -10,37 +10,43 @@
 #                                                                              #
 # **************************************************************************** #
 
+# COMPILER
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra
 RM = rm -rf
 
-LIBFT = libft/libft.a
-LIBS = -lreadline $(LIBFT) 
-
+# FILES
 SRC = src
 OBJ = obj
 INC = inc
 SRCS = $(wildcard $(SRC)/*.c)
 OBJS = $(patsubst $(SRC)/%.c, $(OBJ)/%.o, $(SRCS))
+LIBFT = libft/libft.a
 
+# LINKER
+LIBS = -lreadline $(LIBFT) 
+
+# TARGET
 NAME = minishell
+
+# RULES
+all: $(NAME)
+
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) $(LIBS) -I $(INC) $^ -o $@ 
 
 $(OBJ)/%.o: $(SRC)/%.c
 	@mkdir -p $(OBJ)
 	@make -C libft/ 
-	$(CC) $(CFLAGS) $(LIBS) -I $(INC) -c $< -o $@
-
-.PHONY: all, clean, fclean, re
-
-all: $(NAME)
-
-$(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -o $@ $^
+	$(CC) $(CFLAGS) -I $(INC) -c $< -o $@
 
 clean:
 	$(RM) $(wildcard $(OBJ)/*.o)
 
 fclean: clean
 	$(RM) $(NAME)
+	@make fclean -C libft/
 
 re: fclean all
+
+.PHONY: all, clean, fclean, re
