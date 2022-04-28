@@ -6,11 +6,11 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 12:24:52 by nprimo            #+#    #+#             */
-/*   Updated: 2022/04/28 17:16:41 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/04/28 18:10:22 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#include "minishell.h"
 
 int	exec_command(int fd_in, int fd_out, char **av, char **envp)
 {

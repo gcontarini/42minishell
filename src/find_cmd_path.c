@@ -6,11 +6,11 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 17:08:44 by nprimo            #+#    #+#             */
-/*   Updated: 2022/04/28 17:14:34 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/04/28 18:10:59 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#include "minishell.h"
 
 static char	**find_ls_path_dir(void);
 

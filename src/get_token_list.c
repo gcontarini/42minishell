@@ -6,11 +6,11 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 17:44:00 by nprimo            #+#    #+#             */
-/*   Updated: 2022/04/28 12:50:06 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/04/28 18:11:13 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "minishell.h"
 
 static int	is_metachar(char c);
 static int	is_space(char c);
