@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 16:59:38 by nprimo            #+#    #+#             */
-/*   Updated: 2022/04/28 17:45:10 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/04/28 17:57:10 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_cmd	*get_comm_list(char *input)
 {
-	t_cmd	comm_list[2]; // need to be dynamic allocation
+	t_cmd	*comm_list; // need to be dynamic allocation
 	t_list	*token_list;
 	int		pos;
 
@@ -22,6 +22,7 @@ t_cmd	*get_comm_list(char *input)
 	get_token_list(input, &token_list); // need to add a check if it fails
 	// need to check how many command are there (count_comm or something like that)
 	// while loop to assign all the commands
+	comm_list = malloc(sizeof(t_cmd) * 2);
 	comm_list[0].av = malloc(sizeof(comm_list[0].av) * (ft_lstsize(token_list) + 1));
 	pos = 0;
 	while (token_list)
