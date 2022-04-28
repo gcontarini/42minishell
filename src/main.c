@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:14:41 by gcontarini        #+#    #+#             */
-/*   Updated: 2022/04/28 17:16:32 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/04/28 17:45:32 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int main(void)
 {
     static t_shell  sh;
-    t_comm_list     *comm_list;
+    t_cmd           *comm_list;
 
     //sh = init_sh();
     //register_all_signals(); // Add functions to handle each signal

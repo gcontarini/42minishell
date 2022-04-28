@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:18:18 by gcontari          #+#    #+#             */
-/*   Updated: 2022/04/28 16:26:49 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/04/28 17:36:28 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,17 @@ typedef struct  s_shell
 //    t_llst *pids(t_ulong);
 }   t_shell;
 
+typedef struct s_fd
+{
+	char	*fname;
+	int		fd;
+}	t_fd;
+
 typedef struct  s_cmd
 {
-    char    *bin;
-    char    *args;
+	char				**av;
+	t_fd				in;
+	t_fd				out;
     // Maybe more stuff for redirects etc etc
 }   t_cmd;
 
