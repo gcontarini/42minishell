@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 17:08:44 by nprimo            #+#    #+#             */
-/*   Updated: 2022/04/28 16:54:18 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/04/28 17:14:34 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static char	**find_ls_path_dir(void);
 
-char	*find_cmd_path(const char *cmd, char **envp)
+char	*find_cmd_path(const char *cmd)
 {
 	char	**ls_path_dir;
 	char	*dir;
@@ -46,7 +46,6 @@ static char	**find_ls_path_dir(void)
 {
 	char	**ls_path_dir;
 	char	*path_var;
-	int		pos;
 
 	path_var = getenv("PATH");
 	if (!path_var)
