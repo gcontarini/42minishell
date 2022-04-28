@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 16:24:43 by nprimo            #+#    #+#             */
-/*   Updated: 2022/04/28 16:47:26 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/04/28 17:03:45 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,6 @@ typedef struct s_comm_list
 }	t_comm_list;
 
 void		get_token_list(char *input, t_list **token_list);
-t_comm_list	*get_comm_list(t_list *token_list);
+t_comm_list	*get_comm_list(char *input);
 
 #endif
