@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:14:41 by gcontarini        #+#    #+#             */
-/*   Updated: 2022/04/28 15:32:10 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/04/28 16:14:35 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,11 @@ int main(void)
         ft_printf("INPUT: %s\n", sh.inpt);
         token_list = NULL;
         get_token_list(sh.inpt, &token_list);
+        while (token_list->next)
+        {
+            printf("%s\n", token_list->content);
+            token_list = token_list->next;
+        }
         //exec_inpt(parse_input() => do_cmd()); // => wait for process???
         //free_input(); Check if we can free memory that is added to history
     }
