@@ -6,13 +6,13 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 17:08:44 by nprimo            #+#    #+#             */
-/*   Updated: 2022/04/28 16:25:18 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/04/28 16:54:18 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-static char	**find_ls_path_dir(char **envp);
+static char	**find_ls_path_dir(void);
 
 char	*find_cmd_path(const char *cmd, char **envp)
 {
@@ -23,7 +23,7 @@ char	*find_cmd_path(const char *cmd, char **envp)
 
 	pos = 0;
 	cmd_path = NULL;
-	ls_path_dir = find_ls_path_dir(envp);
+	ls_path_dir = find_ls_path_dir();
 	if (!ls_path_dir)
 		return (cmd_path);
 	while (ls_path_dir[pos])
@@ -42,23 +42,17 @@ char	*find_cmd_path(const char *cmd, char **envp)
 	return (cmd_path);
 }
 
-static char	**find_ls_path_dir(char **envp)
+static char	**find_ls_path_dir(void)
 {
 	char	**ls_path_dir;
+	char	*path_var;
 	int		pos;
 
-	pos = 0;
-	ls_path_dir = NULL;
-	while (envp[pos])
-	{
-		if (ft_strncmp(envp[pos], "PATH", 4) == 0)
-		{
-			ls_path_dir = ft_split(&envp[pos][ft_strlen("PATH=")], ':');
-			if (!ls_path_dir)
-				ls_path_dir = NULL;
-			break ;
-		}
-		pos++;
-	}
+	path_var = getenv("PATH");
+	if (!path_var)
+		return (NULL);
+	ls_path_dir = ft_split(path_var, ':');
+	if (!ls_path_dir)
+		ls_path_dir = NULL;
 	return (ls_path_dir);
 }
