@@ -30,6 +30,7 @@ CORE 	=	ft_atoi.c			\
 			ft_strlen.c			\
 			ft_strmapi.c		\
 			ft_strncmp.c		\
+			ft_strndup.c 		\
 			ft_strnstr.c		\
 			ft_strrchr.c		\
 			ft_strtrim.c		\

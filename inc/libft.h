@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcontari <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 12:05:39 by gcontari          #+#    #+#             */
-/*   Updated: 2021/12/23 17:32:57 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/04/28 15:34:01 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char *));
 int		ft_atoi(const char *str);
 // ## STR W/ MALLOC ##
 char	*ft_strdup(const char *s1);
+char	*ft_strndup(const char *s, int n);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
