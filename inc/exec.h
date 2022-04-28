@@ -1,31 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
+/*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/22 16:24:43 by nprimo            #+#    #+#             */
-/*   Updated: 2022/04/28 16:26:13 by nprimo           ###   ########.fr       */
+/*   Created: 2022/04/28 16:23:46 by nprimo            #+#    #+#             */
+/*   Updated: 2022/04/28 16:27:21 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
+#ifndef EXEC_H
+# define EXEC_H
 
-# include "minishell.h" 
+# include "minishell.h"
 
-# define METACHAR_SET "|&;()<>"
-# define SPACE_SET " \n\t"
-
-typedef struct s_comm_list
-{
-	char				**av;
-	int					input;
-	int					output;
-	struct s_comm_list	*next;
-}	t_comm_list;
-
-void	get_token_list(char *input, t_list **token_list);
+char	*find_cmd_path(const char *cmd, char **envp);
+int		exec_command(int fd_in, int fd_out, char **av, char **envp);
+void	free_split(char **av);
 
 #endif

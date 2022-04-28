@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:18:18 by gcontari          #+#    #+#             */
-/*   Updated: 2022/04/28 15:25:31 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/04/28 16:26:49 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # include "libft.h"
 # include "ft_printf.h"
 # include "parser.h"
+# include "exec.h"
 
 // MACROS
 #define PROMPT "minishell0.0$ " 
