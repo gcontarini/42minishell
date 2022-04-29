@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 12:10:51 by nprimo            #+#    #+#             */
-/*   Updated: 2022/04/29 16:43:44 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/04/29 16:53:58 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,11 @@ void	print_cmd_list(t_list *cmd_list)
 	head = cmd_list;
 	while (head)
 	{
-		printf("av: ");
+		printf("av: \n");
 		cmd = (t_cmd*) head->content;
 		print_av(cmd->av);
 		head = head->next;
+		printf("---\n");
 	}
 }
 
@@ -36,7 +37,7 @@ static void	print_av(char **av)
 	pos = 0;
 	while (av && av[pos])
 	{
-		printf("< %s > ", av[pos]);
+		printf("< %s > \n", av[pos]);
 		pos++;
 	}
 }
