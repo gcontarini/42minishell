@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 17:44:00 by nprimo            #+#    #+#             */
-/*   Updated: 2022/04/28 18:11:13 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/04/29 16:28:06 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,27 @@ static int	is_space(char c);
 static char	*get_next_token(char *input);
 
 
-void	get_token_list(char *input, t_list **token_list)
+int	get_token_list(char *input, t_list **token_list)
 {
 	char	*new_token;
 	t_list	*new_token_el;
+	int		pos;
+	int		flag;
 
-	while (*input && is_space(*input))
-		input++;
-	new_token = get_next_token(input);
+	pos = 0;
+	flag = 0; // use to track errors - there might be a better way
+	while (input[pos] && is_space(input[pos]))
+		pos++;
+	new_token = get_next_token(&input[pos]);
 	if (new_token)
 	{
 		new_token_el = ft_lstnew(new_token);
 		if (new_token_el)
 			ft_lstadd_back(token_list, new_token_el);
-		input += ft_strlen(new_token);
-		return (get_token_list(input, token_list));
+		pos += ft_strlen(new_token);
+		return (get_token_list(&input[pos], token_list));
 	}
-	return ;
+	return (flag);
 }
 
 static char	*get_next_token(char *input)
@@ -46,12 +50,14 @@ static char	*get_next_token(char *input)
 		len = 0;
 		if (is_metachar(*input))
 		{
-			while(input[len] && !is_space(input[len]) && is_metachar(input[len]))
+			while(input[len]
+				&& !is_space(input[len]) && is_metachar(input[len]))
 				len++;
 		}
 		else
 		{
-			while (input[len] && !is_space(input[len]) && !is_metachar(input[len]))
+			while (input[len]
+				&& !is_space(input[len]) && !is_metachar(input[len]))
 				len++;
 		}
 		token = ft_strndup(input, len);

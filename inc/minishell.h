@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:18:18 by gcontari          #+#    #+#             */
-/*   Updated: 2022/04/29 12:23:13 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/04/29 16:19:02 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 # define PROMPT "minishell0.0$ " 
 # define METACHAR_SET "|&;()<>"
 # define SPACE_SET " \n\t"
+# define COMMAND_SEP ";|"
 
 // ALIAS
 typedef unsigned int    t_uint; 
@@ -64,11 +65,11 @@ typedef struct  s_cmd
 // FUNCTIONS
 // core
 void	free_split(char **av);
-void	print_comm_list(t_cmd *comm_list);
+void	print_cmd_list(t_list *cmd_list);
 
 // parser
-void	get_token_list(char *input, t_list **token_list);
-t_cmd	*get_comm_list(char *input);
+int		get_token_list(char *input, t_list **token_list);
+t_list	*get_cmd_list(char *input);
 
 // execture
 char	*find_bin_path(const char *cmd);
