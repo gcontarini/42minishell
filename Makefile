@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+         #
+#    By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/24 19:45:47 by nprimo            #+#    #+#              #
-#    Updated: 2022/04/05 11:17:02 by gcontari         ###   ########.fr        #
+#    Updated: 2022/04/29 11:19:43 by nprimo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # COMPILER
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -g
 RM = rm -rf
 
 # FILES
