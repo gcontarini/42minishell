@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 12:24:52 by nprimo            #+#    #+#             */
-/*   Updated: 2022/04/29 12:21:05 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/04/29 13:01:30 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	exec_command(int fd_in, int fd_out, char **av, char **envp)
 	pid = fork();
 	if (pid == -1)
 		exit(1);
-	bin_path = (av[0]);
+	bin_path = find_bin_path(av[0]);
 	if (!bin_path)
 		exit(1);
 	if (pid == 0)
