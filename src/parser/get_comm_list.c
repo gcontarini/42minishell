@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 16:59:38 by nprimo            #+#    #+#             */
-/*   Updated: 2022/04/28 17:57:10 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/04/29 12:27:57 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ t_cmd	*get_comm_list(char *input)
 		token_list = token_list->next;
 		pos++;
 	}
+	comm_list[0].av[pos] = NULL;
 	comm_list[0].in.fname = NULL;
 	comm_list[0].out.fname = NULL;
 	comm_list[1].av = NULL;
