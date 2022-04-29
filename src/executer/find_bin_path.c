@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   find_cmd_path.c                                    :+:      :+:    :+:   */
+/*   find_bin_path.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/18 17:08:44 by nprimo            #+#    #+#             */
-/*   Updated: 2022/04/28 18:10:59 by nprimo           ###   ########.fr       */
+/*   Created: 2022/04/29 12:21:53 by nprimo            #+#    #+#             */
+/*   Updated: 2022/04/29 12:21:58 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static char	**find_ls_path_dir(void);
 
-char	*find_cmd_path(const char *cmd)
+char	*find_bin_path(const char *cmd)
 {
 	char	**ls_path_dir;
 	char	*dir;

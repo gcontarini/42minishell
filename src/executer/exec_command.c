@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 12:24:52 by nprimo            #+#    #+#             */
-/*   Updated: 2022/04/28 18:10:22 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/04/29 12:21:05 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 int	exec_command(int fd_in, int fd_out, char **av, char **envp)
 {
 	pid_t	pid;
-	char	*cmd_path;
+	char	*bin_path;
 
 	pid = fork();
 	if (pid == -1)
 		exit(1);
-	cmd_path = find_cmd_path(av[0]);
-	if (!cmd_path)
+	bin_path = (av[0]);
+	if (!bin_path)
 		exit(1);
 	if (pid == 0)
 	{
@@ -30,13 +30,13 @@ int	exec_command(int fd_in, int fd_out, char **av, char **envp)
 			exit(1);
 		if (close(fd_in) == -1 || close(fd_out) == -1)
 			exit(1);
-		if (execve(cmd_path, av, envp) == -1)
+		if (execve(bin_path, av, envp) == -1)
 			exit(1);
 	}
 	if (waitpid(pid, NULL, 0) == -1)
 		exit(1);
 	if (close(fd_in) == -1 || close(fd_out))
 		exit(1);
-	free(cmd_path);
+	free(bin_path);
 	return (0);
 }
