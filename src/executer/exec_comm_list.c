@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 17:19:09 by nprimo            #+#    #+#             */
-/*   Updated: 2022/04/29 12:16:52 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/04/29 14:18:52 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@ int exec_comm_list(t_cmd *comm_list)
 	while (comm_list[pos].av)
 	{
 		if (!comm_list->in.fname)
-			comm_list->in.fd = 1;
+			comm_list->in.fd = STDIN_FILENO;
 		// else 
 		// {
 		// 	comm_list->in.fd = open(comm_list->in.fname, O_RDONLY);
 		// 	...
 		// }
 		if (!comm_list[pos].out.fname)
-			comm_list[pos].out.fd = 2;
+			comm_list[pos].out.fd = STDOUT_FILENO;
 		// same as for input
 		if (exec_command(comm_list[pos].in.fd, comm_list[pos].out.fd, 
 				comm_list[pos].av, NULL))
