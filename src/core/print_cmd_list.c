@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_comm_list.c                                  :+:      :+:    :+:   */
+/*   print_cmd_list.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 12:10:51 by nprimo            #+#    #+#             */
-/*   Updated: 2022/04/29 12:13:36 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/04/29 15:53:36 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,18 @@
 
 static void	print_av(char **av);
 
-void	print_comm_list(t_cmd *comm_list)
+void	print_cmd_list(t_list *cmd_list)
 {
-	int pos;
+	t_list	*head;
+	t_cmd	*cmd;
 
-	pos = 0;
-	while (comm_list && comm_list[pos].av)
+	head = cmd_list;
+	while (head)
 	{
-		print_av(comm_list[pos].av);
-		pos++;
+		printf("av: ");
+		cmd = (t_cmd*) head->content;
+		print_av(cmd->av);
+		head = head->next;
 	}
 }
 
