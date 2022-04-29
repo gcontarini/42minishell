@@ -6,7 +6,7 @@
 #    By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/24 19:45:47 by nprimo            #+#    #+#              #
-#    Updated: 2022/04/29 12:02:06 by nprimo           ###   ########.fr        #
+#    Updated: 2022/04/29 13:05:56 by nprimo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,8 @@ OBJ = obj
 INC = inc
 SRCS = $(wildcard $(SRC)/*/*.c)
 OBJS = $(patsubst %.c, $(OBJ)/%.o, $(notdir $(SRCS)))
+SRCS_TEST := $(shell find $(SRC)/*/*.c | grep -v main.c)
+SRCS_TEST += $(wildcard test/*.c)
 LIBFT = libft/libft.a
 
 # LINKER
@@ -39,6 +41,9 @@ $(OBJ)/%.o: $(SRC)/*/%.c
 	@mkdir -p $(OBJ)
 	@make -C libft/ 
 	$(CC) $(CFLAGS) -I $(INC) -c $< -o $@
+
+tester: $(SRCS_TEST)
+	$(CC) $(CFLAGS) $(LIBS) -I $(INC) $^
 
 clean:
 	$(RM) $(wildcard $(OBJ)/*.o)
