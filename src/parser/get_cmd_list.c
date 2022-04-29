@@ -6,14 +6,14 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 16:59:38 by nprimo            #+#    #+#             */
-/*   Updated: 2022/04/29 15:59:18 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/04/29 16:44:46 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	**llist_n_to_av(t_list *llist, int ac);
-static int	add_new_cmd(t_list **cmd_list, t_list *token_list);
+static char		**llist_n_to_av(t_list *llist, int ac);
+static t_list	*add_new_cmd(t_list **cmd_list, t_list *token_list);
 
 t_list	*get_cmd_list(char *input)
 {
@@ -22,21 +22,16 @@ t_list	*get_cmd_list(char *input)
 	t_list	*head;
 
 	token_list = NULL;
-	get_token_list(input, &token_list); // need to add a check if it fails
-	// need to check how many command are there (count_comm or something like that)
-	// while loop to assign all the commands
 	cmd_list = NULL;
+	get_token_list(input, &token_list); // need to add a check if it fails
 	head = token_list;
 	while (head)
-	{
-		add_new_cmd(&cmd_list, head);
-		head = head->next;
-	}
-	ft_lstclear(&token_list, NULL);
+		head = add_new_cmd(&cmd_list, head);
+	// ft_lstclear(&token_list, NULL);
 	return (cmd_list);
 }
 
-static int	add_new_cmd(t_list **cmd_list, t_list *token_list)
+static t_list	*add_new_cmd(t_list **cmd_list, t_list *token_list)
 {
 	t_list	*head;
 	t_list	*new_node;
@@ -51,17 +46,19 @@ static int	add_new_cmd(t_list **cmd_list, t_list *token_list)
 	{
 		// check if there are riderections to files 
 		//		change in and out accordingly in case
+		// when encountering a pipe need to be sure that current cmd will 
+		// write on PIPE and next cmd will read on PIPE (same one)
 		argc++;
 		head = head->next;
 	}
 	new_cmd.av = llist_n_to_av(token_list, argc);
 	if (new_cmd.av == NULL)
-		return (-1);
+		return (NULL);
 	new_node = ft_lstnew(&new_cmd);
 	if (!new_node)
-		return (-1);
+		return (NULL);
 	ft_lstadd_back(cmd_list, new_node);
-	return (0);
+	return (head);
 }
 
 static char	**llist_n_to_av(t_list *llist, int argc)
@@ -77,7 +74,8 @@ static char	**llist_n_to_av(t_list *llist, int argc)
 	pos = 0;
 	while (pos < argc && head)
 	{
-		av[pos] = head->content;
+		av[pos] = (char *) head->content;
+		printf("Adding [%s]...\n", av[pos]); // without this doesn't work
 		head = head->next;
 		pos++;
 	}

@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 12:10:51 by nprimo            #+#    #+#             */
-/*   Updated: 2022/04/29 15:53:36 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/04/29 16:43:44 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	print_av(char **av)
 	pos = 0;
 	while (av && av[pos])
 	{
-		printf("%s\n", av[pos]);
+		printf("< %s > ", av[pos]);
 		pos++;
 	}
 }
