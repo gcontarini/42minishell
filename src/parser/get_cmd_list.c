@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 16:59:38 by nprimo            #+#    #+#             */
-/*   Updated: 2022/05/02 10:27:56 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/05/02 11:40:04 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,16 @@ static t_list	*add_new_cmd(t_list **cmd_list, t_list *token_list)
 	if (!new_cmd)
 		return (NULL);
 	// add function to find input and output file descriptor
+		// check if there are riderections to files 
+		//		change in and out accordingly in case
+		// check if it start with PIPE
 	new_cmd->in.fname = NULL;
 	new_cmd->out.fname = NULL;
 	// count argv in the next command
 	argc = 0;
 	head = token_list;
-	while (head) // && is_control_operator(head)
+	while (head && !is_control_operator(head->content))
 	{
-		// check if there are riderections to files 
-		//		change in and out accordingly in case
 		// when encountering a pipe need to be sure that current cmd will 
 		// write on PIPE and next cmd will read on PIPE (same one)
 		argc++;
