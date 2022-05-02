@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 16:59:38 by nprimo            #+#    #+#             */
-/*   Updated: 2022/04/29 16:44:46 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/05/02 09:27:17 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,16 @@ static t_list	*add_new_cmd(t_list **cmd_list, t_list *token_list)
 {
 	t_list	*head;
 	t_list	*new_node;
-	t_cmd	new_cmd;
+	t_cmd	*new_cmd;
 	int		argc;
 
-	new_cmd.in.fname = NULL;
-	new_cmd.out.fname = NULL;
+	new_cmd = malloc(sizeof(t_cmd) * 1);
+	if (!new_cmd)
+		return (NULL);
+	// add function to find input and output file descriptor
+	new_cmd->in.fname = NULL;
+	new_cmd->out.fname = NULL;
+	// count argv in the next command
 	argc = 0;
 	head = token_list;
 	while (head) // && is_cmd_sep(head)
@@ -51,10 +56,10 @@ static t_list	*add_new_cmd(t_list **cmd_list, t_list *token_list)
 		argc++;
 		head = head->next;
 	}
-	new_cmd.av = llist_n_to_av(token_list, argc);
-	if (new_cmd.av == NULL)
+	new_cmd->av = llist_n_to_av(token_list, argc);
+	if (new_cmd->av == NULL)
 		return (NULL);
-	new_node = ft_lstnew(&new_cmd);
+	new_node = ft_lstnew(new_cmd);
 	if (!new_node)
 		return (NULL);
 	ft_lstadd_back(cmd_list, new_node);
@@ -67,7 +72,7 @@ static char	**llist_n_to_av(t_list *llist, int argc)
 	t_list	*head;
 	int		pos;
 
-	av = malloc(sizeof(*av) * (argc + 1));
+	av = malloc(sizeof(char *) * (argc + 1));
 	if (!av)
 		return (NULL);
 	head = llist;
@@ -75,7 +80,7 @@ static char	**llist_n_to_av(t_list *llist, int argc)
 	while (pos < argc && head)
 	{
 		av[pos] = (char *) head->content;
-		printf("Adding [%s]...\n", av[pos]); // without this doesn't work
+		// printf("Adding [%s]...\n", av[pos]); // without this doesn't work
 		head = head->next;
 		pos++;
 	}
