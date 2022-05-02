@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:18:18 by gcontari          #+#    #+#             */
-/*   Updated: 2022/05/02 12:13:26 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/05/02 12:16:04 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int		is_control_operator(void *void_token);
 
 // execture
 char	*find_bin_path(const char *cmd);
-int		exec_command(int fd_in, int fd_out, char **av, char **envp);
+int		exec_cmd(int fd_in, int fd_out, char **av, char **envp);
 int 	exec_cmd_list(t_list *comm_list);
 
 

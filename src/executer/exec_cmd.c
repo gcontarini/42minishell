@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_command.c                                     :+:      :+:    :+:   */
+/*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 12:24:52 by nprimo            #+#    #+#             */
-/*   Updated: 2022/04/29 14:42:32 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/05/02 12:15:48 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	redirect(int fd_in, int fd_out);
 
-int	exec_command(int fd_in, int fd_out, char **av, char **envp)
+int	exec_cmd(int fd_in, int fd_out, char **av, char **envp)
 {
 	pid_t	pid;
 	char	*bin_path;
