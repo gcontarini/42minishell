@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:18:18 by gcontari          #+#    #+#             */
-/*   Updated: 2022/05/02 11:09:05 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/05/02 11:27:21 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void	print_cmd_list(t_list *cmd_list);
 // parser
 int		get_token_list(const char *input, t_list **token_list);
 t_list	*get_cmd_list(char *input);
+int		is_control_operator(void *void_token);
 
 // execture
 char	*find_bin_path(const char *cmd);
