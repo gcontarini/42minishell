@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 17:44:00 by nprimo            #+#    #+#             */
-/*   Updated: 2022/05/02 11:15:33 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/05/02 12:29:16 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,9 @@ static char	*get_next_token(const char *input)
 			len++;
 			// if doing bonus need to check for control operators 
 			// that can have more than 1 char
+		// else if (ft_strchr("'\"", *input))
+			// len = till the next quote
+			//		when required, do the expansion
 		else
 		{
 			while (input[len]
