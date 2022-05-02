@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:18:18 by gcontari          #+#    #+#             */
-/*   Updated: 2022/05/02 10:12:13 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/05/02 10:46:04 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@
 # define PROMPT "minishell0.0$ " 
 # define METACHAR_SET "|&;()<>"
 # define SPACE_SET " \n\t"
-// # define CONTROL_OP ["||", "&&", "&", ";" ";;" ";&", ";;&", "|", "|&", "(", ")"] 
 
 // ALIAS
 typedef unsigned int    t_uint; 
