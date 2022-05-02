@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:18:18 by gcontari          #+#    #+#             */
-/*   Updated: 2022/05/02 10:46:04 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/05/02 11:09:05 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 
 // MACROS
 # define PROMPT "minishell0.0$ " 
-# define METACHAR_SET "|&;()<>"
+# define METACHAR_SET "|&<>" // ;()
 # define SPACE_SET " \n\t"
 
 // ALIAS
@@ -68,7 +68,7 @@ void	free_cmd(void *void_cmd);
 void	print_cmd_list(t_list *cmd_list);
 
 // parser
-int		get_token_list(char *input, t_list **token_list);
+int		get_token_list(const char *input, t_list **token_list);
 t_list	*get_cmd_list(char *input);
 
 // execture
