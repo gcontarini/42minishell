@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 17:19:09 by nprimo            #+#    #+#             */
-/*   Updated: 2022/05/02 12:13:21 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/05/02 12:19:20 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int exec_cmd_list(t_list *cmd_list)
 		cmd->out.fd = get_fd_out(*cmd);
 		if (cmd->out.fd == - 1 || cmd->in.fd == -1)
 			return (1);
-		if (exec_command(cmd->in.fd, cmd->out.fd, cmd->av, NULL))
+		if (exec_cmd(*cmd, NULL))
 			return (1);
 		head = head->next;
 	}

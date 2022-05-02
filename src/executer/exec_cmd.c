@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 12:24:52 by nprimo            #+#    #+#             */
-/*   Updated: 2022/05/02 12:15:48 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/05/02 12:18:55 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,13 @@
 
 static int	redirect(int fd_in, int fd_out);
 
-int	exec_cmd(int fd_in, int fd_out, char **av, char **envp)
+// int	exec_cmd(int fd_in, int fd_out, char **av, char **envp)
+int	exec_cmd(t_cmd cmd, char **envp)
 {
 	pid_t	pid;
 	char	*bin_path;
 
-	bin_path = find_bin_path(av[0]);
+	bin_path = find_bin_path(cmd.av[0]);
 	if (!bin_path || ft_strlen(bin_path) == 0)
 		exit(1);
 	pid = fork();
@@ -27,14 +28,14 @@ int	exec_cmd(int fd_in, int fd_out, char **av, char **envp)
 		exit(1);
 	if (pid == 0)
 	{
-		if (redirect(fd_in, fd_out) == -1)
+		if (redirect(cmd.in.fd, cmd.out.fd) == -1)
 			exit(1);
-		if (execve(bin_path, av, envp) == -1)
+		if (execve(bin_path, cmd.av, envp) == -1)
 			exit(1);
 	}
 	if (waitpid(pid, NULL, 0) == -1)
 		exit(1);
-	if (close(fd_in) == -1 || close(fd_out))
+	if (close(cmd.in.fd) == -1 || close(cmd.out.fd))
 		exit(1);
 	free(bin_path);
 	return (0);
