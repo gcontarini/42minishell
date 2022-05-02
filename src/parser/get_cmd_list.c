@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 16:59:38 by nprimo            #+#    #+#             */
-/*   Updated: 2022/05/02 09:43:29 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/05/02 10:15:23 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ t_list	*get_cmd_list(char *input)
 	head = token_list;
 	while (head)
 		head = add_new_cmd(&cmd_list, head);
+	ft_lstclear(&token_list, NULL);
 	return (cmd_list);
 }
 
@@ -46,7 +47,7 @@ static t_list	*add_new_cmd(t_list **cmd_list, t_list *token_list)
 	// count argv in the next command
 	argc = 0;
 	head = token_list;
-	while (head) // && is_cmd_sep(head)
+	while (head) // && is_control_operator(head)
 	{
 		// check if there are riderections to files 
 		//		change in and out accordingly in case
@@ -79,7 +80,6 @@ static char	**llist_n_to_av(t_list *llist, int argc)
 	while (pos < argc && head)
 	{
 		av[pos] = (char *) head->content;
-		// printf("Adding [%s]...\n", av[pos]); // without this doesn't work
 		head = head->next;
 		pos++;
 	}
