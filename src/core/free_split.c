@@ -17,7 +17,7 @@ void	free_split(char **av)
 	int	pos;
 
 	pos = 0;
-	while (av[pos])
+	while (av && av[pos])
 	{
 		free(av[pos]);
 		pos++;
