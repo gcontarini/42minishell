@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 17:19:09 by nprimo            #+#    #+#             */
-/*   Updated: 2022/05/02 12:19:20 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/05/02 12:21:22 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ static int	get_fd_in(t_cmd cmd)
 
 	if (!cmd.in.fname)
 			fd = STDIN_FILENO;
+	// else if for PIPE ?
 	else
 	{
 		fd = open(cmd.in.fname, O_RDONLY);
@@ -56,6 +57,7 @@ static int	get_fd_out(t_cmd cmd)
 
 	if (!cmd.in.fname)
 			fd = STDOUT_FILENO;
+	// else if for PIPE ?
 	else
 	{
 		fd = open(cmd.in.fname, O_WRONLY | O_CREAT);
