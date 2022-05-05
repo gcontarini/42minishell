@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:18:18 by gcontari          #+#    #+#             */
-/*   Updated: 2022/05/02 12:18:44 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/05/05 15:36:49 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,10 @@ typedef struct  s_cmd
 void	free_split(char **av);
 void	free_cmd(void *void_cmd);
 void	print_cmd_list(t_list *cmd_list);
+
+// error handling
+void	*error_check_pointer(void *pointer);
+void	error_check(int	ret_value);
 
 // parser
 int		get_token_list(const char *input, t_list **token_list);
