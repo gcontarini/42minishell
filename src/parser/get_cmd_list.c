@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 16:59:38 by nprimo            #+#    #+#             */
-/*   Updated: 2022/05/05 16:27:54 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/05/05 16:33:28 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,24 +40,21 @@ static t_list	*add_new_cmd(t_list **cmd_list, t_list *token_list)
 	t_cmd	*new_cmd;
 	int		argc;
 
-	new_cmd = (t_cmd *) error_check_pointer(malloc(sizeof(t_cmd) * 1));
-	// add function to find input and output file descriptor
-		// check if there are riderections to files 
-		//		change in and out accordingly in case
-		// check if it start with PIPE
-	new_cmd->in.fname = NULL;
-	new_cmd->out.fname = NULL;
-	// count argv in the next command
+	new_cmd = init_new_cmd();
 	argc = 0;
 	head = token_list;
+	while (is_control_operator(head->content))
+	{
+		argc++;
+		head = head->next;
+	}
 	while (head && !is_control_operator(head->content))
 	{
-		// when encountering a pipe need to be sure that current cmd will 
-		// write on PIPE and next cmd will read on PIPE (same one)
 		argc++;
 		head = head->next;
 	}
 	new_cmd->av = (char **)error_check_pointer(llist_n_to_av(token_list, argc));
+	// update cmd_redirections
 	new_node = (t_list *)error_check_pointer(ft_lstnew(new_cmd));
 	ft_lstadd_back(cmd_list, new_node);
 	return (head);

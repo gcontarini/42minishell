@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 12:54:57 by nprimo            #+#    #+#             */
-/*   Updated: 2022/04/29 16:33:46 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/05/05 12:13:18 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,21 @@
 
 int main()
 {
-	t_list	*token_list;
-	t_list	*cmd_list;
-	t_list	*head;
-	char	input[] = "asdf asf asdf &asdf&;asdf ";
+	char	cmd[] = "/Users/nprimo/Desktop/42minishell/b.out";
+	char	*av[] = { "./b.out", NULL };
+	pid_t	pid;
 
-	token_list = NULL;
-	if (get_token_list(input, &token_list) == -1)
-		return (1);
-	cmd_list = get_cmd_list(input);
-	head = token_list;
-	while (token_list)
+	pid = fork();
+	if (pid != 0)
 	{
-		printf("%s\n", token_list->content);
-		token_list = token_list->next;
+		printf("Executing\n");
+		execve(cmd, av, NULL);
 	}
-	ft_lstclear(&head, free);
+	else
+	{
+		printf("Waitign for execution ...\n");
+		sleep(1);
+		wait(0);
+	}
 	return (0);
 }
