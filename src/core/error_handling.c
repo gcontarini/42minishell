@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 15:31:54 by nprimo            #+#    #+#             */
-/*   Updated: 2022/05/05 15:36:53 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/05/05 16:02:11 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	*error_check_pointer(void *pointer)
 
 void	error_check(int	ret_value)
 {
-	if (ret_value != 0)
+	if (ret_value < 0)
 	{
 		printf("User perror to print specific things...\n");
 		// free all
