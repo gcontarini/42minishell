@@ -6,12 +6,13 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 09:50:49 by nprimo            #+#    #+#             */
-/*   Updated: 2022/05/05 16:30:48 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/05/05 17:01:20 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+// control operator list
 // "||", "&&", "&", ";" ";;" ";&", ";;&", "|", "|&", "(", ")"
 
 int	is_control_operator(void *void_token)
@@ -20,7 +21,7 @@ int	is_control_operator(void *void_token)
 	char	*token;
 
 	token = (char *) void_token;
-	token_size = ft_strlen(token);	
+	token_size = ft_strlen(token);
 	if (token_size < 4)
 	{
 		if (ft_strchr("|&;", *token))
