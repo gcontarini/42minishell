@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 16:59:38 by nprimo            #+#    #+#             */
-/*   Updated: 2022/05/05 16:17:40 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/05/05 16:19:30 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,7 @@ static char	**llist_n_to_av(t_list *llist, int argc)
 	t_list	*head;
 	int		pos;
 
-	av = malloc(sizeof(char *) * (argc + 1));
-	if (!av)
-		return (NULL);
+	av = (char **)error_check_pointer(malloc(sizeof(char *) * (argc + 1)));
 	head = llist;
 	pos = 0;
 	while (pos < argc && head)
