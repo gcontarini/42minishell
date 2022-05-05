@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 16:59:38 by nprimo            #+#    #+#             */
-/*   Updated: 2022/05/05 16:09:13 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/05/05 16:17:40 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static t_list	*add_new_cmd(t_list **cmd_list, t_list *token_list);
 
 t_list	*get_cmd_list(char *input)
 {
-	t_list	*cmd_list; // need to be dynamic allocation
+	t_list	*cmd_list;
 	t_list	*token_list;
 	t_list	*head;
 
@@ -39,9 +39,7 @@ static t_list	*add_new_cmd(t_list **cmd_list, t_list *token_list)
 	t_cmd	*new_cmd;
 	int		argc;
 
-	new_cmd = malloc(sizeof(t_cmd) * 1);
-	if (!new_cmd)
-		return (NULL);
+	new_cmd = (t_cmd *) error_check_pointer(malloc(sizeof(t_cmd) * 1));
 	// add function to find input and output file descriptor
 		// check if there are riderections to files 
 		//		change in and out accordingly in case
@@ -58,12 +56,8 @@ static t_list	*add_new_cmd(t_list **cmd_list, t_list *token_list)
 		argc++;
 		head = head->next;
 	}
-	new_cmd->av = llist_n_to_av(token_list, argc);
-	if (new_cmd->av == NULL)
-		return (NULL);
-	new_node = ft_lstnew(new_cmd);
-	if (!new_node)
-		return (NULL);
+	new_cmd->av = (char **)error_check_pointer(llist_n_to_av(token_list, argc));
+	new_node = (t_list *)error_check_pointer(ft_lstnew(new_cmd));
 	ft_lstadd_back(cmd_list, new_node);
 	return (head);
 }
