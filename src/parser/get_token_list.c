@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 17:44:00 by nprimo            #+#    #+#             */
-/*   Updated: 2022/05/02 12:29:16 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/05/05 16:05:32 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,8 @@ int	get_token_list(const char *input, t_list **token_list)
 	char	*new_token;
 	t_list	*new_token_el;
 	int		pos;
-	int		flag;
 
 	pos = 0;
-	flag = 0; // use to track errors - there might be a better way
 	while (input[pos] && ft_strchr(SPACE_SET, input[pos]))
 		pos++;
 	new_token = get_next_token(&input[pos]);
@@ -32,10 +30,12 @@ int	get_token_list(const char *input, t_list **token_list)
 		new_token_el = ft_lstnew(new_token);
 		if (new_token_el)
 			ft_lstadd_back(token_list, new_token_el);
+		else
+			return (-1);
 		pos += ft_strlen(new_token);
 		return (get_token_list(&input[pos], token_list));
 	}
-	return (flag);
+	return (0);
 }
 
 static char	*get_next_token(const char *input)

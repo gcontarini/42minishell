@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 16:59:38 by nprimo            #+#    #+#             */
-/*   Updated: 2022/05/02 11:40:04 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/05/05 16:04:39 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ t_list	*get_cmd_list(char *input)
 	token_list = NULL;
 	cmd_list = NULL;
 	get_token_list(input, &token_list); // need to add a check if it fails
+	// exepand tokens
 	head = token_list;
 	while (head)
 		head = add_new_cmd(&cmd_list, head);
