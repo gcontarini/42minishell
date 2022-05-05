@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 12:21:53 by nprimo            #+#    #+#             */
-/*   Updated: 2022/04/29 12:21:58 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/05/05 15:39:36 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ char	*find_bin_path(const char *cmd)
 
 	pos = 0;
 	cmd_path = NULL;
+	// check if cmd is already a bin present locally
 	ls_path_dir = find_ls_path_dir();
 	if (!ls_path_dir)
 		return (cmd_path);
