@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 12:24:52 by nprimo            #+#    #+#             */
-/*   Updated: 2022/05/02 12:18:55 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/05/05 16:00:48 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static int	redirect(int fd_in, int fd_out);
 
-// int	exec_cmd(int fd_in, int fd_out, char **av, char **envp)
 int	exec_cmd(t_cmd cmd, char **envp)
 {
 	pid_t	pid;
@@ -28,15 +27,12 @@ int	exec_cmd(t_cmd cmd, char **envp)
 		exit(1);
 	if (pid == 0)
 	{
-		if (redirect(cmd.in.fd, cmd.out.fd) == -1)
-			exit(1);
-		if (execve(bin_path, cmd.av, envp) == -1)
-			exit(1);
+		error_check(redirect(cmd.in.fd, cmd.out.fd));
+		error_check(execve(bin_path, cmd.av, envp));
 	}
-	if (waitpid(pid, NULL, 0) == -1)
-		exit(1);
-	if (close(cmd.in.fd) == -1 || close(cmd.out.fd))
-		exit(1);
+	error_check(waitpid(pid, NULL, 0));
+	error_check(close(cmd.in.fd));
+	error_check(close(cmd.out.fd));
 	free(bin_path);
 	return (0);
 }
