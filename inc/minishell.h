@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:18:18 by gcontari          #+#    #+#             */
-/*   Updated: 2022/05/05 15:36:49 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/05/06 10:51:16 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,10 @@ typedef struct s_fd
 
 typedef struct  s_cmd
 {
-	char				**av;
-	t_fd				in;
-	t_fd				out;
+	char	**av;
+	//char	**envp;
+	t_fd	in;
+	t_fd	out;
     // Maybe more stuff for redirects etc etc
 }   t_cmd;
 
