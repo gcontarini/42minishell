@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 16:59:38 by nprimo            #+#    #+#             */
-/*   Updated: 2022/05/06 11:21:21 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/05/07 10:55:47 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,18 +44,18 @@ static t_list	*add_new_cmd(t_list **cmd_list, t_list *token_list)
 	new_cmd = init_new_cmd();
 	argc = 0;
 	head = token_list;
-	while (is_control_operator(head->content))
+	while (head)
 	{
 		argc++;
 		head = head->next;
-	}
-	while (head && !is_control_operator(head->content))
-	{
-		argc++;
-		head = head->next;
+		if (is_control_operator(head->content))
+		{
+			argc++;
+			break ;
+		}
 	}
 	new_cmd->av = (char **)error_check_pointer(llist_n_to_av(token_list, argc));
-	// update cmd_redirections || take into consideration head for input 
+	// update cmd t_fd according to arguments
 	new_node = (t_list *)error_check_pointer(ft_lstnew(new_cmd));
 	ft_lstadd_back(cmd_list, new_node);
 	return (head);
