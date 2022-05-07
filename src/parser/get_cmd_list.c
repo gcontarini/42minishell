@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 16:59:38 by nprimo            #+#    #+#             */
-/*   Updated: 2022/05/07 10:55:47 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/05/07 11:52:19 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_list	*get_cmd_list(char *input)
 	while (head)
 		head = add_new_cmd(&cmd_list, head);
 	// need to clean list (but not content) memory allocated
-	// ft_lstclear(&token_list, NULL); this creates segfault
+	// ft_lstclear(&token_list, NULL); // this creates segfault
 	return (cmd_list);
 }
 
@@ -44,15 +44,17 @@ static t_list	*add_new_cmd(t_list **cmd_list, t_list *token_list)
 	new_cmd = init_new_cmd();
 	argc = 0;
 	head = token_list;
+	if (is_control_operator(head->content))
+		argc++;
 	while (head)
 	{
-		argc++;
-		head = head->next;
 		if (is_control_operator(head->content))
 		{
 			argc++;
 			break ;
 		}
+		argc++;
+		head = head->next;
 	}
 	new_cmd->av = (char **)error_check_pointer(llist_n_to_av(token_list, argc));
 	// update cmd t_fd according to arguments
