@@ -6,7 +6,7 @@
 #    By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/24 19:45:47 by nprimo            #+#    #+#              #
-#    Updated: 2022/05/05 17:06:19 by nprimo           ###   ########.fr        #
+#    Updated: 2022/05/09 11:55:37 by nprimo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ NAME = minishell
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(LIBS) -I $(INC) $^ -o $@ 
+	$(CC) $(CFLAGS) -I $(INC) $^ -o $@ $(LIBS) 
 
 $(OBJ)/%.o: $(SRC)/*/%.c
 	@mkdir -p $(OBJ)
