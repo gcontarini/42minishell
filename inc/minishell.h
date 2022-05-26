@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:18:18 by gcontari          #+#    #+#             */
-/*   Updated: 2022/05/06 10:51:16 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/05/26 12:46:27 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,7 @@ char	*find_bin_path(const char *cmd);
 int		exec_cmd(t_cmd cmd, char **envp);
 int 	exec_cmd_list(t_list *comm_list);
 
+// builtins
+int		ft_echo(t_cmd *cmd);
 
 #endif
