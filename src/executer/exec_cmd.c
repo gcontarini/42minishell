@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 12:24:52 by nprimo            #+#    #+#             */
-/*   Updated: 2022/05/05 16:00:48 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/05/26 10:59:45 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,13 @@ int	exec_cmd(t_cmd cmd, char **envp)
 
 static int	redirect(int fd_in, int fd_out)
 {
-	if (fd_in != 0)
+	if (fd_in != STDIN_FILENO)
 	{
 		if (dup2(fd_in, STDIN_FILENO) == -1
 			|| close(fd_in) == -1)
 			return (-1);
 	}
-	if (fd_out != 1)
+	if (fd_out != STDOUT_FILENO)
 	{
 		if (dup2(fd_out, STDOUT_FILENO) == -1
 			|| close(fd_out) == -1)
