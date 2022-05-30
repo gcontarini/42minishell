@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 16:59:38 by nprimo            #+#    #+#             */
-/*   Updated: 2022/05/07 11:52:19 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/05/30 16:28:21 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,12 @@ static char		**llist_n_to_av(t_list *llist, int ac);
 static t_list	*add_new_cmd(t_list **cmd_list, t_list *token_list);
 static t_cmd	*init_new_cmd(void);
 
-t_list	*get_cmd_list(char *input)
+t_list	*get_cmd_list(t_list *token_list)
 {
 	t_list	*cmd_list;
-	t_list	*token_list;
 	t_list	*head;
 
-	token_list = NULL;
 	cmd_list = NULL;
-	error_check(get_token_list(input, &token_list));
 	// exepand tokens
 	head = token_list;
 	while (head)

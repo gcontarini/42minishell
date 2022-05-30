@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:18:18 by gcontari          #+#    #+#             */
-/*   Updated: 2022/05/30 16:03:22 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/05/30 16:24:34 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	error_check(int	ret_value);
 
 // parser
 int		get_token_list(const char *input, t_list **token_list);
-t_list	*get_cmd_list(char *input);
+t_list	*get_cmd_list(t_list *token_list);
 int		is_control_operator(void *void_token);
 
 // execture
