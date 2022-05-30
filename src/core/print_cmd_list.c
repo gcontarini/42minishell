@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 12:10:51 by nprimo            #+#    #+#             */
-/*   Updated: 2022/05/30 16:02:11 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/05/30 17:37:24 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	print_cmd_list(t_list *cmd_list)
 		printf("token list: \n");
 		print_llist(cmd->token_list);
 		printf("\n");
+		printf("file in:\n%s\n", cmd->in.fname);
+		printf("file out:\n%s\n", cmd->out.fname);
 		head = head->next;
 		printf("---\n");
 	}
@@ -41,7 +43,7 @@ static void	print_av(char **av)
 	pos = 0;
 	while (av && av[pos])
 	{
-		printf("< %s > ", av[pos]);
+		printf(" %s ", av[pos]);
 		pos++;
 	}
 }
