@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:18:18 by gcontari          #+#    #+#             */
-/*   Updated: 2022/05/26 12:46:27 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/05/30 15:32:09 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef struct s_fd
 
 typedef struct  s_cmd
 {
+	t_list	*token_list;
 	char	**av;
 	//char	**envp;
 	t_fd	in;
