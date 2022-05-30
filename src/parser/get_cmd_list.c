@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 16:59:38 by nprimo            #+#    #+#             */
-/*   Updated: 2022/05/30 16:45:34 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/05/30 16:52:44 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,5 +100,8 @@ static t_cmd	*init_new_cmd(void)
 	new_cmd = (t_cmd *) error_check_pointer(malloc(sizeof(t_cmd) * 1));
 	new_cmd->in.fname = NULL;
 	new_cmd->out.fname = NULL;
+	new_cmd->in.fd = -1;
+	new_cmd->out.fd = -1;
+	new_cmd->av = NULL;
 	return (new_cmd);
 }
