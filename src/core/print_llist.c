@@ -1,47 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_cmd_list.c                                   :+:      :+:    :+:   */
+/*   print_llist.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/29 12:10:51 by nprimo            #+#    #+#             */
-/*   Updated: 2022/05/30 16:02:11 by nprimo           ###   ########.fr       */
+/*   Created: 2022/05/30 16:00:02 by nprimo            #+#    #+#             */
+/*   Updated: 2022/05/30 16:04:02 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include <minishell.h>
 
-static void	print_av(char **av);
-
-void	print_cmd_list(t_list *cmd_list)
+void print_llist(t_list *llist)
 {
-	t_list	*head;
-	t_cmd	*cmd;
+	t_list *head;
 
-	head = cmd_list;
+	head = llist;
 	while (head)
 	{
-		printf("av: \n");
-		cmd = (t_cmd*) head->content;
-		print_av(cmd->av);
-		printf("\n");
-		printf("token list: \n");
-		print_llist(cmd->token_list);
-		printf("\n");
+		printf("< %s > ", head->content);
 		head = head->next;
-		printf("---\n");
-	}
-}
-
-static void	print_av(char **av)
-{
-	int pos;
-
-	pos = 0;
-	while (av && av[pos])
-	{
-		printf("< %s > ", av[pos]);
-		pos++;
 	}
 }

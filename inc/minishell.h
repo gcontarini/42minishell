@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:18:18 by gcontari          #+#    #+#             */
-/*   Updated: 2022/05/30 15:32:09 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/05/30 16:03:22 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ typedef struct  s_cmd
 void	free_split(char **av);
 void	free_cmd(void *void_cmd);
 void	print_cmd_list(t_list *cmd_list);
+void 	print_llist(t_list *llist);
 
 // error handling
 void	*error_check_pointer(void *pointer);
