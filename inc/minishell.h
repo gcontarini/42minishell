@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:18:18 by gcontari          #+#    #+#             */
-/*   Updated: 2022/05/30 18:05:18 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/06/02 16:09:29 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,17 @@
 # define SPACE_SET " \n\t"
 
 // ALIAS
-typedef unsigned int    t_uint; 
-typedef unsigned char   t_uchar; 
-typedef unsigned long   t_ulong; 
+typedef unsigned int	t_uint;
+typedef unsigned char	t_uchar;
+typedef unsigned long	t_ulong;
 
 // VARIABLES
-typedef struct  s_shell
+typedef struct s_shell
 {
-    char    *inpt;
-    char    **parsed;
+	char	*inpt;
+	char	**parsed;
 //    t_llst *pids(t_ulong);
-}   t_shell;
+}	t_shell;
 
 typedef struct s_fd
 {
@@ -54,27 +54,28 @@ typedef struct s_fd
 	int		fd;
 }	t_fd;
 
-typedef struct  s_cmd
+typedef struct s_cmd
 {
 	t_list	*token_list;
 	char	**av;
 	//char	**envp;
 	t_fd	in;
 	t_fd	out;
-    // Maybe more stuff for redirects etc etc
-}   t_cmd;
+	// Maybe more stuff for redirects etc etc
+}	t_cmd;
 
 // FUNCTIONS
 // core
 void	free_split(char **av);
 void	free_cmd(void *void_cmd);
 void	print_cmd_list(t_list *cmd_list);
-void 	print_llist(t_list *llist);
+void	print_llist(t_list *llist);
 char	**llist_to_av(t_list *llist);
+int		is_in_set(char *str, char **str_set);
 
 // error handling
 void	*error_check_pointer(void *pointer);
-void	error_check(int	ret_value);
+void	error_check(int ret_value);
 
 // parser
 int		get_token_list(const char *input, t_list **token_list);
@@ -84,7 +85,7 @@ int		is_control_operator(void *void_token);
 // execture
 char	*find_bin_path(const char *cmd);
 int		exec_cmd(t_cmd cmd, char **envp);
-int 	exec_cmd_list(t_list *comm_list);
+int		exec_cmd_list(t_list *comm_list);
 
 // builtins
 int		ft_echo(t_cmd *cmd);
