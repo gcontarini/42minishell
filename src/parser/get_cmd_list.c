@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 16:59:38 by nprimo            #+#    #+#             */
-/*   Updated: 2022/06/06 16:07:38 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/06/06 16:32:15 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ static t_list	*add_new_cmd(t_list **cmd_list, t_list *token_list)
 	new_cmd->token_list = add_cmd_token_list(token_list, argc);
 	error_check(add_cmd_in_out(new_cmd));
 	new_cmd->av = add_cmd_av(new_cmd);
+	ft_lstclear(&new_cmd->token_list, NULL);
 	new_node = (t_list *)error_check_pointer(ft_lstnew(new_cmd));
 	ft_lstadd_back(cmd_list, new_node);
 	return (head);
