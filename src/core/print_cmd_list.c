@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 12:10:51 by nprimo            #+#    #+#             */
-/*   Updated: 2022/05/30 17:37:24 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/06/06 16:51:38 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ void	print_cmd_list(t_list *cmd_list)
 		cmd = (t_cmd*) head->content;
 		print_av(cmd->av);
 		printf("\n");
-		printf("token list: \n");
-		print_llist(cmd->token_list);
+		printf("file in: %s\nred: %s\nfd: %d\n", cmd->in.fname, 
+			cmd->in.redirection, cmd->in.fd);
 		printf("\n");
-		printf("file in:\n%s\n", cmd->in.fname);
-		printf("file out:\n%s\n", cmd->out.fname);
+		printf("file out: %s\nred: %s\nfd: %d\n", cmd->out.fname, 
+			cmd->out.redirection, cmd->out.fd);
 		head = head->next;
 		printf("---\n");
 	}
