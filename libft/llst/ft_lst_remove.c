@@ -1,43 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdel_pos.c                                    :+:      :+:    :+:   */
+/*   ft_lst_remove.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/02 14:48:50 by nprimo            #+#    #+#             */
-/*   Updated: 2022/06/02 14:51:08 by nprimo           ###   ########.fr       */
+/*   Created: 2022/06/06 15:57:18 by nprimo            #+#    #+#             */
+/*   Updated: 2022/06/06 15:57:27 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstdel_pos(t_list **list, int pos, void (*del)(void *))
+t_list	*ft_lst_remove(t_list **llist, void *content)
 {
 	t_list	*prev_el;
-	t_list	*next_el;
 	t_list	*head;
 
-	if (!list)
-		return ;
-	head = *list;
-	if (pos == 0)
+	head = *llist;
+	prev_el = head;
+	while (head)
 	{
-		*list = (*list)->next;
-		pos--;
-		ft_lstdelone(head, del);
-	}
-	while (head && pos > 0)
-	{
+		if (head->content == content)
+		{
+			if (head == prev_el)
+				*llist = (*llist)->next;
+			else if (head->next)
+				prev_el->next = head->next;
+			else
+				prev_el->next = NULL;
+			head->next = NULL;
+			return (head);
+		}
 		prev_el = head;
-		if (head->next)
-			next_el = head->next->next;
-		pos--;
 		head = head->next;
 	}
-	if (pos == 0)
-	{
-		prev_el->next = next_el;
-		ft_lstdelone(head, del);
-	}
+	return (NULL);
 }

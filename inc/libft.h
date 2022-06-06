@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 12:05:39 by gcontari          #+#    #+#             */
-/*   Updated: 2022/06/02 14:47:45 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/06/06 15:55:01 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 void	ft_lstdel_pos(t_list **list, int pos, void (*del)(void *));
+t_list	*ft_lst_remove(t_list **llist, void *content);
 // ###################
 
 #endif
