@@ -54,8 +54,8 @@ LLST	=	ft_lstadd_back.c	\
 			ft_lstmap.c			\
 			ft_lstnew.c			\
 			ft_lstsize.c		\
-			ft_lstdel_pos.c		\
 			ft_lst_remove.c
+
 
 ########### DOUBLE LIST FILES ###########
 DLST	=	ft_dlstadd_back.c	\
