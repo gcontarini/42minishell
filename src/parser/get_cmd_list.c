@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 16:59:38 by nprimo            #+#    #+#             */
-/*   Updated: 2022/06/06 15:55:01 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/06/06 16:07:38 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 static t_list	*add_new_cmd(t_list **cmd_list, t_list *token_list);
 static t_cmd	*init_new_cmd(void);
 static t_list	*add_cmd_token_list(t_list *token_list, int argc);
-static int		add_cmd_in_out(t_cmd *cmd);
-static char		**add_cmd_av(t_cmd *cmd);
+int				add_cmd_in_out(t_cmd *cmd);
+char			**add_cmd_av(t_cmd *cmd);
 
 t_list	*get_cmd_list(t_list *token_list)
 {
@@ -85,69 +85,4 @@ static t_list	*add_cmd_token_list(t_list *token_list, int argc)
 	if (head)
 		head->next = NULL;
 	return (token_list);
-}
-
-static int	add_cmd_in_out(t_cmd *cmd)
-{
-	t_list	*head;
-	void	*curr_cont;
-
-	head = cmd->token_list;
-	while (head)
-	{
-		curr_cont = (char *)head->content;
-		if (ft_strncmp("|", curr_cont, 2) == 0)
-		{
-			if (!cmd->out.fname)
-				cmd->out.fname = curr_cont;
-		}
-		else if (ft_strncmp(">", curr_cont, 2) == 0
-			&& !cmd->out.fname)
-		{
-			if (head->next)
-			{
-				cmd->out.fname = (char *)head->next->content;
-				cmd->out.redirection = curr_cont;
-			}
-			// else error
-		}
-		else if (ft_strncmp("<", curr_cont, 2) == 0
-			&& !cmd->in.fname)
-		{
-			if (head->next)
-			{
-				cmd->in.fname = (char *)head->next->content;
-				cmd->in.redirection = curr_cont;
-			}
-			// else error
-		}
-		head = head->next;
-	}
-	return (0);
-}
-
-static char	**add_cmd_av(t_cmd *cmd)
-{
-	t_list	*curr_token;
-	t_list	*tmp;
-
-	curr_token = cmd->token_list;
-	while (curr_token)
-	{
-		if (ft_strncmp("<", (char *) curr_token->content, 2) == 0
-			|| ft_strncmp(">", (char *) curr_token->content, 2) == 0)
-		{
-			tmp = curr_token->next->next;
-			free(ft_lst_remove(&cmd->token_list, curr_token->next->content));
-			free(ft_lst_remove(&cmd->token_list, curr_token->content));
-			curr_token = tmp;
-		}
-		else
-		{
-			if (ft_strncmp("|", (char *) curr_token->content, 2) == 0)
-				free(ft_lst_remove(&cmd->token_list, curr_token->content));
-			curr_token = curr_token->next;
-		}
-	}
-	return (llist_to_av(cmd->token_list));
 }
