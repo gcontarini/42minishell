@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 16:59:38 by nprimo            #+#    #+#             */
-/*   Updated: 2022/05/30 17:41:14 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/06/06 15:55:01 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static t_list	*add_new_cmd(t_list **cmd_list, t_list *token_list);
 static t_cmd	*init_new_cmd(void);
 static t_list	*add_cmd_token_list(t_list *token_list, int argc);
 static int		add_cmd_in_out(t_cmd *cmd);
+static char		**add_cmd_av(t_cmd *cmd);
 
 t_list	*get_cmd_list(t_list *token_list)
 {
@@ -52,7 +53,7 @@ static t_list	*add_new_cmd(t_list **cmd_list, t_list *token_list)
 	}
 	new_cmd->token_list = add_cmd_token_list(token_list, argc);
 	error_check(add_cmd_in_out(new_cmd));
-	new_cmd->av = llist_to_av(new_cmd->token_list);
+	new_cmd->av = add_cmd_av(new_cmd);
 	new_node = (t_list *)error_check_pointer(ft_lstnew(new_cmd));
 	ft_lstadd_back(cmd_list, new_node);
 	return (head);
@@ -89,37 +90,64 @@ static t_list	*add_cmd_token_list(t_list *token_list, int argc)
 static int	add_cmd_in_out(t_cmd *cmd)
 {
 	t_list	*head;
+	void	*curr_cont;
 
 	head = cmd->token_list;
 	while (head)
 	{
-		if (ft_strncmp("|", (char *)head->content, 2) == 0
-			&& !cmd->out.fname)
+		curr_cont = (char *)head->content;
+		if (ft_strncmp("|", curr_cont, 2) == 0)
 		{
-			cmd->out.fname = (char *)head->content;
-			// remove token from cmd->token_list
+			if (!cmd->out.fname)
+				cmd->out.fname = curr_cont;
 		}
-		else if (ft_strncmp(">", (char *)head->content, 2) == 0
+		else if (ft_strncmp(">", curr_cont, 2) == 0
 			&& !cmd->out.fname)
 		{
 			if (head->next)
 			{
 				cmd->out.fname = (char *)head->next->content;
-				// remove this and next token from cmd->token_list
+				cmd->out.redirection = curr_cont;
 			}
 			// else error
 		}
-		else if (ft_strncmp("<", (char *)head->content, 2) == 0
+		else if (ft_strncmp("<", curr_cont, 2) == 0
 			&& !cmd->in.fname)
 		{
 			if (head->next)
 			{
 				cmd->in.fname = (char *)head->next->content;
-				// remove this and next token from cmd->token_list
+				cmd->in.redirection = curr_cont;
 			}
 			// else error
 		}
 		head = head->next;
 	}
 	return (0);
+}
+
+static char	**add_cmd_av(t_cmd *cmd)
+{
+	t_list	*curr_token;
+	t_list	*tmp;
+
+	curr_token = cmd->token_list;
+	while (curr_token)
+	{
+		if (ft_strncmp("<", (char *) curr_token->content, 2) == 0
+			|| ft_strncmp(">", (char *) curr_token->content, 2) == 0)
+		{
+			tmp = curr_token->next->next;
+			free(ft_lst_remove(&cmd->token_list, curr_token->next->content));
+			free(ft_lst_remove(&cmd->token_list, curr_token->content));
+			curr_token = tmp;
+		}
+		else
+		{
+			if (ft_strncmp("|", (char *) curr_token->content, 2) == 0)
+				free(ft_lst_remove(&cmd->token_list, curr_token->content));
+			curr_token = curr_token->next;
+		}
+	}
+	return (llist_to_av(cmd->token_list));
 }
