@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:18:18 by gcontari          #+#    #+#             */
-/*   Updated: 2022/06/02 16:09:29 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/06/06 15:26:56 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ typedef struct s_shell
 typedef struct s_fd
 {
 	char	*fname;
-	// char	*redirection;
+	char	*redirection;
 	int		fd;
 }	t_fd;
 
