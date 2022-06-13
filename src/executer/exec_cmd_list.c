@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 17:19:09 by nprimo            #+#    #+#             */
-/*   Updated: 2022/06/06 17:33:57 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/06/13 17:23:58 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,12 @@ int	exec_cmd_list(t_list *cmd_list)
 			return (1);
 		head = head->next;
 	}
+	// head = cmd_list;
+	// while (head)
+	// {
+	// 	cmd = (t_cmd *) head->content;
+	// 	waitpid(cmd->pid, NULL, 0);
+	// 	head = head->next;
+	// }
 	return (0);
 }
