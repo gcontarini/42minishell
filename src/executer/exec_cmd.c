@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 12:24:52 by nprimo            #+#    #+#             */
-/*   Updated: 2022/06/16 14:20:20 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/06/16 14:31:18 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ int	exec_cmd(t_cmd cmd, char **envp)
 		error_check(redirect(cmd.in.fd, cmd.out.fd));
 		error_check(execve(bin_path, cmd.av, envp));
 	}
-	else
-		error_check(waitpid(pid, NULL, 0));
+	// else
+	// 	error_check(waitpid(pid, NULL, 0));
 		// cmd.pid = pid;
 	if (cmd.in.fd != STDIN_FILENO)
 		close(cmd.in.fd);
