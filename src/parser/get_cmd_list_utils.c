@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:01:37 by nprimo            #+#    #+#             */
-/*   Updated: 2022/06/06 16:29:43 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/06/16 19:21:37 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,12 +92,14 @@ char	**add_cmd_av(t_cmd *cmd)
 			free(ft_lst_remove(&cmd->token_list, curr_token->content));
 			curr_token = tmp;
 		}
-		else
+		else if (ft_strncmp("|", (char *) curr_token->content, 1) == 0)
 		{
-			if (ft_strncmp("|", (char *) curr_token->content, 2) == 0)
-				free(ft_lst_remove(&cmd->token_list, curr_token->content));
-			curr_token = curr_token->next;
+			tmp = curr_token->next;
+			free(ft_lst_remove(&cmd->token_list, curr_token->content));
+			curr_token = tmp;
 		}
+		else
+			curr_token = curr_token->next;
 	}
 	return (llist_to_av(cmd->token_list));
 }
