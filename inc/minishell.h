@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:18:18 by gcontari          #+#    #+#             */
-/*   Updated: 2022/06/13 17:19:45 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/06/06 17:42:48 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ typedef struct s_cmd
 	//char	**envp;
 	t_fd	in;
 	t_fd	out;
-	pid_t	pid;
 	// Maybe more stuff for redirects etc etc
 }	t_cmd;
 
