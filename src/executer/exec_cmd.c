@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 12:24:52 by nprimo            #+#    #+#             */
-/*   Updated: 2022/06/13 17:24:02 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/06/16 14:20:20 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	exec_cmd(t_cmd cmd, char **envp)
 	char	*bin_path;
 
 	bin_path = find_bin_path(cmd.av[0]);
-	if (!bin_path || ft_strlen(bin_path) == 0)
+	if (!bin_path)
 		exit(1);
 	pid = fork();
 	if (pid == -1)

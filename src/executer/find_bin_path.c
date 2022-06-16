@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 12:21:53 by nprimo            #+#    #+#             */
-/*   Updated: 2022/05/06 10:48:18 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/06/16 14:20:15 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ char	*find_bin_path(const char *cmd)
 		free(dir);
 		if (cmd_path == NULL || access(cmd_path, X_OK) == 0)
 			break ;
-		free(cmd_path);
 		pos++;
 	}
 	free_split(ls_path_dir);
