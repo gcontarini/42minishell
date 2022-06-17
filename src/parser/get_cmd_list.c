@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 16:59:38 by nprimo            #+#    #+#             */
-/*   Updated: 2022/06/16 17:55:23 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/06/17 13:24:05 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,12 @@
 
 static t_list	*add_new_cmd(t_list **cmd_list, t_list *token_list);
 static t_cmd	*init_new_cmd(void);
-static t_list	*add_cmd_token_list(t_list *token_list, int argc);
+static t_list	*split_llist(t_list *llist, int argc);
+// utils
 int				add_cmd_in_out(t_cmd *cmd);
 char			**add_cmd_av(t_cmd *cmd);
+int				control_operator_pos(t_list *llist);
+t_list			*llist_pos(t_list *llist, int pos);
 
 t_list	*get_cmd_list(t_list *token_list)
 {
@@ -38,20 +41,9 @@ static t_list	*add_new_cmd(t_list **cmd_list, t_list *token_list)
 	int		argc;
 
 	new_cmd = init_new_cmd();
-	argc = 0;
-	head = token_list;
-	while (head)
-	{
-		if (is_control_operator(head->content))
-		{
-			argc++;
-			head = head->next;
-			break ;
-		}
-		argc++;
-		head = head->next;
-	}
-	new_cmd->token_list = add_cmd_token_list(token_list, argc);
+	argc = control_operator_pos(token_list);
+	head = llist_pos(token_list, (argc + 1));
+	new_cmd->token_list = split_llist(token_list, argc + 1);
 	error_check(add_cmd_in_out(new_cmd));
 	new_cmd->av = add_cmd_av(new_cmd);
 	new_node = (t_list *)error_check_pointer(ft_lstnew(new_cmd));
@@ -74,11 +66,11 @@ static t_cmd	*init_new_cmd(void)
 	return (new_cmd);
 }
 
-static t_list	*add_cmd_token_list(t_list *token_list, int argc)
+static t_list	*split_llist(t_list *llist, int argc)
 {
 	t_list	*head;
 
-	head = token_list;
+	head = llist;
 	while (head && argc > 1)
 	{
 		argc--;
@@ -86,5 +78,15 @@ static t_list	*add_cmd_token_list(t_list *token_list, int argc)
 	}
 	if (head)
 		head->next = NULL;
-	return (token_list);
+	return (llist);
+}
+
+t_list	*llist_pos(t_list *llist, int pos)
+{
+	while (llist && pos > 0)
+	{
+		llist = llist->next;
+		pos--;
+	}
+	return (llist);
 }
