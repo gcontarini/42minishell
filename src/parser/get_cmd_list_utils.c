@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:01:37 by nprimo            #+#    #+#             */
-/*   Updated: 2022/06/16 19:21:37 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/06/17 13:28:58 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,4 +102,31 @@ char	**add_cmd_av(t_cmd *cmd)
 			curr_token = curr_token->next;
 	}
 	return (llist_to_av(cmd->token_list));
+}
+
+// control operator list
+// "||", "&&", "&", ";" ";;" ";&", ";;&", "|", "|&", "(", ")"
+// ; and & are not to be considered
+int	is_control_operator(char *str)
+{
+	if (ft_strncmp("|", str, 2) == 0)
+		return (1);
+	return (0);
+}
+
+int	control_operator_pos(t_list *llist)
+{
+	char	*curr_content;
+	int		pos;
+
+	pos = 0;
+	while (llist)
+	{
+		curr_content = (char *) llist->content;
+		if (is_control_operator(curr_content))
+			break ;
+		pos++;
+		llist = llist->next;
+	}
+	return (pos);
 }
