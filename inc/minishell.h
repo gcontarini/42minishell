@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:18:18 by gcontari          #+#    #+#             */
-/*   Updated: 2022/06/18 17:26:56 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/06/18 17:33:10 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ void	print_cmd_list(t_list *cmd_list);
 void	print_llist(t_list *llist);
 //
 char	**llist_to_av(t_list *llist);
+char	**dict_list_to_av(t_list *dict_list);
+//
 int		is_in_set(char *str, char **str_set);
 
 // error handling
