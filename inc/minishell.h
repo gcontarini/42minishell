@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:18:18 by gcontari          #+#    #+#             */
-/*   Updated: 2022/06/18 12:27:20 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/06/18 12:49:41 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,6 @@ typedef unsigned char	t_uchar;
 typedef unsigned long	t_ulong;
 
 // VARIABLES
-typedef struct s_shell
-{
-	char	*inpt;
-	char	**parsed;
-//    t_llst *pids(t_ulong);
-}	t_shell;
 
 typedef struct s_fd
 {
@@ -68,6 +62,14 @@ typedef struct s_dict {
     char    *key;
     char    *value;
 }   t_dict;
+
+typedef struct s_shell
+{
+	t_list	*env;
+	char	*input;
+	t_list	*token_list;
+	t_list	*cmd_list;
+}	t_shell;
 
 // FUNCTIONS
 // core
