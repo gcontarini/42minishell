@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:18:18 by gcontari          #+#    #+#             */
-/*   Updated: 2022/06/18 15:06:32 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/06/18 15:59:54 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ typedef struct s_shell
 void	free_split(char **av);
 void	free_cmd(void	*cmd_void);
 void	free_dict(void *var_void);
+void	free_shell(t_shell sh);
+
 //
 t_shell init_shell(char **envp);
 //
