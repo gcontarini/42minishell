@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:18:18 by gcontari          #+#    #+#             */
-/*   Updated: 2022/06/17 13:26:12 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/06/18 12:27:20 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,16 @@ typedef struct s_cmd
 	// Maybe more stuff for redirects etc etc
 }	t_cmd;
 
+typedef struct s_dict {
+    char    *key;
+    char    *value;
+}   t_dict;
+
 // FUNCTIONS
 // core
 void	free_split(char **av);
 void	free_cmd(void	*cmd_void);
+void	free_dict(void *var_void);
 void	print_cmd_list(t_list *cmd_list);
 void	print_llist(t_list *llist);
 char	**llist_to_av(t_list *llist);
