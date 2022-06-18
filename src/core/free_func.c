@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 12:19:39 by nprimo            #+#    #+#             */
-/*   Updated: 2022/06/18 13:13:40 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/06/18 14:50:16 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,11 @@ void	free_dict(void *var_void)
 void	free_shell(t_shell sh)
 {
 	if (sh.env)
-		ft_lstclear(sh.env, free_dict);
+		ft_lstclear(&sh.env, free_dict);
 	if (sh.input)
 		free(sh.input);
 	if (sh.token_list)
-		ft_lstclear(sh.token_list, free);
+		ft_lstclear(&sh.token_list, free);
 	if (sh.cmd_list)
-		ft_lstclear(sh.cmd_list, free_cmd);
+		ft_lstclear(&sh.cmd_list, free_cmd);
 }
