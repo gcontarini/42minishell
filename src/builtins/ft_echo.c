@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 12:21:43 by nprimo            #+#    #+#             */
-/*   Updated: 2022/05/26 12:58:37 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/06/18 16:29:55 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	ft_echo(t_cmd *cmd)
 	if (n_flag == 0)
 	{
 		tmp = output;
-		output = ft_strjoin(output, "\n");
+		output = error_check_pointer(ft_strjoin(output, "\n"));
 		free(tmp);
 	}
 	write(cmd->out.fd, output, ft_strlen(output));

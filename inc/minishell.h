@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:18:18 by gcontari          #+#    #+#             */
-/*   Updated: 2022/06/18 15:59:54 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/06/18 16:28:18 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ void	free_split(char **av);
 void	free_cmd(void	*cmd_void);
 void	free_dict(void *var_void);
 void	free_shell(t_shell sh);
-
 //
 t_shell init_shell(char **envp);
 //
@@ -103,5 +102,6 @@ int 	open_fd(t_list *cmd_list);
 
 // builtins
 int		ft_echo(t_cmd *cmd);
+void	ft_env(t_cmd *cmd, t_shell sh);
 
 #endif
