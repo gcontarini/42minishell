@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:18:18 by gcontari          #+#    #+#             */
-/*   Updated: 2022/06/18 17:33:10 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/06/18 17:41:14 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,6 @@ int		open_fd(t_list *cmd_list);
 
 // builtins
 int		ft_echo(t_cmd *cmd);
-void	ft_env(t_cmd *cmd, t_shell sh);
+int		ft_env(t_cmd *cmd, t_shell sh);
 
 #endif

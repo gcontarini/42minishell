@@ -6,13 +6,13 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 16:06:59 by nprimo            #+#    #+#             */
-/*   Updated: 2022/06/18 16:28:20 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/06/18 17:41:01 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_env(t_cmd *cmd, t_shell sh)
+int	ft_env(t_cmd *cmd, t_shell sh)
 {
 	t_dict	*var;
 	t_list	*env;
@@ -27,4 +27,5 @@ void	ft_env(t_cmd *cmd, t_shell sh)
 		ft_putstr_fd("\n", cmd->out.fd);
 		env = env->next;
 	}
+	return (0);
 }
