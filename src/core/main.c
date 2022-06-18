@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:14:41 by gcontarini        #+#    #+#             */
-/*   Updated: 2022/06/16 15:38:56 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/06/18 12:57:58 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ int main(void)
     // find a way to loop: while loop cause segfault
     while (1)
     {
-        sh.inpt = readline(PROMPT);
-        add_history(sh.inpt);
+        sh.input = readline(PROMPT);
+        add_history(sh.input);
         token_list = NULL;
-        error_check(get_token_list(sh.inpt, &token_list));
-        free(sh.inpt);
+        error_check(get_token_list(sh.input, &token_list));
+        free(sh.input);
         cmd_list = get_cmd_list(token_list);
         open_fd(cmd_list);
         exec_cmd_list(cmd_list);
