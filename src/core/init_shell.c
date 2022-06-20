@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 15:05:16 by nprimo            #+#    #+#             */
-/*   Updated: 2022/06/20 12:13:31 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/06/20 17:05:42 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static t_dict	*str_to_dict(char *str)
 	size_t	len_key;
 	char	*value;
 
-	var = error_check_pointer(malloc(sizeof(t_dict) * 1));
+	var = error_check_pointer(ft_calloc(1, sizeof(t_dict)));
 	value = ft_strchr(str, '=') + 1;
 	var->value = error_check_pointer(ft_strndup(value, ft_strlen(value)));
 	len_key = ft_strlen(str) - ft_strlen(value) - 1;
