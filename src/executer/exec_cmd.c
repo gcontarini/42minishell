@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 12:24:52 by nprimo            #+#    #+#             */
-/*   Updated: 2022/06/18 17:33:01 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/06/20 11:55:40 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 static int	redirect(int fd_in, int fd_out);
 
-int	exec_cmd(t_cmd cmd, t_shell sh)
+int	exec_cmd(t_cmd *cmd, t_shell sh)
 {
 	pid_t	pid;
 	char	*bin_path;
 
-	bin_path = find_bin_path(cmd.av[0]);
+	bin_path = find_bin_path(cmd->av[0]);
 	if (!bin_path)
 		exit(1);
 	pid = fork();
@@ -27,13 +27,13 @@ int	exec_cmd(t_cmd cmd, t_shell sh)
 		exit(1);
 	if (pid == 0)
 	{
-		error_check(redirect(cmd.in.fd, cmd.out.fd));
-		error_check(execve(bin_path, cmd.av, dict_list_to_av(sh.env)));
+		error_check(redirect(cmd->in.fd, cmd->out.fd));
+		error_check(execve(bin_path, cmd->av, dict_list_to_av(sh.env)));
 	}
-	if (cmd.in.fd != STDIN_FILENO)
-		close(cmd.in.fd);
-	if (cmd.out.fd != STDOUT_FILENO)
-		close(cmd.out.fd);
+	if (cmd->in.fd != STDIN_FILENO)
+		close(cmd->in.fd);
+	if (cmd->out.fd != STDOUT_FILENO)
+		close(cmd->out.fd);
 	free(bin_path);
 	return (0);
 }

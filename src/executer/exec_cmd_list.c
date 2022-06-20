@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 17:19:09 by nprimo            #+#    #+#             */
-/*   Updated: 2022/06/18 16:52:29 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/06/20 11:55:55 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	exec_cmd_list(t_shell sh)
 	while (head)
 	{
 		cmd = (t_cmd *) head->content;
-		if (exec_cmd(*cmd, sh))
+		if (exec_cmd(cmd, sh))
 			return (1);
 		head = head->next;
 	}
