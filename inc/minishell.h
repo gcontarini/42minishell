@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:18:18 by gcontari          #+#    #+#             */
-/*   Updated: 2022/06/20 17:03:50 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/06/20 18:23:57 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,13 @@ void	print_llist(t_list *llist);
 //
 char	**llist_to_av(t_list *llist);
 char	**dict_list_to_av(t_list *dict_list);
+t_dict	*str_to_dict(char *str);
+
 //
 int		is_in_set(char *str, char **str_set);
+//
+char	*ft_getenv(const char *name, t_list *env);
+t_dict	*get_dict_var(const char *key, t_list *dict);
 
 // error handling
 void	*error_check_pointer(void *pointer);

@@ -6,13 +6,12 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 15:05:16 by nprimo            #+#    #+#             */
-/*   Updated: 2022/06/20 17:05:42 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/06/20 18:18:31 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static t_dict	*str_to_dict(char *str);
 static t_list	*envp_to_dict_list(char **envp);
 static void		unset_oldpwd(t_list **env);
 static void		update_shlvl(t_list *env);
@@ -28,20 +27,6 @@ t_shell	init_shell(char **envp)
 	sh.token_list = NULL;
 	sh.cmd_list = NULL;
 	return (sh);
-}
-
-static t_dict	*str_to_dict(char *str)
-{
-	t_dict	*var;
-	size_t	len_key;
-	char	*value;
-
-	var = error_check_pointer(ft_calloc(1, sizeof(t_dict)));
-	value = ft_strchr(str, '=') + 1;
-	var->value = error_check_pointer(ft_strndup(value, ft_strlen(value)));
-	len_key = ft_strlen(str) - ft_strlen(value) - 1;
-	var->key = error_check_pointer(ft_strndup(str, len_key));
-	return (var);
 }
 
 static t_list	*envp_to_dict_list(char **envp)
