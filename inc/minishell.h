@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:18:18 by gcontari          #+#    #+#             */
-/*   Updated: 2022/06/20 11:56:05 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/06/20 16:27:59 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # include <unistd.h>
 # include "libft.h"
 # include "ft_printf.h"
+# include "get_next_line.h"
 
 // MACROS
 # define PROMPT "minishell0.0$ " 
@@ -77,6 +78,9 @@ void	free_dict(void *var_void);
 void	free_shell(t_shell sh);
 //
 t_shell	init_shell(char **envp);
+int		shell_interactive(t_shell sh);
+int		shell_from_file(int ac, char **av, t_shell sh);
+
 //
 void	print_cmd_list(t_list *cmd_list);
 void	print_llist(t_list *llist);
