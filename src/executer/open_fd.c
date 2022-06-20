@@ -26,8 +26,6 @@ int	open_fd(t_list *cmd_list)
 		cmd = (t_cmd *)curr_cmd->content;
 		get_fd_in(curr_cmd);
 		get_fd_out(curr_cmd);
-		// if (cmd->out.fd == - 1 || cmd->in.fd == -1)
-		// 	return (1);
 		curr_cmd = curr_cmd->next;
 	}
 	return (0);
@@ -69,16 +67,8 @@ static int	get_fd_out(t_list *cmd_list)
 		}
 	}
 	else if (ft_strncmp(">", cmd->out.redirection, 2) == 0)
-	{
 		cmd->out.fd = open(cmd->out.fname, O_WRONLY | O_CREAT, 0622);
-		if (cmd->out.fd == -1)
-			return (-1);
-	}
 	else if (ft_strncmp(">>", cmd->out.redirection, 3) == 0)
-	{
 		cmd->out.fd = open(cmd->out.fname, O_APPEND | O_CREAT, 0622);
-		if (cmd->out.fd == -1)
-			return (-1);
-	}
 	return (0);
 }
