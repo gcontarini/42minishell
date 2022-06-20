@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 12:19:39 by nprimo            #+#    #+#             */
-/*   Updated: 2022/06/18 15:25:12 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/06/20 19:46:42 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ void	free_cmd(void *cmd_void)
 	t_cmd	*cmd;
 
 	cmd = (t_cmd *) cmd_void;
-	ft_lstclear(&cmd->token_list, NULL);
 	if (cmd->av)
 		free_split(cmd->av);
 	free_fd(&cmd->in);
 	free_fd(&cmd->out);
+	free(cmd);
 }
 
 static void	free_fd(t_fd *fd)
