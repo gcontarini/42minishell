@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 15:05:16 by nprimo            #+#    #+#             */
-/*   Updated: 2022/06/18 16:04:31 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/06/20 12:13:31 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ static void	update_shlvl(t_list *env)
 			sh_lvl = ft_atoi(var->value) + 1;
 			tmp = var->value;
 			var->value = error_check_pointer(ft_itoa(sh_lvl));
+			free(tmp);
 			return ;
 		}
 		env = env->next;
