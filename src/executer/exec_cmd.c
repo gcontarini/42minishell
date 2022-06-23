@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 12:24:52 by nprimo            #+#    #+#             */
-/*   Updated: 2022/06/20 19:36:13 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/06/23 12:38:26 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	exec_cmd(t_cmd *cmd, t_shell sh)
 static int	is_builitin(char *str)
 {
 	static char	*builtin_list[] = {
-		"echo", "env", "export", "exit", NULL};
+		"echo", "env", "export", "exit", "pwd", NULL};
 	int			pos;
 
 	pos = 0;
@@ -96,6 +96,8 @@ int	exec_builtin(t_cmd *cmd, t_shell sh)
 		return_status = ft_export(cmd, sh);
 	else if (ft_strncmp("exit", cmd->av[0], ft_strlen("exit") + 1) == 0)
 		return_status = ft_exit(cmd, sh);
+	else if (ft_strncmp("pwd", cmd->av[0], ft_strlen("pwd") + 1) == 0)
+		return_status = ft_pwd(cmd, sh);
 	if (cmd->in.fd != STDIN_FILENO)
 		close(cmd->in.fd);
 	if (cmd->out.fd != STDOUT_FILENO)

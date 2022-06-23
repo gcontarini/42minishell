@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:18:18 by gcontari          #+#    #+#             */
-/*   Updated: 2022/06/20 19:12:39 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/06/23 12:38:48 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,6 @@ int		ft_echo(t_cmd *cmd);
 int		ft_env(t_cmd *cmd, t_shell sh);
 int		ft_export(t_cmd *cmd, t_shell sh);
 int		ft_exit(t_cmd *cmd, t_shell sh);
-
+int		ft_pwd(t_cmd *cmd, t_shell sh);
 
 #endif
