@@ -16,7 +16,7 @@ t_dict	*get_dict_var(const char *key, t_list *dict)
 {
 	t_dict	*var;
 
-	while (dict)
+	while (dict && key)
 	{
 		var = (t_dict *) dict->content;
 		if (ft_strncmp(key, var->key, ft_strlen(key) + 1) == 0)
