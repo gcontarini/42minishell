@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 12:21:53 by nprimo            #+#    #+#             */
-/*   Updated: 2022/06/24 11:19:50 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/06/24 13:53:03 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*find_bin_path(const char *bin, t_list *env)
 	pos = 0;
 	bin_path = NULL;
 	if (access(bin, F_OK & X_OK) == 0)
-		return (bin_path);
+		return (error_check_pointer(ft_strndup(bin, ft_strlen(bin))));
 	ls_path_dir = error_check_pointer(find_ls_path_dir(env));
 	while (ls_path_dir[pos])
 	{
