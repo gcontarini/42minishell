@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:18:18 by gcontari          #+#    #+#             */
-/*   Updated: 2022/06/24 18:09:32 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/06/24 21:15:41 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@
 typedef unsigned int	t_uint;
 typedef unsigned char	t_uchar;
 typedef unsigned long	t_ulong;
-typedef void			(*t_free_func) (void *);
 
 // VARIABLES
 typedef struct s_fd
@@ -78,6 +77,9 @@ typedef enum e_struct_type
 	T_DICT,
 	T_FD
 }				t_struct_type;
+
+typedef void			(*t_free_func) (void *);
+typedef int				(t_builtins) (t_cmd *, t_shell);
 
 // FUNCTIONS
 // core
@@ -120,7 +122,7 @@ int		exec_cmd_list(t_shell sh);
 int		open_fd(t_list *cmd_list);
 
 // builtins
-int		ft_echo(t_cmd *cmd);
+int		ft_echo(t_cmd *cmd, t_shell sh);
 int		ft_env(t_cmd *cmd, t_shell sh);
 int		ft_export(t_cmd *cmd, t_shell sh);
 int		ft_exit(t_cmd *cmd, t_shell sh);

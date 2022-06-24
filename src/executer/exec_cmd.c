@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 12:24:52 by nprimo            #+#    #+#             */
-/*   Updated: 2022/06/23 15:49:01 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/06/24 21:15:55 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int	exec_builtin(t_cmd *cmd, t_shell sh)
 
 	return_status = 0;
 	if (ft_strncmp("echo", cmd->av[0], ft_strlen("echo") + 1) == 0)
-		return_status = ft_echo(cmd);
+		return_status = ft_echo(cmd, sh);
 	else if (ft_strncmp("env", cmd->av[0], ft_strlen("env") + 1) == 0)
 		return_status = ft_env(cmd, sh);
 	else if (ft_strncmp("export", cmd->av[0], ft_strlen("export") + 1) == 0)
