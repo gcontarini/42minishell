@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 12:24:52 by nprimo            #+#    #+#             */
-/*   Updated: 2022/06/24 21:39:14 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/06/24 21:58:22 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static int	redirect(int fd_in, int fd_out)
 static int	is_builitin(char *str)
 {
 	static char	*builtin_list[] = {
-		"echo", "env", "export", "exit", "pwd", "unset", NULL};
+		"echo", "env", "export", "exit", "pwd", "unset", "cd", NULL};
 	int			pos;
 
 	pos = 0;
@@ -62,7 +62,7 @@ static int	is_builitin(char *str)
 int	exec_builtin(t_cmd *cmd, t_shell sh)
 {
 	static t_builtins	*builtin_list[] = {
-		ft_echo, ft_env, ft_export, ft_exit, ft_pwd, ft_unset
+		ft_echo, ft_env, ft_export, ft_exit, ft_pwd, ft_unset, ft_cd
 	};
 	int					pos;
 	int					return_status;
