@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:18:18 by gcontari          #+#    #+#             */
-/*   Updated: 2022/06/23 15:38:09 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/06/23 15:50:32 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int		get_token_list(const char *input, t_list **token_list);
 t_list	*get_cmd_list(t_list *token_list);
 
 // executer
-char	*find_bin_path(const char *cmd);
+char	*find_bin_path(const char *cmd, t_list *env);
 int		exec_cmd(t_cmd *cmd, t_shell sh);
 int		exec_cmd_list(t_shell sh);
 int		open_fd(t_list *cmd_list);

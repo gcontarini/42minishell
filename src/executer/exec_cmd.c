@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 12:24:52 by nprimo            #+#    #+#             */
-/*   Updated: 2022/06/23 15:37:57 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/06/23 15:49:01 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static int	exec_bin(t_cmd *cmd, t_shell sh)
 	pid_t	pid;
 	char	*bin_path;
 
-	bin_path = find_bin_path(cmd->av[0]);
+	bin_path = find_bin_path(cmd->av[0], sh.env);
 	if (!bin_path)
 		exit(1);
 	pid = fork();
