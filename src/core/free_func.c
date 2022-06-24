@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 12:19:39 by nprimo            #+#    #+#             */
-/*   Updated: 2022/06/18 13:13:40 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/06/20 19:46:42 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ void	free_cmd(void *cmd_void)
 	t_cmd	*cmd;
 
 	cmd = (t_cmd *) cmd_void;
-	ft_lstclear(&cmd->token_list, NULL);
 	if (cmd->av)
 		free_split(cmd->av);
 	free_fd(&cmd->in);
 	free_fd(&cmd->out);
+	free(cmd);
 }
 
 static void	free_fd(t_fd *fd)
@@ -68,11 +68,11 @@ void	free_dict(void *var_void)
 void	free_shell(t_shell sh)
 {
 	if (sh.env)
-		ft_lstclear(sh.env, free_dict);
+		ft_lstclear(&sh.env, free_dict);
 	if (sh.input)
 		free(sh.input);
 	if (sh.token_list)
-		ft_lstclear(sh.token_list, free);
+		ft_lstclear(&sh.token_list, NULL);
 	if (sh.cmd_list)
-		ft_lstclear(sh.cmd_list, free_cmd);
+		ft_lstclear(&sh.cmd_list, free_cmd);
 }

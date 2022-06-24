@@ -1,37 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_echo.c                                          :+:      :+:    :+:   */
+/*   get_dict_var.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/26 12:21:43 by nprimo            #+#    #+#             */
-/*   Updated: 2022/06/20 16:51:45 by nprimo           ###   ########.fr       */
+/*   Created: 2022/06/20 18:10:37 by nprimo            #+#    #+#             */
+/*   Updated: 2022/06/20 18:13:00 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_echo(t_cmd *cmd)
+t_dict	*get_dict_var(const char *key, t_list *dict)
 {
-	int		n_flag;
-	int		pos;
+	t_dict	*var;
 
-	n_flag = 0;
-	pos = 1;
-	if (cmd->av[pos] && ft_strncmp(cmd->av[pos], "-n", 3) == 0)
+	while (dict && key)
 	{
-		n_flag = 1;
-		pos += 1;
+		var = (t_dict *) dict->content;
+		if (ft_strncmp(key, var->key, ft_strlen(key) + 1) == 0)
+			return (var);
+		dict = dict->next;
 	}
-	while (cmd->av[pos])
-	{
-		write(cmd->out.fd, cmd->av[pos], ft_strlen(cmd->av[pos]));
-		pos++;
-		if (cmd->av[pos])
-			write(cmd->out.fd, " ", 1);
-	}
-	if (n_flag == 0)
-		write(cmd->out.fd, "\n", 1);
-	return (0);
+	return (NULL);
 }

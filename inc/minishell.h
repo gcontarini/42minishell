@@ -6,7 +6,7 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:18:18 by gcontari          #+#    #+#             */
-/*   Updated: 2022/06/24 12:59:27 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/06/24 16:20:27 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # include <unistd.h>
 # include "libft.h"
 # include "ft_printf.h"
+# include "get_next_line.h"
 
 // MACROS
 # define PROMPT "minishell0.0$ " 
@@ -53,16 +54,14 @@ typedef struct s_cmd
 {
 	t_list	*token_list;
 	char	**av;
-	//char	**envp;
 	t_fd	in;
 	t_fd	out;
-	// Maybe more stuff for redirects etc etc
 }	t_cmd;
 
 typedef struct s_dict {
-    char    *key;
-    char    *value;
-}   t_dict;
+	char	*key;
+	char	*value;
+}	t_dict;
 
 typedef struct s_shell
 {
@@ -75,12 +74,27 @@ typedef struct s_shell
 // FUNCTIONS
 // core
 void	free_split(char **av);
-void	free_cmd(void	*cmd_void);
+void	free_cmd(void *cmd_void);
 void	free_dict(void *var_void);
+void	free_shell(t_shell sh);
+//
+t_shell	init_shell(char **envp);
+int		shell_interactive(t_shell sh);
+int		shell_from_file(int ac, char **av, t_shell sh);
+
+//
 void	print_cmd_list(t_list *cmd_list);
 void	print_llist(t_list *llist);
+//
 char	**llist_to_av(t_list *llist);
+char	**dict_list_to_av(t_list *dict_list);
+t_dict	*str_to_dict(char *str);
+
+//
 int		is_in_set(char *str, char **str_set);
+//
+char	*ft_getenv(const char *name, t_list *env);
+t_dict	*get_dict_var(const char *key, t_list *dict);
 
 // error handling
 void	*error_check_pointer(void *pointer);
@@ -97,12 +111,17 @@ void	*xmalloc(size_t size, void *mem, t_shell sh);
 void	*free_arr(void *arr);
 
 // executer
-char	*find_bin_path(const char *cmd);
-int		exec_cmd(t_cmd cmd, char **envp);
-int		exec_cmd_list(t_list *comm_list);
+char	*find_bin_path(const char *cmd, t_list *env);
+int		exec_cmd(t_cmd *cmd, t_shell sh);
+int		exec_cmd_list(t_shell sh);
 int		open_fd(t_list *cmd_list);
 
 // builtins
 int		ft_echo(t_cmd *cmd);
+int		ft_env(t_cmd *cmd, t_shell sh);
+int		ft_export(t_cmd *cmd, t_shell sh);
+int		ft_exit(t_cmd *cmd, t_shell sh);
+int		ft_pwd(t_cmd *cmd, t_shell sh);
+int		ft_unset(t_cmd *cmd, t_shell sh);
 
 #endif
