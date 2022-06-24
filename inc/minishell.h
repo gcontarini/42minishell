@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
+/*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:18:18 by gcontari          #+#    #+#             */
-/*   Updated: 2022/06/18 12:49:41 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/06/24 12:55:26 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 # define PROMPT "minishell0.0$ " 
 # define METACHAR_SET "|&<>" // ;()
 # define SPACE_SET " \n\t"
+# define EXP_SET "|&<> \n\t\'\""
 
 // ALIAS
 typedef unsigned int	t_uint;
@@ -88,12 +89,18 @@ void	error_check(int ret_value);
 // parser
 int		get_token_list(const char *input, t_list **token_list);
 t_list	*get_cmd_list(t_list *token_list);
+char	*expander(t_shell sh, const char *input);
+// parser_utils
+t_uint	str_count_char(const char *s, char c);
+void	*xmc(void *p, void *mem);
+void	*xmalloc(size_t size, void *mem, t_shell sh);
+void	*free_arr(void *arr);
 
 // executer
 char	*find_bin_path(const char *cmd);
 int		exec_cmd(t_cmd cmd, char **envp);
 int		exec_cmd_list(t_list *comm_list);
-int 	open_fd(t_list *cmd_list);
+int		open_fd(t_list *cmd_list);
 
 // builtins
 int		ft_echo(t_cmd *cmd);
