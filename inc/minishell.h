@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:18:18 by gcontari          #+#    #+#             */
-/*   Updated: 2022/06/23 15:50:32 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/06/24 17:34:05 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ typedef unsigned char	t_uchar;
 typedef unsigned long	t_ulong;
 
 // VARIABLES
-
 typedef struct s_fd
 {
 	char	*fname;
@@ -57,7 +56,8 @@ typedef struct s_cmd
 	t_fd	out;
 }	t_cmd;
 
-typedef struct s_dict {
+typedef struct s_dict
+{
 	char	*key;
 	char	*value;
 }	t_dict;
@@ -70,11 +70,20 @@ typedef struct s_shell
 	t_list	*cmd_list;
 }	t_shell;
 
+typedef enum e_struct_type
+{
+	T_SPLIT,
+	T_CMD,
+	T_DICT,
+	T_FD
+}	t_struct_type;
+
 // FUNCTIONS
 // core
-void	free_split(char **av);
+void	free_split(void *av_void);
 void	free_cmd(void *cmd_void);
 void	free_dict(void *var_void);
+void	free_fd(void *fd_void);
 void	free_shell(t_shell sh);
 //
 t_shell	init_shell(char **envp);
