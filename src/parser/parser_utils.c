@@ -6,7 +6,7 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 09:27:27 by gcontari          #+#    #+#             */
-/*   Updated: 2022/06/24 12:50:09 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/06/24 13:45:12 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ void	*xmalloc(size_t size, void *mem, t_shell sh)
 	ptr = malloc(size);
 	if (ptr)
 		return (ptr);
-	free(mem);
+	if (mem)
+		free(mem);
 	if (sh.env)
 		free(sh.env);
 	if (sh.input)

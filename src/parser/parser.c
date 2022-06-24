@@ -6,20 +6,24 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 13:16:55 by gcontari          #+#    #+#             */
-/*   Updated: 2022/06/21 09:44:25 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/06/24 16:09:35 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_list			*parser(const char *inpt);
+t_list	*parser(t_shell sh, const char *inpt)
+{
+	char	*inpt_exp;
+	t_list	*head;
 
-// t_list	*parser(const char *inpt)
-// {
-// 	char	*inpt_exp;
-// 	t_list	*head;
+	inpt_exp = expander(sh, inpt);
+	head = _parser(sh, inpt_exp);
+	return (head);
+}
 
-// 	inpt_exp = expander(inpt);
-// 	// head = _parser(inpt_exp);
-// 	return (head);
-// }
+static t_list	*_parser(t_shell sh, const char *inpt)
+{
+
+
+}

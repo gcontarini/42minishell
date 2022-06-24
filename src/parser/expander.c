@@ -6,7 +6,7 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 09:24:17 by gcontari          #+#    #+#             */
-/*   Updated: 2022/06/24 12:56:48 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/06/24 15:41:14 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static void	cpy_and_exp(char *dst, const char *src, t_exp exp)
 		{
 			src += ft_strlen(*vars) + 1;
 			p = getenv(*vars++);
-			while (*p)
+			while (p && *p)
 				*dst++ = *p++;
 			exp_tab++;
 			continue ;
@@ -86,6 +86,7 @@ static void	cpy_and_exp(char *dst, const char *src, t_exp exp)
 			vars++;
 		*dst++ = *src++;
 	}
+	*dst = 0;
 	return ;
 }
 
@@ -140,45 +141,45 @@ static t_uint	expansionlen(const char *input, t_exp exp)
 	return (size);
 }
 
-int	main(void) {
-	char	*p;
-	t_shell	sh;
+// int	main(void) {
+// 	char	*p;
+// 	t_shell	sh;
 
-	p = expander(sh, "echo \"Hello\"");
-	printf("%s\n", p);
-	free(p);
-	p = expander(sh, "echo $PWD");
-	printf("%s\n", p);
-	free(p);
-	p = expander(sh, "echo \"$PWD\"");
-	printf("%s\n", p);
-	free(p);
-	p = expander(sh, "echo '$PWD'");
-	printf("%s\n", p);
-	free(p);
-	p = expander(sh, "cd $PWD | echo $SHELL");
-	printf("%s\n", p);
-	free(p);
-	p = expander(sh, "cd $PWD | echo $SHELL > zip $HOME");
-	printf("%s\n", p);
-	free(p);
-	p = expander(sh, "cd $PWD| echo $SHELL > zip $HOME");
-	printf("%s\n", p);
-	free(p);
-	p = expander(sh, "cd \"$PWD lets go\" | echo $SHELL > zip $HOME");
-	printf("%s\n", p);
-	free(p);
-	p = expander(sh, "cd '$PWD lets go' | echo $SHELL > zip $HOME");
-	printf("%s\n", p);
-	free(p);
-	p = expander(sh, "cd \"$PWD let's go\" | echo $SHELL > zip $HOME");
-	printf("%s\n", p);
-	free(p);
-	p = expander(sh, "cd \"'$PWD' let's go\" | echo $SHELL > zip $HOME");
-	printf("%s\n", p);
-	free(p);
-	p = expander(sh, "cd '\"$PWD\" lets go' | echo $SHELL > zip $HOME");
-	printf("%s\n", p);
-	free(p);
-	return (0);
-}
+// 	p = expander(sh, "echo \"Hello\"");
+// 	printf("%s\n", p);
+// 	free(p);
+// 	p = expander(sh, "echo $PWD");
+// 	printf("%s\n", p);
+// 	free(p);
+// 	p = expander(sh, "echo \"$PWD\"");
+// 	printf("%s\n", p);
+// 	free(p);
+// 	p = expander(sh, "echo '$PWD'");
+// 	printf("%s\n", p);
+// 	free(p);
+// 	p = expander(sh, "cd $PWD | echo $SHELL");
+// 	printf("%s\n", p);
+// 	free(p);
+// 	p = expander(sh, "cd $PWD | echo $SHELL > zip $HOME");
+// 	printf("%s\n", p);
+// 	free(p);
+// 	p = expander(sh, "cd $PWD| echo $SHELL > zip $HOME");
+// 	printf("%s\n", p);
+// 	free(p);
+// 	p = expander(sh, "cd \"$PWD lets go\" | echo $SHELL > zip $HOME");
+// 	printf("%s\n", p);
+// 	free(p);
+// 	p = expander(sh, "cd '$PWD lets go' | echo $SHELL > zip $HOME");
+// 	printf("%s\n", p);
+// 	free(p);
+// 	p = expander(sh, "cd \"$PWD let's go\" | echo $SHELL > zip $HOME");
+// 	printf("%s\n", p);
+// 	free(p);
+// 	p = expander(sh, "cd \"'$PWD' let's go\" | echo $SHELL > zip $HOME");
+// 	printf("%s\n", p);
+// 	free(p);
+// 	p = expander(sh, "cd '\"$PWD\" lets go' | echo $SHELL > zip $HOME");
+// 	printf("%s\n", p);
+// 	free(p);
+// 	return (0);
+// }

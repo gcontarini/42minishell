@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_token_list.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
+/*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 17:44:00 by nprimo            #+#    #+#             */
-/*   Updated: 2022/05/06 11:04:49 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/06/24 12:59:01 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 static char	*get_next_token(const char *input);
-
 
 int	get_token_list(const char *input, t_list **token_list)
 {
