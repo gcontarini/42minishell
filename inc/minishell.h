@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:18:18 by gcontari          #+#    #+#             */
-/*   Updated: 2022/06/24 17:34:05 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/06/24 17:51:10 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ typedef struct s_fd
 	char	*fname;
 	char	*redirection;
 	int		fd;
-}	t_fd;
+}				t_fd;
 
 typedef struct s_cmd
 {
@@ -54,13 +54,13 @@ typedef struct s_cmd
 	char	**av;
 	t_fd	in;
 	t_fd	out;
-}	t_cmd;
+}				t_cmd;
 
 typedef struct s_dict
 {
 	char	*key;
 	char	*value;
-}	t_dict;
+}				t_dict;
 
 typedef struct s_shell
 {
@@ -68,7 +68,7 @@ typedef struct s_shell
 	char	*input;
 	t_list	*token_list;
 	t_list	*cmd_list;
-}	t_shell;
+}				t_shell;
 
 typedef enum e_struct_type
 {
@@ -76,7 +76,9 @@ typedef enum e_struct_type
 	T_CMD,
 	T_DICT,
 	T_FD
-}	t_struct_type;
+}				t_struct_type;
+
+typedef void	(*t_free_func) (void *);
 
 // FUNCTIONS
 // core

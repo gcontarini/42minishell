@@ -6,18 +6,18 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 12:19:39 by nprimo            #+#    #+#             */
-/*   Updated: 2022/06/20 19:46:42 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/06/24 17:37:35 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	free_fd(t_fd *fd);
-
-void	free_split(char **av)
+void	free_split(void *av_void)
 {
-	int	pos;
+	int		pos;
+	char	**av;
 
+	av = (char **) av_void;
 	pos = 0;
 	while (av && av[pos])
 	{
@@ -39,8 +39,11 @@ void	free_cmd(void *cmd_void)
 	free(cmd);
 }
 
-static void	free_fd(t_fd *fd)
+void	free_fd(void *fd_void)
 {
+	t_fd	*fd;
+
+	fd = (t_fd *) fd_void;
 	if (fd)
 	{
 		if (fd->fname)
