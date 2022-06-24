@@ -6,7 +6,7 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:18:18 by gcontari          #+#    #+#             */
-/*   Updated: 2022/06/24 16:20:27 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/06/24 18:13:07 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,15 @@
 typedef unsigned int	t_uint;
 typedef unsigned char	t_uchar;
 typedef unsigned long	t_ulong;
+typedef void			(*t_free_func) (void *);
 
 // VARIABLES
-
 typedef struct s_fd
 {
 	char	*fname;
 	char	*redirection;
 	int		fd;
-}	t_fd;
+}				t_fd;
 
 typedef struct s_cmd
 {
@@ -56,12 +56,13 @@ typedef struct s_cmd
 	char	**av;
 	t_fd	in;
 	t_fd	out;
-}	t_cmd;
+}				t_cmd;
 
-typedef struct s_dict {
+typedef struct s_dict
+{
 	char	*key;
 	char	*value;
-}	t_dict;
+}				t_dict;
 
 typedef struct s_shell
 {
@@ -69,13 +70,22 @@ typedef struct s_shell
 	char	*input;
 	t_list	*token_list;
 	t_list	*cmd_list;
-}	t_shell;
+}				t_shell;
+
+typedef enum e_struct_type
+{
+	T_SPLIT,
+	T_CMD,
+	T_DICT,
+	T_FD
+}				t_struct_type;
 
 // FUNCTIONS
 // core
-void	free_split(char **av);
+void	free_split(void *av_void);
 void	free_cmd(void *cmd_void);
 void	free_dict(void *var_void);
+void	free_fd(void *fd_void);
 void	free_shell(t_shell sh);
 //
 t_shell	init_shell(char **envp);
