@@ -6,15 +6,15 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 16:00:02 by nprimo            #+#    #+#             */
-/*   Updated: 2022/05/30 17:37:33 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/06/25 11:32:48 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void print_llist(t_list *llist)
+void	print_llist(t_list *llist)
 {
-	t_list *head;
+	t_list	*head;
 
 	head = llist;
 	while (head)
@@ -22,4 +22,5 @@ void print_llist(t_list *llist)
 		printf(" %s ", head->content);
 		head = head->next;
 	}
+	printf("\n");
 }
