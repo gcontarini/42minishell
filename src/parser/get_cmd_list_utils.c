@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:01:37 by nprimo            #+#    #+#             */
-/*   Updated: 2022/06/25 15:58:29 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/06/25 18:06:50 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ static int	add_cmd_out(t_cmd *cmd, t_list *cmd_token_list)
 				cmd->out.fname = (char *)curr_token->next->content;
 				cmd->out.redirection = curr_cont;
 			}
-			return (258);
+			else
+				return (258);
 		}
 		curr_token = curr_token->next;
 	}
@@ -73,7 +74,8 @@ static int	add_cmd_in(t_cmd *cmd, t_list *cmd_token_list)
 				cmd->in.redirection = curr_cont;
 				curr_token = curr_token->next;
 			}
-			return (258);
+			else
+				return (258);
 		}
 		curr_token = curr_token->next;
 	}
