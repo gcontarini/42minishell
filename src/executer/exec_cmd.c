@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 12:24:52 by nprimo            #+#    #+#             */
-/*   Updated: 2022/06/25 18:31:00 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/07/01 10:09:02 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,14 @@ char		*find_bin_path(const char *bin, t_list *env, t_shell sh);
 
 int	exec_cmd(t_cmd *cmd, t_shell *sh)
 {
-	if (is_builitin(cmd->av[0]) >= 0)
-		return (exec_builtin(cmd, sh));
-	else
-		return (exec_bin(cmd, sh));
+	if (cmd->av[0])
+	{
+		if (is_builitin(cmd->av[0]) >= 0)
+			return (exec_builtin(cmd, sh));
+		else
+			return (exec_bin(cmd, sh));
+	}
+	return (1);
 }
 
 static int	redirect(int fd_in, int fd_out)
@@ -76,7 +80,7 @@ static int	exec_builtin(t_cmd *cmd, t_shell *sh)
 		close(cmd->in.fd);
 	if (cmd->out.fd != STDOUT_FILENO)
 		close(cmd->out.fd);
-	return (0);
+	return (return_status);
 }
 
 static int	exec_bin(t_cmd *cmd, t_shell *sh)
