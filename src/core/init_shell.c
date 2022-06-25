@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 15:05:16 by nprimo            #+#    #+#             */
-/*   Updated: 2022/06/25 17:13:06 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/06/25 18:20:53 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 static t_list	*envp_to_dict_list(char **envp);
 static void		unset_oldpwd(t_list **env);
-static void		update_shlvl(t_list *env);
+static void		update_shlvl(t_list *env, t_shell sh);
 
 t_shell	init_shell(char **envp)
 {
 	t_shell	sh;
 
 	sh.env = envp_to_dict_list(envp);
-	update_shlvl(sh.env);
+	update_shlvl(sh.env, sh);
 	unset_oldpwd(&sh.env);
 	sh.input = NULL;
 	sh.token_list = NULL;
@@ -47,7 +47,7 @@ static t_list	*envp_to_dict_list(char **envp)
 	return (env);
 }
 
-static void	update_shlvl(t_list *env)
+static void	update_shlvl(t_list *env, t_shell sh)
 {
 	t_dict	*var;
 	int		sh_lvl;
@@ -60,7 +60,7 @@ static void	update_shlvl(t_list *env)
 		{
 			sh_lvl = ft_atoi(var->value) + 1;
 			tmp = var->value;
-			var->value = error_check_pointer(ft_itoa(sh_lvl));
+			var->value = xmc(ft_itoa(sh_lvl), NULL, 0, sh);
 			free(tmp);
 			return ;
 		}

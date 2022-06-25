@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:53:26 by nprimo            #+#    #+#             */
-/*   Updated: 2022/06/20 18:48:58 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/06/25 18:14:56 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ static int	add_to_env(char *key_value, t_shell sh)
 	}
 	else
 	{
-		new_el = error_check_pointer(ft_lstnew(new_var));
+		new_el = xmc(ft_lstnew(new_var), NULL, 0, sh);
 		ft_lstadd_back(&sh.env, new_el);
 	}
 	return (0);
