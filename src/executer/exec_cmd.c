@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 12:24:52 by nprimo            #+#    #+#             */
-/*   Updated: 2022/06/25 17:34:17 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/06/25 18:10:34 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,11 @@ static int	exec_bin(t_cmd *cmd, t_shell *sh)
 	pid_t	pid;
 	char	*bin_path;
 
-	bin_path = find_bin_path(cmd->av[0], sh->env, *sh);
+	if (access(cmd->av[0], F_OK & X_OK) == 0)
+		bin_path = xmc(ft_strndup(cmd->av[0],
+					ft_strlen(cmd->av[0])), NULL, 0, *sh);
+	else
+		bin_path = find_bin_path(cmd->av[0], sh->env, *sh);
 	pid = fork();
 	if (pid == -1)
 		exit(1);
@@ -97,6 +101,7 @@ static int	exec_bin(t_cmd *cmd, t_shell *sh)
 		close(cmd->in.fd);
 	if (cmd->out.fd != STDOUT_FILENO)
 		close(cmd->out.fd);
-	free(bin_path);
+	if (bin_path)
+		free(bin_path);
 	return (0);
 }

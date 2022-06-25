@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 12:21:53 by nprimo            #+#    #+#             */
-/*   Updated: 2022/06/25 17:06:55 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/06/25 17:50:47 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ char	*find_bin_path(const char *bin, t_list *env, t_shell sh)
 
 	pos = 0;
 	bin_path = NULL;
-	if (access(bin, F_OK & X_OK) == 0)
-		return (xmc(ft_strndup(bin, ft_strlen(bin)), NULL, 0, sh));
 	ls_path_dir = find_ls_path_dir(env, sh);
 	while (ls_path_dir[pos])
 	{
@@ -38,6 +36,8 @@ char	*find_bin_path(const char *bin, t_list *env, t_shell sh)
 		free(bin_path);
 		pos++;
 	}
+	if (ls_path_dir[pos] == NULL)
+		bin_path = xmc(ft_strndup(bin, ft_strlen(bin)), NULL, 0, sh);
 	free_split(ls_path_dir);
 	return (bin_path);
 }
