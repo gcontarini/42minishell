@@ -6,28 +6,32 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:01:37 by nprimo            #+#    #+#             */
-/*   Updated: 2022/06/17 13:28:58 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/06/25 15:58:29 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	add_cmd_out(t_cmd *cmd);
-static int	add_cmd_in(t_cmd *cmd);
+static int	add_cmd_out(t_cmd *cmd, t_list *cmd_token_list);
+static int	add_cmd_in(t_cmd *cmd, t_list *cmd_token_list);
 
-int	add_cmd_in_out(t_cmd *cmd)
+int	add_cmd_in_out(t_cmd *cmd, t_list *cmd_token_list)
 {
-	add_cmd_in(cmd);
-	add_cmd_out(cmd);
-	return (0);
+	int	return_status;
+
+	return_status = 0;
+	return_status = add_cmd_in(cmd, cmd_token_list);
+	if (return_status == 0)
+		return_status = add_cmd_out(cmd, cmd_token_list);
+	return (return_status);
 }
 
-static int	add_cmd_out(t_cmd *cmd)
+static int	add_cmd_out(t_cmd *cmd, t_list *cmd_token_list)
 {
 	t_list	*curr_token;
 	void	*curr_cont;
 
-	curr_token = cmd->token_list;
+	curr_token = cmd_token_list;
 	while (curr_token)
 	{
 		curr_cont = (char *)curr_token->content;
@@ -43,19 +47,19 @@ static int	add_cmd_out(t_cmd *cmd)
 				cmd->out.fname = (char *)curr_token->next->content;
 				cmd->out.redirection = curr_cont;
 			}
-			// else error
+			return (258);
 		}
 		curr_token = curr_token->next;
 	}
 	return (0);
 }
 
-static int	add_cmd_in(t_cmd *cmd)
+static int	add_cmd_in(t_cmd *cmd, t_list *cmd_token_list)
 {
 	t_list	*curr_token;
 	void	*curr_cont;
 
-	curr_token = cmd->token_list;
+	curr_token = cmd_token_list;
 	while (curr_token)
 	{
 		curr_cont = (char *)curr_token->content;
@@ -69,64 +73,37 @@ static int	add_cmd_in(t_cmd *cmd)
 				cmd->in.redirection = curr_cont;
 				curr_token = curr_token->next;
 			}
-			// else error
+			return (258);
 		}
 		curr_token = curr_token->next;
 	}
 	return (0);
 }
 
-char	**add_cmd_av(t_cmd *cmd)
+char	**token_list_to_av(t_list **token_list, t_shell sh)
 {
 	t_list	*curr_token;
 	t_list	*tmp;
 
-	curr_token = cmd->token_list;
+	curr_token = *token_list;
 	while (curr_token)
 	{
 		if (ft_strncmp("<", (char *) curr_token->content, 2) == 0
 			|| ft_strncmp(">", (char *) curr_token->content, 2) == 0)
 		{
 			tmp = curr_token->next->next;
-			free(ft_lst_remove(&cmd->token_list, curr_token->next->content));
-			free(ft_lst_remove(&cmd->token_list, curr_token->content));
+			free(ft_lst_remove(token_list, curr_token->next->content));
+			free(ft_lst_remove(token_list, curr_token->content));
 			curr_token = tmp;
 		}
 		else if (ft_strncmp("|", (char *) curr_token->content, 1) == 0)
 		{
 			tmp = curr_token->next;
-			free(ft_lst_remove(&cmd->token_list, curr_token->content));
+			free(ft_lst_remove(token_list, curr_token->content));
 			curr_token = tmp;
 		}
 		else
 			curr_token = curr_token->next;
 	}
-	return (llist_to_av(cmd->token_list));
-}
-
-// control operator list
-// "||", "&&", "&", ";" ";;" ";&", ";;&", "|", "|&", "(", ")"
-// ; and & are not to be considered
-int	is_control_operator(char *str)
-{
-	if (ft_strncmp("|", str, 2) == 0)
-		return (1);
-	return (0);
-}
-
-int	control_operator_pos(t_list *llist)
-{
-	char	*curr_content;
-	int		pos;
-
-	pos = 0;
-	while (llist)
-	{
-		curr_content = (char *) llist->content;
-		if (is_control_operator(curr_content))
-			break ;
-		pos++;
-		llist = llist->next;
-	}
-	return (pos);
+	return (xmc(llist_to_av(*token_list), NULL, 0, sh));
 }
