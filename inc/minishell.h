@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:18:18 by gcontari          #+#    #+#             */
-/*   Updated: 2022/06/24 21:58:07 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/06/25 12:24:48 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ t_dict	*get_dict_var(const char *key, t_list *dict);
 // error handling
 void	*error_check_pointer(void *pointer);
 void	error_check(int ret_value);
+void	*xmc(void *ptr, void *var, t_struct_type type, t_shell sh);
 
 // parser
 int		get_token_list(const char *input, t_list **token_list);
