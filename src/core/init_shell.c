@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 15:05:16 by nprimo            #+#    #+#             */
-/*   Updated: 2022/06/20 18:18:31 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/06/25 17:13:06 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_shell	init_shell(char **envp)
 	sh.input = NULL;
 	sh.token_list = NULL;
 	sh.cmd_list = NULL;
+	sh.exit_status = 0;
 	return (sh);
 }
 

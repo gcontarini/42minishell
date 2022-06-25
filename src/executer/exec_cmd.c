@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 12:24:52 by nprimo            #+#    #+#             */
-/*   Updated: 2022/06/25 17:10:18 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/06/25 17:34:17 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 static int	redirect(int fd_in, int fd_out);
 static int	is_builitin(char *str);
-static int	exec_builtin(t_cmd *cmd, t_shell sh);
-static int	exec_bin(t_cmd *cmd, t_shell sh);
+static int	exec_builtin(t_cmd *cmd, t_shell *sh);
+static int	exec_bin(t_cmd *cmd, t_shell *sh);
 //
 char		*find_bin_path(const char *bin, t_list *env, t_shell sh);
 
-int	exec_cmd(t_cmd *cmd, t_shell sh)
+int	exec_cmd(t_cmd *cmd, t_shell *sh)
 {
 	if (is_builitin(cmd->av[0]) >= 0)
 		return (exec_builtin(cmd, sh));
@@ -61,7 +61,7 @@ static int	is_builitin(char *str)
 	return (-1);
 }
 
-int	exec_builtin(t_cmd *cmd, t_shell sh)
+static int	exec_builtin(t_cmd *cmd, t_shell *sh)
 {
 	static t_builtins	*builtin_list[] = {
 		ft_echo, ft_env, ft_export, ft_exit, ft_pwd, ft_unset, ft_cd
@@ -71,7 +71,7 @@ int	exec_builtin(t_cmd *cmd, t_shell sh)
 
 	return_status = 0;
 	pos = is_builitin(cmd->av[0]);
-	return_status = builtin_list[pos](cmd, sh);
+	return_status = builtin_list[pos](cmd, *sh);
 	if (cmd->in.fd != STDIN_FILENO)
 		close(cmd->in.fd);
 	if (cmd->out.fd != STDOUT_FILENO)
@@ -79,19 +79,19 @@ int	exec_builtin(t_cmd *cmd, t_shell sh)
 	return (0);
 }
 
-static int	exec_bin(t_cmd *cmd, t_shell sh)
+static int	exec_bin(t_cmd *cmd, t_shell *sh)
 {
 	pid_t	pid;
 	char	*bin_path;
 
-	bin_path = find_bin_path(cmd->av[0], sh.env, sh);
+	bin_path = find_bin_path(cmd->av[0], sh->env, *sh);
 	pid = fork();
 	if (pid == -1)
 		exit(1);
 	if (pid == 0)
 	{
 		error_check(redirect(cmd->in.fd, cmd->out.fd));
-		error_check(execve(bin_path, cmd->av, dict_list_to_av(sh.env)));
+		error_check(execve(bin_path, cmd->av, dict_list_to_av(sh->env)));
 	}
 	if (cmd->in.fd != STDIN_FILENO)
 		close(cmd->in.fd);

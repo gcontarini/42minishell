@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 16:59:38 by nprimo            #+#    #+#             */
-/*   Updated: 2022/06/25 16:04:25 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/06/25 17:36:44 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char			**token_list_to_av(t_list **token_list, t_shell sh);
 int				control_operator_pos(t_list *llist);
 t_list			*llist_pos(t_list *llist, int pos);
 
-t_list	*get_cmd_list(t_list **token_list, t_shell sh)
+t_list	*get_cmd_list(t_list **token_list, t_shell *sh)
 {
 	t_list	*cmd_list;
 	t_list	*cmd_token_list;
@@ -32,14 +32,15 @@ t_list	*get_cmd_list(t_list **token_list, t_shell sh)
 	cmd_token_list = pop_cmd_token_list(token_list);
 	while (cmd_token_list)
 	{
-		next_cmd = xmc(init_new_cmd(), NULL, 0, sh);
-		add_cmd_in_out(next_cmd, cmd_token_list);
-		// if fails - break execution and went back to reading
-		next_cmd->av = token_list_to_av(&cmd_token_list, sh);
+		next_cmd = xmc(init_new_cmd(), NULL, 0, *sh);
+		sh->exit_status = add_cmd_in_out(next_cmd, cmd_token_list);
+		if (sh->exit_status)
+			break ;
+		next_cmd->av = token_list_to_av(&cmd_token_list, *sh);
 		tmp = cmd_token_list;
 		cmd_token_list = pop_cmd_token_list(token_list);
 		ft_lstclear(&tmp, NULL);
-		ft_lstadd_back(&cmd_list, xmc(ft_lstnew(next_cmd), NULL, 0, sh));
+		ft_lstadd_back(&cmd_list, xmc(ft_lstnew(next_cmd), NULL, 0, *sh));
 	}
 	return (cmd_list);
 }

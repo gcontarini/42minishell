@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:18:18 by gcontari          #+#    #+#             */
-/*   Updated: 2022/06/25 16:55:08 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/06/25 17:29:41 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct s_shell
 	char	*input;
 	t_list	*token_list;
 	t_list	*cmd_list;
+	int		exit_status;
 }				t_shell;
 
 typedef enum e_struct_type
@@ -113,11 +114,11 @@ void	*xmc(void *ptr, void *var, t_struct_type type, t_shell sh);
 
 // parser
 int		get_token_list(const char *input, t_list **token_list);
-t_list	*get_cmd_list(t_list **token_list, t_shell sh);
+t_list	*get_cmd_list(t_list **token_list, t_shell *sh);
 
 // executer
-int		exec_cmd(t_cmd *cmd, t_shell sh);
-int		exec_cmd_list(t_shell sh);
+int		exec_cmd(t_cmd *cmd, t_shell *sh);
+int		exec_cmd_list(t_shell *sh);
 int		open_fd(t_list *cmd_list);
 
 // builtins
