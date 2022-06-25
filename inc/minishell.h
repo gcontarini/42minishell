@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:18:18 by gcontari          #+#    #+#             */
-/*   Updated: 2022/06/25 12:24:48 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/06/25 15:37:29 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ typedef struct s_fd
 
 typedef struct s_cmd
 {
-	t_list	*token_list;
 	char	**av;
 	t_fd	in;
 	t_fd	out;
@@ -114,7 +113,7 @@ void	*xmc(void *ptr, void *var, t_struct_type type, t_shell sh);
 
 // parser
 int		get_token_list(const char *input, t_list **token_list);
-t_list	*get_cmd_list(t_list *token_list);
+t_list	*get_cmd_list(t_list **token_list, t_shell sh);
 
 // executer
 char	*find_bin_path(const char *cmd, t_list *env);

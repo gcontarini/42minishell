@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 12:10:51 by nprimo            #+#    #+#             */
-/*   Updated: 2022/06/25 11:32:23 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/06/25 15:37:54 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,6 @@ void	print_cmd_list(t_list *cmd_list)
 	while (head)
 	{
 		cmd = (t_cmd *) head->content;
-		printf("token list:\n");
-		print_llist(cmd->token_list);
-		printf("\n");
 		printf("av: \n");
 		print_av(cmd->av);
 		printf("\n");
