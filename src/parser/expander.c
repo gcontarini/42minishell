@@ -6,18 +6,11 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 09:24:17 by gcontari          #+#    #+#             */
-/*   Updated: 2022/06/24 15:41:14 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/06/27 09:26:44 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-typedef struct s_expander
-{
-	t_uint	counter;
-	char	**var_names;
-	bool	*table;
-}	t_exp;
 
 static char		**split_env_names(const char *input, t_exp exp, t_shell sh);
 static void		cpy_and_exp(char *dst, const char *src, t_exp exp);
@@ -30,14 +23,14 @@ char	*expander(t_shell sh, const char *input)
 	char	*output;
 
 	exp.counter = str_count_char(input, '$');
-	exp.table = xmalloc(exp.counter, NULL, sh);
+	exp.table = xmc(malloc(exp.counter), NULL, T_CMD, sh);
 	create_exp_table(input, exp);
-	exp.var_names = xmalloc((exp.counter + 1) * sizeof(char *), &exp, sh);
+	exp.var_names = xmc(
+			malloc((exp.counter + 1) * sizeof(char *)), &exp, T_CMD, sh);
 	split_env_names(input, exp, sh);
-	output = xmalloc(expansionlen(input, exp) + 1, &exp, sh);
+	output = xmc(malloc(expansionlen(input, exp) + 1), &exp, T_CMD, sh);
 	cpy_and_exp(output, input, exp);
-	free(exp.table);
-	free_arr(exp.var_names);
+	free_exp(&exp);
 	return (output);
 }
 
@@ -56,7 +49,7 @@ static char	**split_env_names(const char *input, t_exp exp, t_shell sh)
 		ptr = (char *)++input;
 		while (*ptr && !ft_strchr(EXP_SET, *ptr))
 			ptr++;
-		*tmp = xmalloc(ptr - input + 1, &exp, sh);
+		*tmp = xmc(malloc(ptr - input + 1), &exp, T_EXP, sh);
 		ft_strlcpy(*tmp++, input, ptr - input + 1);
 		*tmp = NULL;
 	}

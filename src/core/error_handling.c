@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_handling.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
+/*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 15:31:54 by nprimo            #+#    #+#             */
-/*   Updated: 2022/06/24 17:45:53 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/06/27 09:24:04 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void	*error_check_pointer(void *pointer)
 
 void	*xmc(void *ptr, void *var, t_struct_type type, t_shell sh)
 {
-	static t_free_func free_func_list[] = {
-		free_split, free_cmd, free_dict, free_fd
+	static t_free_func	free_func_list[] = {
+		free_split, free_cmd, free_dict, free_fd, free_exp
 	};
 
 	if (!ptr)

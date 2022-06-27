@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_func.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
+/*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 12:19:39 by nprimo            #+#    #+#             */
-/*   Updated: 2022/06/24 17:37:35 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/06/27 09:27:37 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,4 +78,18 @@ void	free_shell(t_shell sh)
 		ft_lstclear(&sh.token_list, NULL);
 	if (sh.cmd_list)
 		ft_lstclear(&sh.cmd_list, free_cmd);
+}
+
+void	free_exp(void *exp_void)
+{
+	t_exp	*exp;
+
+	exp = (t_exp *) exp_void;
+	if (exp)
+	{
+		if (exp->table)
+			free(exp->table);
+		if (exp->var_names)
+			free_split(exp->var_names);
+	}
 }

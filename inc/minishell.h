@@ -6,7 +6,7 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:18:18 by gcontari          #+#    #+#             */
-/*   Updated: 2022/06/24 18:13:07 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/06/27 09:28:11 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,20 @@ typedef struct s_shell
 	t_list	*cmd_list;
 }				t_shell;
 
+typedef struct s_expander
+{
+	t_uint	counter;
+	char	**var_names;
+	bool	*table;
+}	t_exp;
+
 typedef enum e_struct_type
 {
 	T_SPLIT,
 	T_CMD,
 	T_DICT,
-	T_FD
+	T_FD,
+	T_EXP
 }				t_struct_type;
 
 // FUNCTIONS
@@ -87,6 +95,7 @@ void	free_cmd(void *cmd_void);
 void	free_dict(void *var_void);
 void	free_fd(void *fd_void);
 void	free_shell(t_shell sh);
+void	free_exp(void *exp_void);
 //
 t_shell	init_shell(char **envp);
 int		shell_interactive(t_shell sh);
@@ -107,18 +116,17 @@ char	*ft_getenv(const char *name, t_list *env);
 t_dict	*get_dict_var(const char *key, t_list *dict);
 
 // error handling
+void	*xmc(void *ptr, void *var, t_struct_type type, t_shell sh);
 void	*error_check_pointer(void *pointer);
 void	error_check(int ret_value);
 
 // parser
 int		get_token_list(const char *input, t_list **token_list);
 t_list	*get_cmd_list(t_list *token_list);
+// expander
 char	*expander(t_shell sh, const char *input);
 // parser_utils
 t_uint	str_count_char(const char *s, char c);
-void	*xmc(void *p, void *mem);
-void	*xmalloc(size_t size, void *mem, t_shell sh);
-void	*free_arr(void *arr);
 
 // executer
 char	*find_bin_path(const char *cmd, t_list *env);
