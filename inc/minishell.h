@@ -6,7 +6,7 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:18:18 by gcontari          #+#    #+#             */
-/*   Updated: 2022/06/27 09:28:11 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/06/27 09:32:13 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ typedef struct s_fd
 	char	*fname;
 	char	*redirection;
 	int		fd;
-}				t_fd;
+}	t_fd;
 
 typedef struct s_cmd
 {
@@ -56,13 +56,13 @@ typedef struct s_cmd
 	char	**av;
 	t_fd	in;
 	t_fd	out;
-}				t_cmd;
+}	t_cmd;
 
 typedef struct s_dict
 {
 	char	*key;
 	char	*value;
-}				t_dict;
+}	t_dict;
 
 typedef struct s_shell
 {
@@ -70,7 +70,7 @@ typedef struct s_shell
 	char	*input;
 	t_list	*token_list;
 	t_list	*cmd_list;
-}				t_shell;
+}	t_shell;
 
 typedef struct s_expander
 {
@@ -86,7 +86,7 @@ typedef enum e_struct_type
 	T_DICT,
 	T_FD,
 	T_EXP
-}				t_struct_type;
+}	t_struct_type;
 
 // FUNCTIONS
 // core
