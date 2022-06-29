@@ -6,49 +6,21 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 13:16:55 by gcontari          #+#    #+#             */
-/*   Updated: 2022/06/28 10:11:11 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/06/29 09:55:30 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// typedef enum e_token_type
-// {
-// 	BIN,
-// 	FILE,
-// 	R_DIR,
-// 	L_DIR,
-// 	PIPE,
-// 	QUOTE,
-// 	AND,
-// 	OR,
-// 	O_PAR,
-// 	C_PAR
-// }	t_ttype;
-
-typedef enum e_token_type
-{
-	GENERAL,
-	DIRECTION,
-	QUOTE
-}	t_ttype;
-typedef struct s_token
-{
-	char	*s;
-	enum	e_ttype;
-}	t_token;
-
-// Move structs to header.
-// Add new enum types and free functions to xmc
 // Write a main to test lexer
-
 t_list	*parser(t_shell sh, const char *inpt)
 {
 	char	*inpt_exp;
 
 	inpt_exp = expander(sh, inpt);
+	free(inpt);
+	sh.input = inpt_exp;
 	sh.token_list = lexer(sh, inpt_exp);
-	free(inpt_exp);
 	return (sh.token_list);
 }
 
@@ -58,66 +30,61 @@ static t_list	*lexer(t_shell sh, const char *inpt)
 {
 	while (inpt && *inpt)
 	{
-		if (ft_strchr("\"\'", *inpt))
-			inpt = quote_handler(inpt, sh.token_list, sh);
-		else if (ft_strchr(METACHAR_SET, *inpt))
-			inpt = dir_handler(inpt, sh.token_list, sh);
-		else if (ft_strchr(SPACE_SET, *inpt))
-			while (ft_strchr(SPACE_SET, *(++inpt)))
-				;
-		else
-			inpt = normal_handler(inpt, sh.token_list, sh);
+		while (*inpt && ft_strchr(SPACE_SET, *inpt))
+			inpt++;
+		if (*inpt && ft_strchr("\"\'", *inpt))
+			inpt = quote_handler(inpt, sh);
+		else if (*inpt && ft_strchr(METACHAR_SET, *inpt))
+			inpt = dir_handler(inpt, sh);
+		else if (*inpt)
+			inpt = normal_handler(inpt, sh);
 	}
 	return (sh.token_list);
 }
 
-const char	*quote_handler(const char *inpt, t_list *head, t_shell sh)
+const char	*quote_handler(const char *inpt, t_shell sh)
 {
-	char		*token_str;
 	char		*p;
-	t_list		*node;
-	t_token		*token;
 
 	p = ft_strchr(inpt + 1, *inpt);
 	if (!p)
-		return (normal_handler(inpt, head, sh));
-	token_str = xmc(ft_strndup(inpt + 1, p - inpt), NULL, 0, sh);
-	token = xmc(new_token(token_str, QUOTE), token_str, T_MEM, sh);
-	node = xmc(ft_lstnew(token), token, T_TOKEN, sh);
-	ft_lstadd_back(sh.token_list, node);
+		return (normal_handler(inpt, sh));
+	create_token(inpt + 1, p - inpt, sh);
 	return (p + 1);
 }
 
-const char	*dir_handler(const char *inpt, t_list *head, t_shell sh)
+const char	*dir_handler(const char *inpt, t_shell sh)
 {
 	char		*p;
 	t_uint		step;
-	t_list		*node;
-	t_token		*token;
 
 	step = 1;
 	if (*(inpt + 1) == *inpt)
 		step++;
-	p = xmc(ft_strndup(inpt, step), NULL, 0, sh);
-	token = xmc(new_token(p, DIRECTION), p, T_MEM, sh);
-	node = xmc(ft_lstnew(token), token, T_TOKEN, sh);
-	ft_lstadd_back(sh.token_list, node);
+	create_token(inpt, step, sh);
 	return (inpt + step);
 }
 
-const char	*normal_handler(const char *inpt, t_list *head, t_shell sh)
+const char	*normal_handler(const char *inpt, t_shell sh)
+{
+	char		*p;
+
+	p = inpt;
+	while (*p && !ft_strchr(EXP_SET, *p))
+		p++;
+	create_token(inpt + 1, p - inpt, sh);
+	return (p);
+}
+
+static void	create_token(const char *str, t_uint n, t_shell sh)
 {
 	char		*token_str;
-	char		*p;
 	t_list		*node;
 	t_token		*token;
 
-	p = inpt;
-	while (*p && !ft_strchr(METACHAR_SET, *p))
-		p++;
-	token_str = xmc(ft_strndup(inpt + 1, p - inpt), NULL, 0, sh);
-	token = xmc(new_token(token_str, GENERAL), token_str, T_MEM, sh);
+	token_str = xmc(ft_strndup(str, n), NULL, 0, sh);
+	token = xmc(malloc(sizeof(t_token)), token_str, T_MEM, sh);
+	token->s = token_str;
 	node = xmc(ft_lstnew(token), token, T_TOKEN, sh);
 	ft_lstadd_back(sh.token_list, node);
-	return (p);
 }

@@ -6,7 +6,7 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 12:19:39 by nprimo            #+#    #+#             */
-/*   Updated: 2022/06/27 09:27:37 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/06/29 09:50:12 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,18 @@ void	free_exp(void *exp_void)
 			free(exp->table);
 		if (exp->var_names)
 			free_split(exp->var_names);
+	}
+}
+
+void	free_token (void *token_void)
+{
+	t_token	*token;
+
+	token = (t_token *) token_void;
+	if (token)
+	{
+		if (token->s)
+			free(token->s);
+		free(token);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:18:18 by gcontari          #+#    #+#             */
-/*   Updated: 2022/06/27 09:32:13 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/06/29 09:54:32 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,14 +79,38 @@ typedef struct s_expander
 	bool	*table;
 }	t_exp;
 
+typedef struct s_token
+{
+	char	*s;
+	enum	e_ttype;
+}	t_token;
+
 typedef enum e_struct_type
 {
 	T_SPLIT,
 	T_CMD,
 	T_DICT,
 	T_FD,
-	T_EXP
+	T_EXP,
+	T_TOKEN,
+	T_MEM
 }	t_struct_type;
+
+typedef enum e_token_type
+{
+	BIN,
+	FILE,
+	R_DIR,
+	L_DIR,
+	HERE_DOC,
+	APPEND,
+	PIPE,
+	QUOTE,
+	AND,
+	OR,
+	O_PAR,
+	C_PAR
+}	t_ttype;
 
 // FUNCTIONS
 // core
@@ -94,8 +118,10 @@ void	free_split(void *av_void);
 void	free_cmd(void *cmd_void);
 void	free_dict(void *var_void);
 void	free_fd(void *fd_void);
-void	free_shell(t_shell sh);
 void	free_exp(void *exp_void);
+void	free_token(void *token_void);
+
+void	free_shell(t_shell sh);
 //
 t_shell	init_shell(char **envp);
 int		shell_interactive(t_shell sh);
