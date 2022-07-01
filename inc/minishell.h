@@ -6,7 +6,7 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:18:18 by gcontari          #+#    #+#             */
-/*   Updated: 2022/06/29 09:54:32 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/07/01 17:15:18 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,37 @@ typedef unsigned int	t_uint;
 typedef unsigned char	t_uchar;
 typedef unsigned long	t_ulong;
 typedef void			(*t_free_func) (void *);
+
+typedef enum e_struct_type
+{
+	T_SPLIT,
+	T_CMD,
+	T_DICT,
+	T_FD,
+	T_EXP,
+	T_TOKEN,
+	T_MEM
+}	t_struct_type;
+
+typedef enum e_token_type
+{
+	TOKEN,
+	REDIR,
+	QUOTE
+	// BIN,
+	// FILE,
+	// PIPE,
+	// R_DIR,
+	// L_DIR,
+	// HERE_DOC,
+	// APPEND,
+	// PIPE,
+	// QUOTE,
+	// AND,
+	// OR,
+	// O_PAR,
+	// C_PAR
+}	t_ttype;
 
 // VARIABLES
 typedef struct s_fd
@@ -82,35 +113,8 @@ typedef struct s_expander
 typedef struct s_token
 {
 	char	*s;
-	enum	e_ttype;
+	t_ttype	t;
 }	t_token;
-
-typedef enum e_struct_type
-{
-	T_SPLIT,
-	T_CMD,
-	T_DICT,
-	T_FD,
-	T_EXP,
-	T_TOKEN,
-	T_MEM
-}	t_struct_type;
-
-typedef enum e_token_type
-{
-	BIN,
-	FILE,
-	R_DIR,
-	L_DIR,
-	HERE_DOC,
-	APPEND,
-	PIPE,
-	QUOTE,
-	AND,
-	OR,
-	O_PAR,
-	C_PAR
-}	t_ttype;
 
 // FUNCTIONS
 // core
@@ -147,8 +151,11 @@ void	*error_check_pointer(void *pointer);
 void	error_check(int ret_value);
 
 // parser
+t_list	*parser(t_shell sh, const char *inpt);
 int		get_token_list(const char *input, t_list **token_list);
 t_list	*get_cmd_list(t_list *token_list);
+// lexer
+t_list	*lexer(t_shell sh, const char *inpt);
 // expander
 char	*expander(t_shell sh, const char *input);
 // parser_utils
