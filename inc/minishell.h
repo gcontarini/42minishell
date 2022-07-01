@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:18:18 by gcontari          #+#    #+#             */
-/*   Updated: 2022/07/01 20:01:34 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/07/01 20:06:53 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,7 @@ t_dict	*get_dict_var(const char *key, t_list *dict);
 // error handling
 void	*xmc(void *ptr, void *var, t_struct_type type, t_shell sh);
 void	*error_check_pointer(void *pointer);
-void	error_check(int ret_value);
+void	error_check(int ret_value, t_shell sh);
 
 // parser
 t_list	*parser(t_shell sh, const char *inpt);
