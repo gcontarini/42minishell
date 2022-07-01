@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 17:02:05 by nprimo            #+#    #+#             */
-/*   Updated: 2022/06/25 18:30:43 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/07/01 20:34:03 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	**llist_to_av(t_list *llist, t_shell sh)
 	pos = 0;
 	while (head)
 	{
-		av[pos] = (char *) head->content;
+		av[pos] = ((t_token *) head->content)->s;
 		head = head->next;
 		pos++;
 	}

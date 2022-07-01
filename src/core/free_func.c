@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_func.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 12:19:39 by nprimo            #+#    #+#             */
-/*   Updated: 2022/07/01 20:02:16 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/07/01 20:55:55 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	free_shell(t_shell sh)
 	if (sh.input)
 		free(sh.input);
 	if (sh.token_list)
-		ft_lstclear(&sh.token_list, free);
+		ft_lstclear(&sh.token_list, free_token);
 	if (sh.cmd_list)
 		ft_lstclear(&sh.cmd_list, free_cmd);
 }
@@ -95,7 +95,7 @@ void	free_exp(void *exp_void)
 	}
 }
 
-void	free_token (void *token_void)
+void	free_token(void *token_void)
 {
 	t_token	*token;
 
@@ -106,4 +106,13 @@ void	free_token (void *token_void)
 			free(token->s);
 		free(token);
 	}
+}
+
+void	free_token_wrap(void *token_void)
+{
+	t_token	*token;
+
+	token = (t_token *) token_void;
+	if (token)
+		free(token);
 }

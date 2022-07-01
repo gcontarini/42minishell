@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 17:13:27 by gcontari          #+#    #+#             */
-/*   Updated: 2022/07/01 20:15:14 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/07/01 20:36:11 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,8 @@ const char	*normal_handler(const char *inpt, t_shell *sh)
 	return (p);
 }
 
-static t_list	*create_token(const char *str, t_uint n, t_ttype token_type, t_shell *sh)
+static t_list	*create_token(const char *str, t_uint n, t_ttype token_type,
+					t_shell *sh)
 {
 	char		*token_str;
 	t_list		*node;
@@ -101,7 +102,8 @@ static t_list	*create_token(const char *str, t_uint n, t_ttype token_type, t_she
 // 	sh = init_shell(envp);
 // 	for (int i = 0; test_cases[i] != NULL; i++) {
 // 		for (t_list *curr = lexer(sh, test_cases[i]); curr; curr = curr->next)
-// 			printf("%s - %d\n", ((t_token *) curr->content)->s, ((t_token *) curr->content)->t);
+// 			printf("%s - %d\n", ((t_token *) curr->content)->s, 
+				// ((t_token *) curr->content)->t);
 // 		printf("----------------\n");
 // 	}
 // 	free_shell(sh);

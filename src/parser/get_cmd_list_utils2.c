@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 15:56:01 by nprimo            #+#    #+#             */
-/*   Updated: 2022/06/25 15:56:26 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/07/01 20:28:28 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	control_operator_pos(t_list *llist)
 	pos = 0;
 	while (llist)
 	{
-		curr_content = (char *) llist->content;
+		curr_content = ((t_token *) llist->content)->s;
 		if (is_control_operator(curr_content))
 			break ;
 		pos++;

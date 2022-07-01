@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:24:04 by nprimo            #+#    #+#             */
-/*   Updated: 2022/07/01 20:18:23 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/07/01 20:42:39 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	shell_interactive(t_shell sh)
 		exec_input(&sh);
 		if (sh.exit_status != 0)
 			printf("Print error status code (%d) accordingly\n", sh.exit_status);
+		free(sh.input);
 	}
 	return (0);
 }
