@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:18:18 by gcontari          #+#    #+#             */
-/*   Updated: 2022/06/25 18:26:32 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/07/01 15:40:34 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ t_list	*get_cmd_list(t_list **token_list, t_shell *sh);
 int		exec_cmd(t_cmd *cmd, t_shell *sh);
 int		exec_cmd_list(t_shell *sh);
 int		open_fd(t_list *cmd_list, t_shell sh);
+int		here_doc(char *eof);
 
 // builtins
 int		ft_echo(t_cmd *cmd, t_shell sh);

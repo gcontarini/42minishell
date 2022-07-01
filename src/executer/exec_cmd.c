@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 12:24:52 by nprimo            #+#    #+#             */
-/*   Updated: 2022/06/25 18:43:39 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/07/01 19:56:41 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ static int	exec_builtin(t_cmd *cmd, t_shell *sh)
 		close(cmd->in.fd);
 	if (cmd->out.fd != STDOUT_FILENO)
 		close(cmd->out.fd);
-	return (0);
+	return (return_status);
 }
 
 static int	exec_bin(t_cmd *cmd, t_shell *sh)

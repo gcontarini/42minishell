@@ -18,12 +18,10 @@ static int	get_fd_out(t_list *cmd_list, t_shell sh);
 int	open_fd(t_list *cmd_list, t_shell sh)
 {
 	t_list	*curr_cmd;
-	t_cmd	*cmd;
 
 	curr_cmd = cmd_list;
 	while (curr_cmd)
 	{
-		cmd = (t_cmd *)curr_cmd->content;
 		get_fd_in(curr_cmd, sh);
 		get_fd_out(curr_cmd, sh);
 		curr_cmd = curr_cmd->next;
@@ -37,7 +35,7 @@ static int	get_fd_in(t_list *cmd_list, t_shell sh)
 
 	cmd = (t_cmd *) cmd_list->content;
 	if (!cmd->in.fname && cmd->in.fd < 0)
-			cmd->in.fd = STDIN_FILENO;
+		cmd->in.fd = STDIN_FILENO;
 	else if (cmd->in.fname && ft_strncmp("<", cmd->in.redirection, 2) == 0)
 		cmd->in.fd = open(cmd->in.fname, O_RDONLY);
 	error_check(cmd->in.fd, sh);
@@ -52,7 +50,7 @@ static int	get_fd_out(t_list *cmd_list, t_shell sh)
 
 	cmd = (t_cmd *) cmd_list->content;
 	if (!cmd->out.fname && cmd->out.fd < 0)
-			cmd->out.fd = STDOUT_FILENO;
+		cmd->out.fd = STDOUT_FILENO;
 	else if (ft_strncmp(cmd->out.fname, "|", 2) == 0)
 	{
 		if (cmd_list->next)

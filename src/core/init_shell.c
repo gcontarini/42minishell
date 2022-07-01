@@ -6,13 +6,13 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 15:05:16 by nprimo            #+#    #+#             */
-/*   Updated: 2022/06/25 18:20:53 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/07/01 10:07:14 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static t_list	*envp_to_dict_list(char **envp);
+static t_list	*envp_to_dict_list(char **envp, t_shell sh);
 static void		unset_oldpwd(t_list **env);
 static void		update_shlvl(t_list *env, t_shell sh);
 
@@ -20,7 +20,7 @@ t_shell	init_shell(char **envp)
 {
 	t_shell	sh;
 
-	sh.env = envp_to_dict_list(envp);
+	sh.env = envp_to_dict_list(envp, sh);
 	update_shlvl(sh.env, sh);
 	unset_oldpwd(&sh.env);
 	sh.input = NULL;
@@ -30,7 +30,7 @@ t_shell	init_shell(char **envp)
 	return (sh);
 }
 
-static t_list	*envp_to_dict_list(char **envp)
+static t_list	*envp_to_dict_list(char **envp, t_shell sh)
 {
 	int		pos;
 	t_list	*env;
@@ -40,7 +40,7 @@ static t_list	*envp_to_dict_list(char **envp)
 	pos = 0;
 	while (envp[pos])
 	{
-		var = str_to_dict(envp[pos]);
+		var = str_to_dict(envp[pos], sh);
 		ft_lstadd_back(&env, ft_lstnew(var));
 		pos++;
 	}
