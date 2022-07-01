@@ -6,7 +6,7 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:24:04 by nprimo            #+#    #+#             */
-/*   Updated: 2022/07/01 20:03:31 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/07/01 20:11:05 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	shell_from_file(int ac, char **av, t_shell sh)
 
 static int	exec_input(t_shell *sh)
 {
-	sh.token_list = parser(sh, sh.input);
+	sh->token_list = parser(*sh, sh->input);
 	sh->cmd_list = get_cmd_list(&sh->token_list, sh);
 	if (sh->exit_status == 0)
 		sh->exit_status = open_fd(sh->cmd_list, *sh);
