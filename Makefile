@@ -6,7 +6,7 @@
 #    By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/24 19:45:47 by nprimo            #+#    #+#              #
-#    Updated: 2022/05/30 16:48:23 by nprimo           ###   ########.fr        #
+#    Updated: 2022/07/01 12:56:23 by nprimo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,7 @@ $(OBJ)/%.o: $(SRC)/*/%.c
 	$(CC) $(CFLAGS) -I $(INC) -c $< -o $@
 
 tester: $(SRCS_TEST)
-	$(CC) -Wall -g -fsanitize=address $(LIBS) -I $(INC) $^
+	$(CC) -Wall -g -fsanitize=address -I $(INC) $^ $(LIBS) 
 
 clean:
 	$(RM) $(wildcard $(OBJ)/*.o)

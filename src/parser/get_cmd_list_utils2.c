@@ -1,38 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_echo.c                                          :+:      :+:    :+:   */
+/*   get_cmd_list_utils2.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/26 12:21:43 by nprimo            #+#    #+#             */
-/*   Updated: 2022/06/24 21:15:07 by nprimo           ###   ########.fr       */
+/*   Created: 2022/06/25 15:56:01 by nprimo            #+#    #+#             */
+/*   Updated: 2022/06/25 15:56:26 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_echo(t_cmd *cmd, t_shell sh)
+// control operator list
+// "||", "&&", "&", ";" ";;" ";&", ";;&", "|", "|&", "(", ")"
+// ; and & are not to be considered
+int	is_control_operator(char *str)
 {
-	int		n_flag;
+	if (ft_strncmp("|", str, 2) == 0)
+		return (1);
+	return (0);
+}
+
+int	control_operator_pos(t_list *llist)
+{
+	char	*curr_content;
 	int		pos;
 
-	(void) sh;
-	n_flag = 0;
-	pos = 1;
-	if (cmd->av[pos] && ft_strncmp(cmd->av[pos], "-n", 3) == 0)
+	pos = 0;
+	while (llist)
 	{
-		n_flag = 1;
-		pos += 1;
-	}
-	while (cmd->av[pos])
-	{
-		write(cmd->out.fd, cmd->av[pos], ft_strlen(cmd->av[pos]));
+		curr_content = (char *) llist->content;
+		if (is_control_operator(curr_content))
+			break ;
 		pos++;
-		if (cmd->av[pos])
-			write(cmd->out.fd, " ", 1);
+		llist = llist->next;
 	}
-	if (n_flag == 0)
-		write(cmd->out.fd, "\n", 1);
-	return (0);
+	return (pos);
 }

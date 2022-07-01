@@ -1,26 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_llist.c                                      :+:      :+:    :+:   */
+/*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/30 16:00:02 by nprimo            #+#    #+#             */
-/*   Updated: 2022/07/01 10:07:49 by nprimo           ###   ########.fr       */
+/*   Created: 2022/07/01 15:36:50 by nprimo            #+#    #+#             */
+/*   Updated: 2022/07/01 15:40:40 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include "minishell.h"
 
-void	print_llist(t_list *llist)
+int	here_doc(char *eof)
 {
-	t_list	*head;
+	int		fd_pipe[2];
+	char	*new_line;
 
-	head = llist;
-	while (head)
+	if (pipe(fd_pipe) == -1)
+		return (-1);
+	new_line = readline("> ");
+	while (ft_strncmp(new_line, eof, ft_strlen(eof) + 1))
 	{
-		printf(" %s ", (char *) head->content);
-		head = head->next;
+		ft_putstr_fd(new_line, fd_pipe[1]);
+		free(new_line);
+		ft_putstr_fd("\n", fd_pipe[1]);
+		new_line = readline("> ");
 	}
-	printf("\n");
+	free(new_line);
+	return (fd_pipe[0]);
 }

@@ -6,20 +6,20 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 17:02:05 by nprimo            #+#    #+#             */
-/*   Updated: 2022/05/30 17:04:58 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/06/25 18:30:43 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	**llist_to_av(t_list *llist)
+char	**llist_to_av(t_list *llist, t_shell sh)
 {
 	char	**av;
 	t_list	*head;
 	int		pos;
 
-	av = (char **)error_check_pointer(malloc(sizeof(char *) 
-		* (ft_lstsize(llist) + 1)));
+	av = (char **)xmc(malloc(sizeof(char *)
+				* (ft_lstsize(llist) + 1)), NULL, 0, sh);
 	head = llist;
 	pos = 0;
 	while (head)

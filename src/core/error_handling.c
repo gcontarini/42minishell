@@ -6,22 +6,11 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 15:31:54 by nprimo            #+#    #+#             */
-/*   Updated: 2022/06/29 09:53:05 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/07/01 20:02:03 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	*error_check_pointer(void *pointer)
-{
-	if (!pointer)
-	{
-		printf("User perror to print specific things...\n");
-		// free all
-		exit(1); // exit with errno
-	}
-	return (pointer);
-}
 
 void	*xmc(void *ptr, void *var, t_struct_type type, t_shell sh)
 {
@@ -40,12 +29,12 @@ void	*xmc(void *ptr, void *var, t_struct_type type, t_shell sh)
 	return (ptr);
 }
 
-void	error_check(int ret_value)
+void	error_check(int ret_value, t_shell sh)
 {
 	if (ret_value < 0)
 	{
 		printf("User perror to print specific things...\n");
-		// free all
-		exit(1); // exit with errno
+		free_shell(sh);
+		exit(1);
 	}
 }

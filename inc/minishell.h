@@ -6,7 +6,7 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:18:18 by gcontari          #+#    #+#             */
-/*   Updated: 2022/07/01 17:15:18 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/07/01 20:01:34 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@
 typedef unsigned int	t_uint;
 typedef unsigned char	t_uchar;
 typedef unsigned long	t_ulong;
-typedef void			(*t_free_func) (void *);
 
 typedef enum e_struct_type
 {
@@ -83,7 +82,6 @@ typedef struct s_fd
 
 typedef struct s_cmd
 {
-	t_list	*token_list;
 	char	**av;
 	t_fd	in;
 	t_fd	out;
@@ -101,7 +99,8 @@ typedef struct s_shell
 	char	*input;
 	t_list	*token_list;
 	t_list	*cmd_list;
-}	t_shell;
+	int		exit_status;
+}				t_shell;
 
 typedef struct s_expander
 {
@@ -115,6 +114,9 @@ typedef struct s_token
 	char	*s;
 	t_ttype	t;
 }	t_token;
+
+typedef void			(*t_free_func) (void *);
+typedef int				(t_builtins) (t_cmd *, t_shell);
 
 // FUNCTIONS
 // core
@@ -135,9 +137,9 @@ int		shell_from_file(int ac, char **av, t_shell sh);
 void	print_cmd_list(t_list *cmd_list);
 void	print_llist(t_list *llist);
 //
-char	**llist_to_av(t_list *llist);
-char	**dict_list_to_av(t_list *dict_list);
-t_dict	*str_to_dict(char *str);
+char	**llist_to_av(t_list *llist, t_shell sh);
+char	**dict_list_to_av(t_list *dict_list, t_shell sh);
+t_dict	*str_to_dict(char *str, t_shell sh);
 
 //
 int		is_in_set(char *str, char **str_set);
@@ -162,17 +164,18 @@ char	*expander(t_shell sh, const char *input);
 t_uint	str_count_char(const char *s, char c);
 
 // executer
-char	*find_bin_path(const char *cmd, t_list *env);
-int		exec_cmd(t_cmd *cmd, t_shell sh);
-int		exec_cmd_list(t_shell sh);
-int		open_fd(t_list *cmd_list);
+int		exec_cmd(t_cmd *cmd, t_shell *sh);
+int		exec_cmd_list(t_shell *sh);
+int		open_fd(t_list *cmd_list, t_shell sh);
+int		here_doc(char *eof);
 
 // builtins
-int		ft_echo(t_cmd *cmd);
+int		ft_echo(t_cmd *cmd, t_shell sh);
 int		ft_env(t_cmd *cmd, t_shell sh);
 int		ft_export(t_cmd *cmd, t_shell sh);
 int		ft_exit(t_cmd *cmd, t_shell sh);
 int		ft_pwd(t_cmd *cmd, t_shell sh);
 int		ft_unset(t_cmd *cmd, t_shell sh);
+int		ft_cd(t_cmd *cmd, t_shell sh);
 
 #endif
