@@ -6,30 +6,41 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 12:54:57 by nprimo            #+#    #+#             */
-/*   Updated: 2022/05/05 17:05:50 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/07/01 16:41:28 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int main(int argc, char **argv, char **envp)
+void test(t_shell sh)
 {
-	char	cmd[] = "/Users/nprimo/Desktop/42minishell/b.out";
-	char	*av[] = { "./b.out", NULL };
-	pid_t	pid;
-
-	printf("cmd: %s\n", cmd);
-	pid = fork();
-	if (pid != 0)
-	{
-		printf("Executing\n");
-		execve(cmd, av, envp);
-	}
-	else
-	{
-		printf("Waitign for execution ...\n");
-		sleep(1);
-		wait(0);
-	}
-	return (0);
+	printf("T: %p\n", &sh.token_list);
 }
+
+int	main(int ac, char **argv, char **envp)
+{
+	char	*str = "echoas'dfasd'asdfsad";
+	char	*av[] = { "/usr/bin/echo", str, NULL };
+
+	execve("/usr/bin/echo", av, NULL);
+}
+
+// int here_doc(char *eof, t_shell sh)
+// {
+// 	int		fd_pipe[2];
+// 	char	*new_line;
+// 	char	*tmp;
+
+// 	if (pipe(fd_pipe) == -1)
+// 		return (-1);
+// 	new_line = readline("> ");
+// 	while (ft_strncmp(new_line, eof, ft_strlen(eof) + 1))
+// 	{
+// 		ft_putstr_fd(new_line, fd_pipe[1]);
+// 		free(new_line);
+// 		ft_putstr_fd("\n", fd_pipe[1]);
+// 		new_line = readline("> ");
+// 	}
+// 	free(new_line);
+// 	return (fd_pipe[0]);
+// }

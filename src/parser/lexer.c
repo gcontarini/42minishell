@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 17:13:27 by gcontari          #+#    #+#             */
-/*   Updated: 2022/07/01 17:18:17 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/07/01 20:15:14 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ static t_list		*create_token(const char *str,
 
 t_list	*lexer(t_shell sh, const char *inpt)
 {
-	t_token	*token;
-
 	while (inpt && *inpt)
 	{
 		while (*inpt && ft_strchr(SPACE_SET, *inpt))
@@ -49,7 +47,6 @@ const char	*quote_handler(const char *inpt, t_shell *sh)
 
 const char	*dir_handler(const char *inpt, t_shell *sh)
 {
-	char		*p;
 	t_uint		step;
 
 	step = 1;
@@ -63,7 +60,7 @@ const char	*normal_handler(const char *inpt, t_shell *sh)
 {
 	char		*p;
 
-	p = inpt;
+	p = (char *) inpt;
 	while (*p && !ft_strchr(EXP_SET, *p))
 		p++;
 	sh->token_list = create_token(inpt, p - inpt, TOKEN, sh);

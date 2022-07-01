@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:18:18 by gcontari          #+#    #+#             */
-/*   Updated: 2022/07/01 20:06:53 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/07/01 20:17:53 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,9 +153,9 @@ void	*error_check_pointer(void *pointer);
 void	error_check(int ret_value, t_shell sh);
 
 // parser
-t_list	*parser(t_shell sh, const char *inpt);
+t_list	*parser(t_shell *sh, const char *inpt);
 int		get_token_list(const char *input, t_list **token_list);
-t_list	*get_cmd_list(t_list *token_list);
+t_list	*get_cmd_list(t_list **token_list, t_shell *s_shell);
 // lexer
 t_list	*lexer(t_shell sh, const char *inpt);
 // expander

@@ -3,25 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 13:16:55 by gcontari          #+#    #+#             */
-/*   Updated: 2022/07/01 19:50:14 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/07/01 20:17:37 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_list	*parser(t_shell sh, const char *inpt)
+t_list	*parser(t_shell *sh, const char *inpt)
 {
 	char	*inpt_exp;
 
-	inpt_exp = expander(sh, inpt);
-	free(inpt);
-	sh.input = inpt_exp;
-	sh.token_list = lexer(sh, inpt_exp);
-	// sh.token_list = build_syntax_tree(sh);
-	return (sh.token_list);
+	inpt_exp = expander(*sh, inpt);
+	free((char *) inpt);
+	sh->input = inpt_exp;
+	sh->token_list = lexer(*sh, inpt_exp);
+	// sh->token_list = build_syntax_tree(sh);
+	return (sh->token_list);
 }
 
 // static t_list	*build_syntax_tree(t_shell sh)
