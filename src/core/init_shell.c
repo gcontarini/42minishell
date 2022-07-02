@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_shell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
+/*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 15:05:16 by nprimo            #+#    #+#             */
-/*   Updated: 2022/07/01 10:07:14 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/07/02 12:51:23 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_shell	init_shell(char **envp)
 {
 	t_shell	sh;
 
+	sh.input = 0;
 	sh.env = envp_to_dict_list(envp, sh);
 	update_shlvl(sh.env, sh);
 	unset_oldpwd(&sh.env);

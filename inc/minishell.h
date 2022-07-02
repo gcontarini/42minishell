@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
+/*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:18:18 by gcontari          #+#    #+#             */
-/*   Updated: 2022/07/01 20:56:23 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/07/02 13:00:14 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,12 @@ typedef enum e_struct_type
 
 typedef enum e_token_type
 {
-	TOKEN,
-	REDIR,
-	QUOTE
+	CON_TOKEN,
+	I_TOKEN,
+	CON_REDIR,
+	I_REDIR,
+	CON_QUOTE,
+	I_QUOTE
 	// BIN,
 	// FILE,
 	// PIPE,
