@@ -38,6 +38,8 @@ static int	get_fd_in(t_list *cmd_list, t_shell sh)
 		cmd->in.fd = STDIN_FILENO;
 	else if (cmd->in.fname && ft_strncmp("<", cmd->in.redirection, 2) == 0)
 		cmd->in.fd = open(cmd->in.fname, O_RDONLY);
+	else if (cmd->in.fname && ft_strncmp("<<", cmd->in.redirection, 2) == 0)
+		cmd->in.fd = here_doc(cmd->in.fname);
 	error_check(cmd->in.fd, sh);
 	return (0);
 }

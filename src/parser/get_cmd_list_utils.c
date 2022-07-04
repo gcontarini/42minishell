@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:01:37 by nprimo            #+#    #+#             */
-/*   Updated: 2022/07/01 21:01:08 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/07/04 13:19:38 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,9 @@ char	**token_list_to_av(t_list **token_list, t_shell sh)
 	while (curr_t)
 	{
 		if (ft_strncmp("<", ((t_token *) curr_t->content)->s, 2) == 0
-			|| ft_strncmp(">", ((t_token *) curr_t->content)->s, 2) == 0)
+			|| ft_strncmp(">", ((t_token *) curr_t->content)->s, 2) == 0
+			|| ft_strncmp(">>", ((t_token *) curr_t->content)->s, 3) == 0
+			|| ft_strncmp("<<", ((t_token *) curr_t->content)->s, 3) == 0)
 		{
 			tmp = curr_t->next->next;
 			ft_lstdelone(ft_lst_remove(token_list, curr_t->next->content),
