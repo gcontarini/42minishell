@@ -55,7 +55,7 @@ static int	get_fd_out(t_list *cmd_list, t_shell sh)
 		cmd->out.fd = STDOUT_FILENO;
 	else if (ft_strncmp(cmd->out.fname, "|", 2) == 0)
 	{
-		if (cmd_list->next)
+		if (cmd_list->next && !ft_strchr(METACHAR_SET, cmd->out.fname[0]))
 		{
 			next_cmd = (t_cmd *) cmd_list->next->content;
 			error_check(pipe(fd_pipe), sh);
