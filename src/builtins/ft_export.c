@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:53:26 by nprimo            #+#    #+#             */
-/*   Updated: 2022/07/01 10:05:11 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/07/04 18:18:25 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@ static int	add_to_env(char *key_value, t_shell sh);
 int	ft_export(t_cmd *cmd, t_shell sh)
 {
 	int	pos;
+	int	return_status;
 
+	return_status = 0;
 	if (get_ac(cmd->av) == 1)
 		display_env(sh.env, cmd->out.fd);
 	else
@@ -27,11 +29,14 @@ int	ft_export(t_cmd *cmd, t_shell sh)
 		pos = 1;
 		while (cmd->av[pos])
 		{
-			add_to_env(cmd->av[pos], sh);
+			if (ft_isdigit(cmd->av[pos][0]))
+				return_status = 1;
+			if (ft_isdigit(cmd->av[pos][0]) == 0)
+				add_to_env(cmd->av[pos], sh);
 			pos++;
 		}
 	}
-	return (0);
+	return (return_status);
 }
 
 static int	get_ac(char **av)
