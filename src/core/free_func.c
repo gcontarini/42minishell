@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 12:19:39 by nprimo            #+#    #+#             */
-/*   Updated: 2022/07/01 20:55:55 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/07/04 15:13:46 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void	free_token(void *token_void)
 	}
 }
 
-void	free_token_wrap(void *token_void)
+void	free_t(void *token_void)
 {
 	t_token	*token;
 

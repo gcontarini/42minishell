@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 16:59:38 by nprimo            #+#    #+#             */
-/*   Updated: 2022/07/01 20:55:11 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/07/04 15:13:46 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_list	*get_cmd_list(t_list **token_list, t_shell *sh)
 		next_cmd->av = token_list_to_av(&cmd_token_list, *sh);
 		tmp = cmd_token_list;
 		cmd_token_list = pop_cmd_token_list(token_list);
-		ft_lstclear(&tmp, free_token_wrap);
+		ft_lstclear(&tmp, free_t);
 		ft_lstadd_back(&cmd_list, xmc(ft_lstnew(next_cmd), NULL, 0, *sh));
 	}
 	return (cmd_list);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:18:18 by gcontari          #+#    #+#             */
-/*   Updated: 2022/07/02 13:00:14 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/07/04 15:13:46 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ void	free_dict(void *var_void);
 void	free_fd(void *fd_void);
 void	free_exp(void *exp_void);
 void	free_token(void *token_void);
-void	free_token_wrap(void *token_void);
+void	free_t(void *token_void);
 
 void	free_shell(t_shell sh);
 //
