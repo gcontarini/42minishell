@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:01:37 by nprimo            #+#    #+#             */
-/*   Updated: 2022/07/04 15:14:30 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/07/04 17:34:06 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,7 @@ static int	add_cmd_out(t_cmd *cmd, t_list *cmd_token_list)
 			&& !cmd->out.fname)
 			cmd->out.fname = curr_cont->s;
 		else if ((ft_strncmp(">", curr_cont->s, 2) == 0
-				|| (ft_strncmp(">>", curr_cont->s, 3) == 0))
-			&& !cmd->out.fname)
+				|| (ft_strncmp(">>", curr_cont->s, 3) == 0)))
 		{
 			if (curr_token->next)
 			{
