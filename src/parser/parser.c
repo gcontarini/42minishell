@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
+/*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 13:16:55 by gcontari          #+#    #+#             */
-/*   Updated: 2022/07/01 20:41:28 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/07/06 09:38:16 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,24 +20,37 @@ t_list	*parser(t_shell *sh, const char *inpt)
 	free((char *) inpt);
 	sh->input = inpt_exp;
 	sh->token_list = lexer(*sh, inpt_exp);
-	// sh->token_list = build_syntax_tree(sh);
+	sh->token_list = build_syntax_tree(sh);
 	return (sh->token_list);
 }
 
-// static t_list	*build_syntax_tree(t_shell sh)
-// {
-// 	t_list	*head;
-// 	t_list	*curr;
-// 	t_token	*token;
+t_list	*build_syntax_tree(t_shell *sh)
+{
+	t_list	*curr;
+	t_token	*token;
 
-// 	// RULES -> TOKEN REDIR QUOTE
-// 	head = sh.token_list;
-// 	curr = head;
-// 	while (curr)
-// 	{
-// 		token = (t_token *) curr->content;
+	curr = sh->token_list->next;
+	while (curr)
+	{
+		// Need to save last node and current one
+		// Change both functions to cover that
+		token = (t_token *) curr->content;
+		if (token->t < CON_REDIR && token->t % 2 == 0)
+			concat_last(sh->token_list, curr, sh);
+		// token = (t_token *) curr->content;
+		if (ft_strlen(token->s) == 0)
+			remove_empty(sh->token_list, curr, sh);
+		curr = curr->next;
+	}
+	return (sh->token_list);
+}
 
-// 		curr = curr->next;
-// 	}
-// 	return (head);
-// }
+static void	concat_last(t_list *head, t_list *curr, t_shell *sh)
+{
+
+}
+
+static void	remove_empty(t_list *head, t_list *curr, t_shell *sh)
+{
+
+}

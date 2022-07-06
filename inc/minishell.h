@@ -6,7 +6,7 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:18:18 by gcontari          #+#    #+#             */
-/*   Updated: 2022/07/02 13:00:14 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/07/06 09:05:30 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,23 +56,10 @@ typedef enum e_token_type
 {
 	CON_TOKEN,
 	I_TOKEN,
-	CON_REDIR,
-	I_REDIR,
 	CON_QUOTE,
-	I_QUOTE
-	// BIN,
-	// FILE,
-	// PIPE,
-	// R_DIR,
-	// L_DIR,
-	// HERE_DOC,
-	// APPEND,
-	// PIPE,
-	// QUOTE,
-	// AND,
-	// OR,
-	// O_PAR,
-	// C_PAR
+	I_QUOTE,
+	CON_REDIR,
+	I_REDIR
 }	t_ttype;
 
 // VARIABLES
