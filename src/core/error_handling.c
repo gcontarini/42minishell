@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_handling.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 15:31:54 by nprimo            #+#    #+#             */
-/*   Updated: 2022/07/01 20:02:03 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/07/06 16:33:47 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,6 @@ void	error_check(int ret_value, t_shell sh)
 	{
 		printf("User perror to print specific things...\n");
 		free_shell(sh);
-		exit(1);
+		exit(sh.exit_status);
 	}
 }
