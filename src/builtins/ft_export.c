@@ -6,15 +6,15 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:53:26 by nprimo            #+#    #+#             */
-/*   Updated: 2022/07/04 18:18:25 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/07/08 12:55:29 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	get_ac(char **av);
 static void	display_env(t_list *env, int fd);
 static int	add_to_env(char *key_value, t_shell sh);
+int			get_ac(char **av);
 
 int	ft_export(t_cmd *cmd, t_shell sh)
 {
@@ -37,16 +37,6 @@ int	ft_export(t_cmd *cmd, t_shell sh)
 		}
 	}
 	return (return_status);
-}
-
-static int	get_ac(char **av)
-{
-	int	pos;
-
-	pos = 0;
-	while (av[pos])
-		pos++;
-	return (pos);
 }
 
 static void	display_env(t_list *env, int fd)
