@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 12:24:52 by nprimo            #+#    #+#             */
-/*   Updated: 2022/07/08 16:03:48 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/07/08 17:22:07 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static int	exec_builtin(t_cmd *cmd, t_shell *sh);
 static int	exec_bin(t_cmd *cmd, t_shell *sh);
 //
 char		*find_bin_path(const char *bin, t_list *env, t_shell sh);
+void		close_cmd_fd(t_cmd *cmd);
 
 int	exec_cmd(t_cmd *cmd, t_shell *sh)
 {
@@ -87,6 +88,7 @@ static int	exec_bin(t_cmd *cmd, t_shell *sh)
 {
 	pid_t	pid;
 	char	*bin_path;
+	char	**envp;
 
 	if (access(cmd->av[0], F_OK & X_OK) == 0)
 		bin_path = xmc(ft_strndup(cmd->av[0],
@@ -99,14 +101,13 @@ static int	exec_bin(t_cmd *cmd, t_shell *sh)
 	if (pid == 0)
 	{
 		error_check(redirect(cmd->in.fd, cmd->out.fd), *sh);
-		if (execve(bin_path, cmd->av, dict_list_to_av(sh->env, *sh)) == -1)
+		envp = dict_list_to_av(sh->env, *sh);
+		if (execve(bin_path, cmd->av, envp) == -1)
 			sh->exit_status = 1; // find value that makes return = 127
+		free_split(envp);
 		exit(sh->exit_status);
 	}
-	if (cmd->in.fd != STDIN_FILENO)
-		close(cmd->in.fd);
-	if (cmd->out.fd != STDOUT_FILENO)
-		close(cmd->out.fd);
+	close_cmd_fd(cmd);
 	if (bin_path)
 		free(bin_path);
 	return (0);
