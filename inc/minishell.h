@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:18:18 by gcontari          #+#    #+#             */
-/*   Updated: 2022/07/04 15:13:46 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/07/08 17:27:50 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ typedef struct s_shell
 {
 	t_list	*env;
 	char	*input;
+	char	*homepath;
 	t_list	*token_list;
 	t_list	*cmd_list;
 	int		exit_status;

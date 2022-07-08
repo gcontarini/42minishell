@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_shell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 15:05:16 by nprimo            #+#    #+#             */
-/*   Updated: 2022/07/02 12:51:23 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/07/08 17:27:54 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ t_shell	init_shell(char **envp)
 	sh.token_list = NULL;
 	sh.cmd_list = NULL;
 	sh.exit_status = 0;
+	sh.homepath = ft_getenv("HOME", sh.env);
 	return (sh);
 }
 
