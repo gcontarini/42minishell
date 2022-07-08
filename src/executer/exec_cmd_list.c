@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 17:19:09 by nprimo            #+#    #+#             */
-/*   Updated: 2022/06/25 18:05:02 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/07/08 15:50:29 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,5 @@ int	exec_cmd_list(t_shell *sh)
 	}
 	while (wait(&sh->exit_status) != -1 && sh->exit_status == 0)
 		;
-	return (0);
+	return (sh->exit_status);
 }
