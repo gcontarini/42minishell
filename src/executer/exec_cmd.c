@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 12:24:52 by nprimo            #+#    #+#             */
-/*   Updated: 2022/07/01 19:56:41 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/07/08 16:03:48 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,9 @@ static int	exec_bin(t_cmd *cmd, t_shell *sh)
 	if (pid == 0)
 	{
 		error_check(redirect(cmd->in.fd, cmd->out.fd), *sh);
-		error_check(execve(bin_path, cmd->av,
-				dict_list_to_av(sh->env, *sh)), *sh);
+		if (execve(bin_path, cmd->av, dict_list_to_av(sh->env, *sh)) == -1)
+			sh->exit_status = 1; // find value that makes return = 127
+		exit(sh->exit_status);
 	}
 	if (cmd->in.fd != STDIN_FILENO)
 		close(cmd->in.fd);
