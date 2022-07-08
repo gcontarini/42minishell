@@ -6,7 +6,7 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 13:16:55 by gcontari          #+#    #+#             */
-/*   Updated: 2022/07/06 09:38:16 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/07/08 20:47:09 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,33 +24,39 @@ t_list	*parser(t_shell *sh, const char *inpt)
 	return (sh->token_list);
 }
 
-t_list	*build_syntax_tree(t_shell *sh)
-{
-	t_list	*curr;
-	t_token	*token;
+// int main(int argc, char **argv, char **envp)
+// {
+// 	t_shell	sh;
+// 	char	*test_cases[] = {
+// 		"echo adsad > 1412341",
+// 		"\"echo adsad\" > 1412341",
+// 		"\"echo ad\'sad > 14\"12341",
+// 		"\"\"echo adsad > 1412341",
+// 		"\'echo adsad >\' 1412341",
+// 		"ad|ad > 1412341",
+// 		"echo <<adsad >> 1412341",
+// 		"\t\t\n     echo hi | \t\t\t ola",
+// 		"echo asdf\"asd\"asd",
+// 		"echo aaaaaaa\"bbbbbbbbbb\"cccccccc dddddddd",
+// 		"echo aaaaaaa \"bbbbbbbbbb\"cccccccc dddddddd",
+// 		"echo aaaaaaa \" bbbbbbbbbb\"cccccccc dddddddd",
+// 		"echo aaaaaaa \" bbbbbbbbbb\"cccccccc dddddddd",
+// 		"echo aaaaaaa>>bbbbbbbb",
+// 		"echo aaaaaaa>>\"cccccccccc\">>bbbbbbbb",
+// 		"echo aaaaaaa>> >>bbbbbbbb",
+// 		0
+// 	};
 
-	curr = sh->token_list->next;
-	while (curr)
-	{
-		// Need to save last node and current one
-		// Change both functions to cover that
-		token = (t_token *) curr->content;
-		if (token->t < CON_REDIR && token->t % 2 == 0)
-			concat_last(sh->token_list, curr, sh);
-		// token = (t_token *) curr->content;
-		if (ft_strlen(token->s) == 0)
-			remove_empty(sh->token_list, curr, sh);
-		curr = curr->next;
-	}
-	return (sh->token_list);
-}
-
-static void	concat_last(t_list *head, t_list *curr, t_shell *sh)
-{
-
-}
-
-static void	remove_empty(t_list *head, t_list *curr, t_shell *sh)
-{
-
-}
+// 	for (int i = 0; test_cases[i] != NULL; i++) {
+// 		sh = init_shell(envp);
+// 		printf("------- TEST NUMBER %d ---------\n", i);
+// 		for (t_list *curr = parser(&sh, test_cases[i]); curr; curr = curr->next)
+// 		{
+// 			printf("%s - %d\n", ((t_token *) curr->content)->s,
+// 				((t_token *) curr->content)->t);
+// 		}
+// 		printf("----------------\n");
+// 		free_shell(sh);
+// 	}
+// 	return (0);
+// }
