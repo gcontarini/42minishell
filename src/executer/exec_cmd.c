@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 12:24:52 by nprimo            #+#    #+#             */
-/*   Updated: 2022/07/08 17:22:07 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/07/08 17:29:05 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	exec_cmd(t_cmd *cmd, t_shell *sh)
 		else
 			return (exec_bin(cmd, sh));
 	}
-	return (1);
+	return (0);
 }
 
 static int	redirect(int fd_in, int fd_out)
