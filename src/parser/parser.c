@@ -6,7 +6,7 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 13:16:55 by gcontari          #+#    #+#             */
-/*   Updated: 2022/07/08 20:47:09 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/07/09 11:19:12 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,20 @@ t_list	*parser(t_shell *sh, const char *inpt)
 	sh->token_list = lexer(*sh, inpt_exp);
 	sh->token_list = build_syntax_tree(sh);
 	return (sh->token_list);
+}
+
+// Utility 
+t_uint	str_count_char(const char *s, char c)
+{
+	t_uint	i;
+
+	i = 0;
+	while (s && *s)
+	{
+		if (*s++ == c)
+			i++;
+	}
+	return (i);
 }
 
 // int main(int argc, char **argv, char **envp)
