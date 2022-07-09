@@ -6,7 +6,7 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:18:18 by gcontari          #+#    #+#             */
-/*   Updated: 2022/07/08 20:02:53 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/07/09 11:21:40 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,7 @@ void	error_check(int ret_value, t_shell sh);
 
 // parser
 t_list	*parser(t_shell *sh, const char *inpt);
-int		get_token_list(const char *input, t_list **token_list);
+t_uint	str_count_char(const char *s, char c);
 t_list	*get_cmd_list(t_list **token_list, t_shell *s_shell);
 // lexer
 t_list	*lexer(t_shell sh, const char *inpt);
@@ -153,8 +153,6 @@ t_list	*lexer(t_shell sh, const char *inpt);
 char	*expander(t_shell sh, const char *input);
 // syntax_tree
 t_list	*build_syntax_tree(t_shell *sh);
-// parser_utils
-t_uint	str_count_char(const char *s, char c);
 
 // executer
 int		exec_cmd(t_cmd *cmd, t_shell *sh);
