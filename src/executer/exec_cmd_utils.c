@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_exit.c                                          :+:      :+:    :+:   */
+/*   exec_cmd_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/20 19:11:28 by nprimo            #+#    #+#             */
-/*   Updated: 2022/06/20 19:21:38 by nprimo           ###   ########.fr       */
+/*   Created: 2022/07/08 17:21:27 by nprimo            #+#    #+#             */
+/*   Updated: 2022/07/08 17:22:11 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_exit(t_cmd *cmd, t_shell sh)
+void	close_cmd_fd(t_cmd *cmd)
 {
-	cmd = (void *) cmd;
-	free_shell(sh);
-	exit(0);
+	if (cmd->in.fd != STDIN_FILENO)
+		close(cmd->in.fd);
+	if (cmd->out.fd != STDOUT_FILENO)
+		close(cmd->out.fd);
 }

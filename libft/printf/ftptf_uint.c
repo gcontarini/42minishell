@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ftptf_uint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcontari <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 10:33:50 by gcontari          #+#    #+#             */
-/*   Updated: 2021/11/27 19:38:31 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/07/04 13:21:35 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ char	*buff_uint_dot(t_qunit qu, unsigned int n)
 	opt.len = ft_uintlen(n);
 	opt.dot = qu.op[NO_DOT - NO_NUM] - opt.len;
 	if (opt.dot < 0)
-	opt.dot = 0;
+		opt.dot = 0;
 	p = (char *) malloc(opt.len + opt.dot + 1);
 	if (!p)
 		return (NULL);

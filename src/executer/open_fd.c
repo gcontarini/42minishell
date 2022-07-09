@@ -38,6 +38,8 @@ static int	get_fd_in(t_list *cmd_list, t_shell sh)
 		cmd->in.fd = STDIN_FILENO;
 	else if (cmd->in.fname && ft_strncmp("<", cmd->in.redirection, 2) == 0)
 		cmd->in.fd = open(cmd->in.fname, O_RDONLY);
+	else if (cmd->in.fname && ft_strncmp("<<", cmd->in.redirection, 2) == 0)
+		cmd->in.fd = here_doc(cmd->in.fname);
 	error_check(cmd->in.fd, sh);
 	return (0);
 }
@@ -62,9 +64,9 @@ static int	get_fd_out(t_list *cmd_list, t_shell sh)
 		}
 	}
 	else if (ft_strncmp(">", cmd->out.redirection, 2) == 0)
-		cmd->out.fd = open(cmd->out.fname, O_WRONLY | O_CREAT, 0622);
+		cmd->out.fd = open(cmd->out.fname, O_WRONLY | O_CREAT | O_TRUNC, 0622);
 	else if (ft_strncmp(">>", cmd->out.redirection, 3) == 0)
-		cmd->out.fd = open(cmd->out.fname, O_APPEND | O_CREAT, 0622);
+		cmd->out.fd = open(cmd->out.fname, O_WRONLY | O_APPEND | O_CREAT, 0622);
 	error_check(cmd->out.fd, sh);
 	return (0);
 }
