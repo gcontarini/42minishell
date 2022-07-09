@@ -6,13 +6,13 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 20:00:15 by gcontari          #+#    #+#             */
-/*   Updated: 2022/07/08 20:52:23 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/07/09 11:25:07 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void		concat_next(t_list *head, t_list *curr, t_shell *sh);
+static void		concat_next(t_list *curr, t_shell *sh);
 static void		remove_empty(t_list *head, t_list *curr, t_shell *sh);
 static t_list	*syntax_error_checker(t_list *curr, t_shell *sh);
 
@@ -30,7 +30,7 @@ t_list	*build_syntax_tree(t_shell *sh)
 		if (((t_token *) curr->content)->t < CON_REDIR
 			&& token->t < CON_REDIR && token->t % 2 == 0)
 		{
-			concat_next(sh->token_list, curr, sh);
+			concat_next(curr, sh);
 			continue ;
 		}
 		if (ft_strlen(token->s) == 0)
@@ -45,7 +45,7 @@ t_list	*build_syntax_tree(t_shell *sh)
 	return (sh->token_list);
 }
 
-static void	concat_next(t_list *head, t_list *curr, t_shell *sh)
+static void	concat_next(t_list *curr, t_shell *sh)
 {
 	t_token	*token_curr;
 	t_token	*token_next;
