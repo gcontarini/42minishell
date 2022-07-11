@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
+/*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 09:24:17 by gcontari          #+#    #+#             */
-/*   Updated: 2022/07/01 20:40:21 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/07/11 09:37:01 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 static char		**split_env_names(const char *input, t_exp exp, t_shell sh);
-static void		cpy_and_exp(char *dst, const char *src, t_exp exp);
+static void		cpy_and_exp(char *dst, const char *src, t_exp exp, t_shell sh);
 static void		create_exp_table(const char *input, t_exp exp);
-static t_uint	expansionlen(const char *input, t_exp exp);
+static t_uint	expansionlen(const char *input, t_exp exp, t_shell sh);
 
 char	*expander(t_shell sh, const char *input)
 {
@@ -26,10 +26,10 @@ char	*expander(t_shell sh, const char *input)
 	exp.table = xmc(malloc(exp.counter), NULL, T_CMD, sh);
 	create_exp_table(input, exp);
 	exp.var_names = xmc(
-			malloc((exp.counter + 1) * sizeof(char *)), &exp, T_CMD, sh);
+			malloc((exp.counter + 1) * sizeof(char *)), &exp, T_EXP, sh);
 	split_env_names(input, exp, sh);
-	output = xmc(malloc(expansionlen(input, exp) + 1), &exp, T_CMD, sh);
-	cpy_and_exp(output, input, exp);
+	output = xmc(malloc(expansionlen(input, exp, sh) + 1), &exp, T_EXP, sh);
+	cpy_and_exp(output, input, exp, sh);
 	free_exp(&exp);
 	return (output);
 }
@@ -56,27 +56,29 @@ static char	**split_env_names(const char *input, t_exp exp, t_shell sh)
 	return (exp.var_names);
 }
 
-static void	cpy_and_exp(char *dst, const char *src, t_exp exp)
+static void	cpy_and_exp(char *dst, const char *src, t_exp exp, t_shell sh)
 {
 	char	*p;
 	char	**vars;
-	bool	*exp_tab;
 
 	vars = exp.var_names;
-	exp_tab = exp.table;
 	while (src && *src)
 	{
-		if (*src == '$' && *exp_tab)
+		if (*src == '$' && *exp.table)
 		{
-			src += ft_strlen(*vars) + 1;
-			p = getenv(*vars++);
+			src += (*vars && **vars != '?') * (ft_strlen(*vars) + 1)
+				+ (*vars && **vars == '?') * ft_intlen(sh.exit_status);
+			if (*vars && **vars == '?')
+				p = xmc(ft_itoa(sh.exit_status), &exp, T_EXP, sh);
+			else
+				p = ft_getenv(*vars, sh.env);
 			while (p && *p)
 				*dst++ = *p++;
-			exp_tab++;
+			exp.table++;
+			vars++;
 			continue ;
 		}
-		else if (*src == '$' && !*exp_tab++)
-			vars++;
+		vars = vars + (1 * (*src == '$' && !*exp.table++));
 		*dst++ = *src++;
 	}
 	*dst = 0;
@@ -112,7 +114,7 @@ static void	create_exp_table(const char *input, t_exp exp)
 	return ;
 }
 
-static t_uint	expansionlen(const char *input, t_exp exp)
+static t_uint	expansionlen(const char *input, t_exp exp, t_shell sh)
 {
 	t_uint	size;
 	bool	*exp_tab;
@@ -128,8 +130,11 @@ static t_uint	expansionlen(const char *input, t_exp exp)
 			size++;
 			continue ;
 		}
-		input += ft_strlen(*vars);
-		size += ft_strlen(getenv(*vars++));
+		if (*vars && **vars == '?')
+			size += ft_intlen(sh.exit_status);
+		else
+			size += ft_strlen(ft_getenv(*vars, sh.env));
+		input += ft_strlen(*vars++);
 	}
 	return (size);
 }
