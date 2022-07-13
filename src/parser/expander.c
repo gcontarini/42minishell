@@ -6,7 +6,7 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 09:24:17 by gcontari          #+#    #+#             */
-/*   Updated: 2022/07/11 09:37:01 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/07/13 08:53:57 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static void	cpy_and_exp(char *dst, const char *src, t_exp exp, t_shell sh)
 		if (*src == '$' && *exp.table)
 		{
 			src += (*vars && **vars != '?') * (ft_strlen(*vars) + 1)
-				+ (*vars && **vars == '?') * ft_intlen(sh.exit_status);
+				+ (*vars && **vars == '?') * (ft_intlen(sh.exit_status) + 1);
 			if (*vars && **vars == '?')
 				p = xmc(ft_itoa(sh.exit_status), &exp, T_EXP, sh);
 			else
