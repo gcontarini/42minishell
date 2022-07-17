@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:18:18 by gcontari          #+#    #+#             */
-/*   Updated: 2022/07/11 09:02:39 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/07/17 20:01:03 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ typedef struct s_fd
 typedef struct s_cmd
 {
 	char	**av;
-	t_fd	in;
-	t_fd	out;
+	int		fd[2];
+	t_list	*fd_pair_list;
 }	t_cmd;
 
 typedef struct s_dict

@@ -6,79 +6,37 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:01:37 by nprimo            #+#    #+#             */
-/*   Updated: 2022/07/04 17:46:01 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/07/17 20:01:51 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	add_cmd_out(t_cmd *cmd, t_list *cmd_token_list);
-static int	add_cmd_in(t_cmd *cmd, t_list *cmd_token_list);
 static int	is_redirection(const char *str);
 
-int	add_cmd_in_out(t_cmd *cmd, t_list *cmd_token_list)
+void	add_cmd_in_out(t_cmd *cmd, t_list *curr_token, t_shell *sh)
 {
-	int	return_status;
-
-	return_status = 0;
-	return_status = add_cmd_in(cmd, cmd_token_list);
-	if (return_status == 0)
-		return_status = add_cmd_out(cmd, cmd_token_list);
-	return (return_status);
-}
-
-static int	add_cmd_out(t_cmd *cmd, t_list *cmd_token_list)
-{
-	t_list	*curr_token;
 	t_token	*curr_cont;
+	t_dict	*fd_pair;
 
-	curr_token = cmd_token_list;
 	while (curr_token)
 	{
 		curr_cont = (t_token *) curr_token->content;
-		if (ft_strncmp("|", curr_cont->s, 2) == 0
-			&& !cmd->out.fname)
-			cmd->out.fname = curr_cont->s;
-		else if ((ft_strncmp(">", curr_cont->s, 2) == 0
-				|| (ft_strncmp(">>", curr_cont->s, 3) == 0)))
+		if (is_redireciton(curr_cont->s))
 		{
-			if (curr_token->next)
+			fd_pair = xmc(ft_calloc(sizeof(t_dict), 1), NULL, 0, *sh);
+			fd_pair->key = curr_cont->s;
+			if (ft_strncmp("|", cur_cont->s, 2))
 			{
-				cmd->out.fname = ((t_token *) curr_token->next->content)->s;
-				cmd->out.redirection = curr_cont->s;
+				if (curr_token->next)
+					fd_pair->value = ((t_token *) curr_token->next->content)->s;
+				else
+					sh->exit_status = 258;
 			}
-			else
-				return (258);
+			ft_lstadd_back(&cmd->fd_pair_list, xmc(ft_lstnew(fd_pair), NULL, 0, *sh));
 		}
 		curr_token = curr_token->next;
 	}
-	return (0);
-}
-
-static int	add_cmd_in(t_cmd *cmd, t_list *cmd_token_list)
-{
-	t_list	*curr_token;
-	t_token	*curr_cont;
-
-	curr_token = cmd_token_list;
-	while (curr_token)
-	{
-		curr_cont = (t_token *) curr_token->content;
-		if ((ft_strncmp("<", curr_cont->s, 2) == 0
-				|| (ft_strncmp("<<", curr_cont->s, 3) == 0)))
-		{
-			if (curr_token->next)
-			{
-				cmd->in.fname = ((t_token *)curr_token->next->content)->s;
-				cmd->in.redirection = curr_cont->s;
-				curr_token = curr_token->next;
-			}
-			else
-				return (258);
-		}
-		curr_token = curr_token->next;
-	}
-	return (0);
 }
 
 char	**token_list_to_av(t_list **tlist, t_shell sh)
@@ -111,7 +69,7 @@ char	**token_list_to_av(t_list **tlist, t_shell sh)
 static int	is_redirection(const char *str)
 {
 	static char	*red_set[] = {
-		"<", ">", "<<", ">>", NULL
+		"|", "<", ">", "<<", ">>", NULL
 	};
 	int			pos;
 

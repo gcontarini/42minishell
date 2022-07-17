@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 12:19:39 by nprimo            #+#    #+#             */
-/*   Updated: 2022/07/04 15:13:46 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/07/17 20:03:34 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,14 @@ void	free_cmd(void *cmd_void)
 	t_cmd	*cmd;
 
 	cmd = (t_cmd *) cmd_void;
-	if (cmd->av)
-		free_split(cmd->av);
-	free_fd(&cmd->in);
-	free_fd(&cmd->out);
-	free(cmd);
+	if (cmd)
+	{
+		if (cmd->av)
+			free_split(cmd->av);
+		if (cmd->fd_pair_list)
+			ft_lstclear(&cmd->fd_pair_list, free_dict);
+		free(cmd);
+	}
 }
 
 void	free_fd(void *fd_void)

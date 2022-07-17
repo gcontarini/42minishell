@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 16:59:38 by nprimo            #+#    #+#             */
-/*   Updated: 2022/07/04 15:13:46 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/07/17 19:52:55 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static t_list	*pop_cmd_token_list(t_list **llist);
 static t_cmd	*init_new_cmd(t_shell sh);
 static t_list	*split_llist(t_list *llist, int argc);
 // utils
-int				add_cmd_in_out(t_cmd *cmd, t_list *cmd_token_list);
+void			add_cmd_in_out(t_cmd *cmd, t_list *cmd_token, t_shell *sh);
 char			**token_list_to_av(t_list **token_list, t_shell sh);
 int				control_operator_pos(t_list *llist);
 t_list			*llist_pos(t_list *llist, int pos);
@@ -33,7 +33,7 @@ t_list	*get_cmd_list(t_list **token_list, t_shell *sh)
 	while (cmd_token_list)
 	{
 		next_cmd = xmc(init_new_cmd(*sh), NULL, 0, *sh);
-		sh->exit_status = add_cmd_in_out(next_cmd, cmd_token_list);
+		add_cmd_in_out(next_cmd, cmd_token_list);
 		if (sh->exit_status)
 			break ;
 		next_cmd->av = token_list_to_av(&cmd_token_list, *sh);
@@ -66,8 +66,8 @@ static t_cmd	*init_new_cmd(t_shell sh)
 	t_cmd	*new_cmd;
 
 	new_cmd = (t_cmd *) xmc(ft_calloc(1, sizeof(t_cmd)), NULL, 0, sh);
-	new_cmd->in.fd = -1;
-	new_cmd->out.fd = -1;
+	new_cmd->fd[0] = STDIN_FILENO;
+	new_cmd->fd[1] = STDOUT_FILENO;
 	return (new_cmd);
 }
 
