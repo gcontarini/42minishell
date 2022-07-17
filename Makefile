@@ -12,7 +12,7 @@
 
 # COMPILER
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra -g
+CFLAGS = -Wall -Werror -Wextra -g -fsanitize=address
 RM = rm -rf
 
 # FILES
