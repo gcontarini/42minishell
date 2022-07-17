@@ -63,7 +63,7 @@ static void	get_fd_out(t_list *cmd_list, t_shell sh)
 	{
 		fd_pair = (t_dict *) head_fd_pair->content;
 		if (cmd->fd[1] != STDOUT_FILENO) // && fd_pair->key is not "|"
-			error_check(cmd->fd[1], sh);
+			error_check(close(cmd->fd[1]), sh);
 		if (ft_strncmp(fd_pair->key, "|", 2) == 0)
 		{
 			if (cmd_list->next)
