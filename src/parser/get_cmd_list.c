@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 16:59:38 by nprimo            #+#    #+#             */
-/*   Updated: 2022/07/17 19:52:55 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/07/17 20:17:39 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_list	*get_cmd_list(t_list **token_list, t_shell *sh)
 	while (cmd_token_list)
 	{
 		next_cmd = xmc(init_new_cmd(*sh), NULL, 0, *sh);
-		add_cmd_in_out(next_cmd, cmd_token_list);
+		add_cmd_in_out(next_cmd, cmd_token_list, sh);
 		if (sh->exit_status)
 			break ;
 		next_cmd->av = token_list_to_av(&cmd_token_list, *sh);

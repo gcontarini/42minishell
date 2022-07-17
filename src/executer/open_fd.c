@@ -12,8 +12,8 @@
 
 #include "minishell.h"
 
-static int	get_fd_in(t_list *cmd_list, t_shell sh);
-static int	get_fd_out(t_list *cmd_list, t_shell sh);
+static void	get_fd_in(t_list *cmd_list, t_shell sh);
+static void	get_fd_out(t_list *cmd_list, t_shell sh);
 
 int	open_fd(t_list *cmd_list, t_shell sh)
 {
@@ -29,44 +29,54 @@ int	open_fd(t_list *cmd_list, t_shell sh)
 	return (0);
 }
 
-static int	get_fd_in(t_list *cmd_list, t_shell sh)
+static void	get_fd_in(t_list *cmd_list, t_shell sh)
 {
 	t_cmd	*cmd;
+	t_dict	*fd_pair;
+	t_list	*head_fd_list;
 
 	cmd = (t_cmd *) cmd_list->content;
-	if (!cmd->in.fname && cmd->in.fd < 0)
-		cmd->in.fd = STDIN_FILENO;
-	else if (cmd->in.fname && ft_strncmp("<", cmd->in.redirection, 2) == 0)
-		cmd->in.fd = open(cmd->in.fname, O_RDONLY);
-	else if (cmd->in.fname && ft_strncmp("<<", cmd->in.redirection, 2) == 0)
-		cmd->in.fd = here_doc(cmd->in.fname);
-	error_check(cmd->in.fd, sh);
-	return (0);
+	head_fd_list = cmd->fd_pair_list;
+	while (head_fd_list)
+	{
+		fd_pair = (t_dict *) head_fd_list->content;
+		if (cmd->fd[0] != STDIN_FILENO)
+			error_check(close(cmd->fd[0]), sh);
+		if (ft_strncmp("<", fd_pair->key, 2) == 0)
+			cmd->fd[0] = open(fd_pair->value, O_RDONLY);
+		else if (ft_strncmp("<<", fd_pair->key, 3) == 0)
+			cmd->fd[0] = here_doc(fd_pair->value);
+		head_fd_list = head_fd_list->next;
+	}
 }
 
-static int	get_fd_out(t_list *cmd_list, t_shell sh)
+static void	get_fd_out(t_list *cmd_list, t_shell sh)
 {
 	int		fd_pipe[2];
 	t_cmd	*cmd;
-	t_cmd	*next_cmd;
+	t_list	*head_fd_pair;
+	t_dict	*fd_pair;
 
 	cmd = (t_cmd *) cmd_list->content;
-	if (!cmd->out.fname && cmd->out.fd < 0)
-		cmd->out.fd = STDOUT_FILENO;
-	else if (ft_strncmp(cmd->out.fname, "|", 2) == 0)
+	head_fd_pair = cmd->fd_pair_list;
+	while (head_fd_pair)
 	{
-		if (cmd_list->next)
+		fd_pair = (t_dict *) head_fd_pair->content;
+		if (cmd->fd[1] != STDOUT_FILENO) // && fd_pair->key is not "|"
+			error_check(cmd->fd[1], sh);
+		if (ft_strncmp(fd_pair->key, "|", 2) == 0)
 		{
-			next_cmd = (t_cmd *) cmd_list->next->content;
-			error_check(pipe(fd_pipe), sh);
-			next_cmd->in.fd = fd_pipe[0];
-			cmd->out.fd = fd_pipe[1];
+			if (cmd_list->next)
+			{
+				error_check(pipe(fd_pipe), sh);
+				((t_cmd *) cmd_list->next->content)->fd[0] = fd_pipe[0];
+				cmd->fd[1] = fd_pipe[1];
+			}
 		}
+		else if (ft_strncmp(">", fd_pair->key, 2) == 0)
+			cmd->fd[1] = open(fd_pair->value, O_WRONLY | O_CREAT | O_TRUNC, 0622);
+		else if (ft_strncmp(">>", fd_pair->key, 3) == 0)
+			cmd->fd[1] = open(fd_pair->value, O_WRONLY | O_APPEND | O_CREAT, 0622);
+		head_fd_pair = head_fd_pair->next;
 	}
-	else if (ft_strncmp(">", cmd->out.redirection, 2) == 0)
-		cmd->out.fd = open(cmd->out.fname, O_WRONLY | O_CREAT | O_TRUNC, 0622);
-	else if (ft_strncmp(">>", cmd->out.redirection, 3) == 0)
-		cmd->out.fd = open(cmd->out.fname, O_WRONLY | O_APPEND | O_CREAT, 0622);
-	error_check(cmd->out.fd, sh);
-	return (0);
 }

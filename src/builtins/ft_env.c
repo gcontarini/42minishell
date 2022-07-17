@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 16:06:59 by nprimo            #+#    #+#             */
-/*   Updated: 2022/06/20 18:46:51 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/07/17 20:20:15 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ int	ft_env(t_cmd *cmd, t_shell sh)
 		var = (t_dict *) env->content;
 		if (var->value)
 		{
-			ft_putstr_fd(var->key, cmd->out.fd);
-			ft_putstr_fd("=", cmd->out.fd);
-			ft_putstr_fd(var->value, cmd->out.fd);
-			ft_putstr_fd("\n", cmd->out.fd);
+			ft_putstr_fd(var->key, cmd->fd[1]);
+			ft_putstr_fd("=", cmd->fd[1]);
+			ft_putstr_fd(var->value, cmd->fd[1]);
+			ft_putstr_fd("\n", cmd->fd[1]);
 		}
 		env = env->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:53:26 by nprimo            #+#    #+#             */
-/*   Updated: 2022/07/08 12:55:29 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/07/17 20:20:15 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_export(t_cmd *cmd, t_shell sh)
 
 	return_status = 0;
 	if (get_ac(cmd->av) == 1)
-		display_env(sh.env, cmd->out.fd);
+		display_env(sh.env, cmd->fd[1]);
 	else
 	{
 		pos = 1;

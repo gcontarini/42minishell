@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 12:21:43 by nprimo            #+#    #+#             */
-/*   Updated: 2022/06/24 21:15:07 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/07/17 20:20:36 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ int	ft_echo(t_cmd *cmd, t_shell sh)
 	}
 	while (cmd->av[pos])
 	{
-		write(cmd->out.fd, cmd->av[pos], ft_strlen(cmd->av[pos]));
+		write(cmd->fd[1], cmd->av[pos], ft_strlen(cmd->av[pos]));
 		pos++;
 		if (cmd->av[pos])
-			write(cmd->out.fd, " ", 1);
+			write(cmd->fd[1], " ", 1);
 	}
 	if (n_flag == 0)
-		write(cmd->out.fd, "\n", 1);
+		write(cmd->fd[1], "\n", 1);
 	return (0);
 }

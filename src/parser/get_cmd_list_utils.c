@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:01:37 by nprimo            #+#    #+#             */
-/*   Updated: 2022/07/17 20:01:51 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/07/17 20:18:19 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ void	add_cmd_in_out(t_cmd *cmd, t_list *curr_token, t_shell *sh)
 	while (curr_token)
 	{
 		curr_cont = (t_token *) curr_token->content;
-		if (is_redireciton(curr_cont->s))
+		if (is_redirection(curr_cont->s))
 		{
 			fd_pair = xmc(ft_calloc(sizeof(t_dict), 1), NULL, 0, *sh);
 			fd_pair->key = curr_cont->s;
-			if (ft_strncmp("|", cur_cont->s, 2))
+			if (ft_strncmp("|", curr_cont->s, 2))
 			{
 				if (curr_token->next)
 					fd_pair->value = ((t_token *) curr_token->next->content)->s;
