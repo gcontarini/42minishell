@@ -6,7 +6,7 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:18:18 by gcontari          #+#    #+#             */
-/*   Updated: 2022/07/11 09:02:39 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/07/21 19:39:27 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include <sys/stat.h>
 # include <sys/wait.h>
 # include <unistd.h>
+# include <termios.h>
 # include "libft.h"
 # include "ft_printf.h"
 # include "get_next_line.h"
@@ -35,11 +36,16 @@
 # define METACHAR_SET "|&<>" // ;()
 # define SPACE_SET " \n\t"
 # define EXP_SET "|&<> \n\t\'\""
+# define INVALID_TERM 0 // Don't know what to use
+
+// Global variable
+int						g_shell_pid;
 
 // ALIAS
 typedef unsigned int	t_uint;
 typedef unsigned char	t_uchar;
 typedef unsigned long	t_ulong;
+typedef struct termios	t_term;
 
 typedef enum e_struct_type
 {
@@ -85,12 +91,15 @@ typedef struct s_dict
 
 typedef struct s_shell
 {
-	t_list	*env;
-	char	*input;
-	char	*homepath;
-	t_list	*token_list;
-	t_list	*cmd_list;
-	int		exit_status;
+	t_list			*env;
+	char			*input;
+	char			*homepath;
+	t_list			*token_list;
+	t_list			*cmd_list;
+	int				exit_status;
+	int				term_fd;
+	struct termios	old_term;
+	struct termios	new_term;
 }	t_shell;
 
 typedef struct s_expander
@@ -110,6 +119,15 @@ typedef void			(*t_free_func) (void *);
 typedef int				(t_builtins) (t_cmd *, t_shell);
 
 // FUNCTIONS
+// builtins
+int		ft_echo(t_cmd *cmd, t_shell sh);
+int		ft_env(t_cmd *cmd, t_shell sh);
+int		ft_export(t_cmd *cmd, t_shell sh);
+int		ft_exit(t_cmd *cmd, t_shell sh);
+int		ft_pwd(t_cmd *cmd, t_shell sh);
+int		ft_unset(t_cmd *cmd, t_shell sh);
+int		ft_cd(t_cmd *cmd, t_shell sh);
+
 // core
 void	free_split(void *av_void);
 void	free_cmd(void *cmd_void);
@@ -120,7 +138,7 @@ void	free_token(void *token_void);
 void	free_t(void *token_void);
 
 void	free_shell(t_shell sh);
-//
+// shell
 t_shell	init_shell(char **envp);
 int		shell_interactive(t_shell sh);
 int		shell_from_file(int ac, char **av, t_shell sh);
@@ -144,30 +162,27 @@ void	*xmc(void *ptr, void *var, t_struct_type type, t_shell sh);
 void	*error_check_pointer(void *pointer);
 void	error_check(int ret_value, t_shell sh);
 
-// parser
-t_list	*parser(t_shell *sh, const char *inpt);
-t_uint	str_count_char(const char *s, char c);
-t_list	*get_cmd_list(t_list **token_list, t_shell *s_shell);
-// lexer
-t_list	*lexer(t_shell sh, const char *inpt);
-// expander
-char	*expander(t_shell sh, const char *input);
-// syntax_tree
-t_list	*build_syntax_tree(t_shell *sh);
-
 // executer
 int		exec_cmd(t_cmd *cmd, t_shell *sh);
 int		exec_cmd_list(t_shell *sh);
 int		open_fd(t_list *cmd_list, t_shell sh);
 int		here_doc(char *eof);
 
-// builtins
-int		ft_echo(t_cmd *cmd, t_shell sh);
-int		ft_env(t_cmd *cmd, t_shell sh);
-int		ft_export(t_cmd *cmd, t_shell sh);
-int		ft_exit(t_cmd *cmd, t_shell sh);
-int		ft_pwd(t_cmd *cmd, t_shell sh);
-int		ft_unset(t_cmd *cmd, t_shell sh);
-int		ft_cd(t_cmd *cmd, t_shell sh);
+// parser
+t_list	*parser(t_shell *sh, const char *inpt);
+t_uint	str_count_char(const char *s, char c);
+t_list	*get_cmd_list(t_list **token_list, t_shell *s_shell);
+t_list	*lexer(t_shell sh, const char *inpt);
+char	*expander(t_shell sh, const char *input);
+t_list	*build_syntax_tree(t_shell *sh);
+
+// signals
+void	register_signals(void);
+
+// terminal
+t_term	ms_config_termios(t_shell *sh);
+t_term	ms_get_termios(t_shell *sh);
+void	ms_restore_term(t_shell *sh);
+void	ms_set_term(t_shell *sh);
 
 #endif

@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ms_get_termios.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/29 12:54:57 by nprimo            #+#    #+#             */
-/*   Updated: 2022/07/21 18:57:18 by gcontari         ###   ########.fr       */
+/*   Created: 2022/07/21 18:44:23 by gcontari          #+#    #+#             */
+/*   Updated: 2022/07/21 19:40:10 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	main(int argc, char **argv)
+t_term	ms_get_termios(t_shell *sh)
 {
-	// char	*inpt;
+	t_term	curr_term;
 
-	// register_signals();
-	// while (1)
-	// {
-	// 	inpt = readline("HELLO ");
-	// 	printf("%s\n", inpt);
-	// }
-	printf("%d\n", ttyslot());
-	printf("%d\n", STDIN_FILENO);
-	return (0);
+	if (isatty(sh->term_fd) == 0)
+	{
+		free_shell(*sh);
+		exit(INVALID_TERM);
+	}
+	tcgetattr(sh->term_fd, &curr_term);
+	return (curr_term);
 }

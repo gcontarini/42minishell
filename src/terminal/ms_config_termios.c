@@ -1,28 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ms_config_termios.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/29 12:54:57 by nprimo            #+#    #+#             */
-/*   Updated: 2022/07/21 18:57:18 by gcontari         ###   ########.fr       */
+/*   Created: 2022/07/21 18:45:51 by gcontari          #+#    #+#             */
+/*   Updated: 2022/07/21 19:40:27 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	main(int argc, char **argv)
+t_term	ms_config_termios(t_shell *sh)
 {
-	// char	*inpt;
+	t_term	new_term;
 
-	// register_signals();
-	// while (1)
-	// {
-	// 	inpt = readline("HELLO ");
-	// 	printf("%s\n", inpt);
-	// }
-	printf("%d\n", ttyslot());
-	printf("%d\n", STDIN_FILENO);
-	return (0);
+	new_term = sh->old_term;
+	new_term.c_lflag &= ~ECHOCTL;
+	return (new_term);
 }
