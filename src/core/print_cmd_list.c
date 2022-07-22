@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 12:10:51 by nprimo            #+#    #+#             */
-/*   Updated: 2022/06/25 15:37:54 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/07/22 21:26:40 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ void	print_cmd_list(t_list *cmd_list)
 		print_av(cmd->av);
 		printf("\n");
 		printf("file in: %s\nred: %s\nfd: %d\n", cmd->in.fname,
-			cmd->in.redirection, cmd->in.fd);
+			cmd->in.red, cmd->in.fd);
 		printf("\n");
 		printf("file out: %s\nred: %s\nfd: %d\n", cmd->out.fname,
-			cmd->out.redirection, cmd->out.fd);
+			cmd->out.red, cmd->out.fd);
 		head = head->next;
 		printf("---\n");
 	}
