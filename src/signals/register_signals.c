@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/21 18:58:57 by gcontari          #+#    #+#             */
-/*   Updated: 2022/07/21 19:45:45 by gcontari         ###   ########.fr       */
+/*   Created: 2022/07/22 17:29:09 by gcontari          #+#    #+#             */
+/*   Updated: 2022/07/22 17:29:16 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,9 @@
 
 extern int	g_shell_pid;
 
-static void	redo_prompt(void);
+static void	redo_prompt(int sig);
 static void	sig_handler(int sig, siginfo_t *info, void *ucontext);
 
-// Needs a here doc control to avoid not closing it when necessary
 void	register_signals(void)
 {
 	struct sigaction	sa;
@@ -32,10 +31,15 @@ void	register_signals(void)
 	kill(0, SIGINT);
 }
 
-static void	redo_prompt(void)
+static void	redo_prompt(int sig)
 {
-	write(2, "\n", 1);
-	rl_replace_line("", 0);
+	if (sig == SIGINT)
+	{
+		write(STDERR_FILENO, "\n", 1);
+		rl_replace_line("", 0);
+	}
+	else if (sig == SIGQUIT)
+		write(STDERR_FILENO, "", 0);
 	rl_on_new_line();
 	rl_redisplay();
 	return ;
@@ -50,8 +54,7 @@ static void	sig_handler(int sig, siginfo_t *info, void *ucontext)
 	}
 	if (g_shell_pid != info->si_pid)
 		return ;
-	if (sig == SIGINT) // SIGQUIT SHOULD DO NOTHING, RIGHT NOW IT SETS THE CURSOR POSITION TO START, INSTEAD TAKE THE CURSOR POSITION AND SET IT BACK TO THIS POSITION
-		redo_prompt();
+	redo_prompt(sig);
 	(void) ucontext;
 	return ;
 }

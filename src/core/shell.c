@@ -6,7 +6,7 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:24:04 by nprimo            #+#    #+#             */
-/*   Updated: 2022/07/21 19:41:14 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/07/22 17:22:01 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ static int	exec_input(t_shell *sh);
 int	shell_interactive(t_shell sh)
 {
 	register_signals();
+	ms_set_term(&sh);
 	while (1)
 	{
-		ms_set_term(&sh);
 		sh.input = readline(PROMPT);
 		if (!sh.input)
 		{
@@ -27,8 +27,11 @@ int	shell_interactive(t_shell sh)
 			free_shell(sh);
 			exit(0);
 		}
-		add_history(sh.input);
-		exec_input(&sh);
+		else if (ft_strlen(sh.input) > 0)
+		{
+			add_history(sh.input);
+			exec_input(&sh);
+		}
 	}
 	return (0);
 }

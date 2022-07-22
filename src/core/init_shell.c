@@ -6,7 +6,7 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 15:05:16 by nprimo            #+#    #+#             */
-/*   Updated: 2022/07/21 19:39:35 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/07/22 14:08:20 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_shell	init_shell(char **envp)
 	sh.cmd_list = NULL;
 	sh.exit_status = 0;
 	sh.homepath = ft_getenv("HOME", sh.env);
-	sh.term_fd = ttyslot();
+	sh.term_fd = STDERR_FILENO;
 	sh.old_term = ms_get_termios(&sh);
 	sh.new_term = ms_config_termios(&sh);
 	return (sh);
