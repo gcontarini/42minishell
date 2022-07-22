@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:01:37 by nprimo            #+#    #+#             */
-/*   Updated: 2022/07/04 17:46:01 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/07/22 20:21:39 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 static int	add_cmd_out(t_cmd *cmd, t_list *cmd_token_list);
 static int	add_cmd_in(t_cmd *cmd, t_list *cmd_token_list);
 static int	is_redirection(const char *str);
+
+char		*ft_replace(char *original, char *new);
 
 int	add_cmd_in_out(t_cmd *cmd, t_list *cmd_token_list)
 {
@@ -44,8 +46,10 @@ static int	add_cmd_out(t_cmd *cmd, t_list *cmd_token_list)
 		{
 			if (curr_token->next)
 			{
-				cmd->out.fname = ((t_token *) curr_token->next->content)->s;
-				cmd->out.redirection = curr_cont->s;
+				cmd->out.fname = ft_replace(cmd->out.fname,
+						((t_token *) curr_token->next->content)->s);
+				cmd->out.redirection = ft_replace(cmd->out.redirection,
+						curr_cont->s);
 			}
 			else
 				return (258);
@@ -69,8 +73,9 @@ static int	add_cmd_in(t_cmd *cmd, t_list *cmd_token_list)
 		{
 			if (curr_token->next)
 			{
-				cmd->in.fname = ((t_token *)curr_token->next->content)->s;
-				cmd->in.redirection = curr_cont->s;
+				cmd->in.fname = ft_replace(cmd->in.fname,
+						((t_token *)curr_token->next->content)->s);
+				cmd->in.redirection = ft_replace(cmd->in.fname, curr_cont->s);
 				curr_token = curr_token->next;
 			}
 			else
@@ -92,14 +97,15 @@ char	**token_list_to_av(t_list **tlist, t_shell sh)
 		if (is_redirection(((t_token *) curr_t->content)->s))
 		{
 			tmp = curr_t->next->next;
-			ft_lstdelone(ft_lst_remove(tlist, curr_t->next->content), free_t);
-			ft_lstdelone(ft_lst_remove(tlist, curr_t->content), free_t);
+			ft_lstdelone(ft_lst_remove(tlist, curr_t->next->content),
+				free_token);
+			ft_lstdelone(ft_lst_remove(tlist, curr_t->content), free_token);
 			curr_t = tmp;
 		}
 		else if (ft_strncmp("|", ((t_token *) curr_t->content)->s, 2) == 0)
 		{
 			tmp = curr_t->next;
-			ft_lstdelone(ft_lst_remove(tlist, curr_t->content), free_t);
+			ft_lstdelone(ft_lst_remove(tlist, curr_t->content), free_token);
 			curr_t = tmp;
 		}
 		else
