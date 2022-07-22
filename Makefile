@@ -41,7 +41,7 @@ NAME = minishell
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -I $(INC) $(LIBS) $^ -o $@  
+	$(CC) $(CFLAGS) -I $(INC) $^ -o $@ $(LIBS) 
 
 $(OBJ)/%.o: $(SRC)/*/%.c
 	@mkdir -p $(OBJ)

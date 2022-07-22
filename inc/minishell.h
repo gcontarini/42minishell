@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:18:18 by gcontari          #+#    #+#             */
-/*   Updated: 2022/07/21 19:39:27 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/07/22 18:20:36 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@
 # define EXP_SET "|&<> \n\t\'\""
 # define INVALID_TERM 0 // Don't know what to use
 
-// Global variable
-int						g_shell_pid;
 
 // ALIAS
 typedef unsigned int	t_uint;

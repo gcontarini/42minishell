@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   register_signals.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 17:29:09 by gcontari          #+#    #+#             */
-/*   Updated: 2022/07/22 17:29:16 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/07/22 18:20:33 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-extern int	g_shell_pid;
+int	g_shell_pid;
 
 static void	redo_prompt(int sig);
 static void	sig_handler(int sig, siginfo_t *info, void *ucontext);
