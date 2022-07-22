@@ -15,7 +15,7 @@ SYS_NAME := $(shell uname)
 
 # COMPILER
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra -Qunused-arguments -g
+CFLAGS = -Wall -Werror -Wextra -g
 RM = rm -rf
 
 # FILES
@@ -46,7 +46,7 @@ $(NAME): $(OBJS)
 $(OBJ)/%.o: $(SRC)/*/%.c
 	@mkdir -p $(OBJ)
 	@make -C libft/ 
-	$(CC) $(CFLAGS) -I $(INC) $(LIBS) -c $< -o $@ 
+	$(CC) $(CFLAGS) -I $(INC) -c $< -o $@ 
 
 tester: $(SRCS_TEST)
 	$(CC) -Wall -g -fsanitize=address -I $(INC) $^ $(LIBS) 
