@@ -6,7 +6,7 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 12:24:52 by nprimo            #+#    #+#             */
-/*   Updated: 2022/07/22 16:45:34 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/07/24 16:20:02 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ static int	exec_bin(t_cmd *cmd, t_shell *sh)
 		exit(1);
 	if (pid == 0)
 	{
+		set_signals(SIG_DFL, sh);
 		error_check(redirect(cmd->in.fd, cmd->out.fd), *sh);
 		envp = dict_list_to_av(sh->env, *sh);
 		if (execve(bin_path, cmd->av, envp) == -1)

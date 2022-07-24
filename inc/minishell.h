@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
+/*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:18:18 by gcontari          #+#    #+#             */
-/*   Updated: 2022/07/22 18:20:36 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/07/24 16:18:18 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,7 +175,7 @@ char	*expander(t_shell sh, const char *input);
 t_list	*build_syntax_tree(t_shell *sh);
 
 // signals
-void	register_signals(void);
+void	set_signals(int opt, t_shell *sh);
 
 // terminal
 t_term	ms_config_termios(t_shell *sh);
