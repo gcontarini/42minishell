@@ -6,7 +6,7 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 17:29:09 by gcontari          #+#    #+#             */
-/*   Updated: 2022/07/25 14:18:34 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/07/25 14:20:03 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	set_signals(void (*opt)(int), t_shell *sh)
 	sa.sa_flags = SA_SIGINFO;
 	sa.sa_sigaction = sig_handler;
 	if (sigaction(SIGINT, &sa, NULL) == -1
-		|| sigaction(SIGQUIT, &sa, NULL == -1))
+		|| sigaction(SIGQUIT, &sa, NULL) == -1)
 	{
 		free_shell(*sh);
 		exit(0);
