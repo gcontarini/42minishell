@@ -6,7 +6,7 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 15:36:50 by nprimo            #+#    #+#             */
-/*   Updated: 2022/07/25 14:57:20 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/07/25 14:58:11 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static void	child_here_doc(char *eof, int fd_pipe[2]);
 
 void	sig_exit(int sig)
 {
+	(void) sig;
 	exit(42);
 	return ;
 }
