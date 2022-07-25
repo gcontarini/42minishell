@@ -41,7 +41,7 @@ static int	get_fd_in(t_list *cmd_list, t_shell *sh)
 		cmd->in.fd = open(cmd->in.fname, O_RDONLY);
 	else if (cmd->in.fname && ft_strncmp("<<", cmd->in.redirection, 2) == 0)
 		cmd->in.fd = here_doc(cmd->in.fname);
-	return (ofile_checker(cmd->in.fd, &sh));
+	return (ofile_checker(cmd->in.fd, sh));
 }
 
 int	ofile_checker(int fd, t_shell *sh)
@@ -78,5 +78,5 @@ static int	get_fd_out(t_list *cmd_list, t_shell *sh)
 		cmd->out.fd = open(cmd->out.fname, O_WRONLY | O_CREAT | O_TRUNC, 0622);
 	else if (ft_strncmp(">>", cmd->out.redirection, 3) == 0)
 		cmd->out.fd = open(cmd->out.fname, O_WRONLY | O_APPEND | O_CREAT, 0622);
-	return (ofile_checker(cmd->out.fd, &sh));
+	return (ofile_checker(cmd->out.fd, sh));
 }
