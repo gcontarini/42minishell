@@ -6,7 +6,7 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 15:36:50 by nprimo            #+#    #+#             */
-/*   Updated: 2022/07/25 18:16:05 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/07/25 18:21:00 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	here_doc(char *eof, t_shell *sh)
 	waitpid(0, &status, 0);
 	if (status != 0)
 		return (_close_pipe(fd_pipe, -1)); // error no?
+	printf("HERE\n");
 	return (fd_pipe[0]);
 }
 
