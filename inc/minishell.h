@@ -6,7 +6,7 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:18:18 by gcontari          #+#    #+#             */
-/*   Updated: 2022/07/25 17:58:46 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/07/25 18:16:43 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,7 +164,7 @@ int		ofile_checker(int fd, t_shell *sh);
 int		exec_cmd(t_cmd *cmd, t_shell *sh);
 int		exec_cmd_list(t_shell *sh);
 int		open_fd(t_list *cmd_list, t_shell sh);
-int		here_doc(char *eof);
+int		here_doc(char *eof, t_shell *sh);
 
 // parser
 t_list	*parser(t_shell *sh, const char *inpt);
@@ -176,6 +176,7 @@ t_list	*build_syntax_tree(t_shell *sh);
 
 // signals
 void	set_signals(void (*opt)(int), t_shell *sh);
+void	set_here_doc_signal(t_shell *sh);
 
 // terminal
 t_term	ms_config_termios(t_shell *sh);

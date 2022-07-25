@@ -40,7 +40,7 @@ static int	get_fd_in(t_list *cmd_list, t_shell *sh)
 	else if (cmd->in.fname && ft_strncmp("<", cmd->in.redirection, 2) == 0)
 		cmd->in.fd = open(cmd->in.fname, O_RDONLY);
 	else if (cmd->in.fname && ft_strncmp("<<", cmd->in.redirection, 2) == 0)
-		cmd->in.fd = here_doc(cmd->in.fname);
+		cmd->in.fd = here_doc(cmd->in.fname, sh);
 	return (ofile_checker(cmd->in.fd, sh));
 }
 

@@ -6,7 +6,7 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 15:36:50 by nprimo            #+#    #+#             */
-/*   Updated: 2022/07/25 17:45:14 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/07/25 18:16:05 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,7 @@
 static int	_close_pipe(int pipe[2], int status);
 static void	child_here_doc(char *eof, int fd_pipe[2]);
 
-void	sig_exit(int sig)
-{
-	(void) sig;
-	exit(42);
-	return ;
-}
-
-int	here_doc(char *eof)
+int	here_doc(char *eof, t_shell *sh)
 {
 	int		fd_pipe[2];
 	int		status;
@@ -35,9 +28,7 @@ int	here_doc(char *eof)
 		return (_close_pipe(fd_pipe, -1)); // error no?
 	if (pid == 0)
 	{
-		set_signals(SIG_DFL, NULL);
-		signal(SIGINT, sig_exit);
-		signal(SIGQUIT, SIG_IGN);
+		set_here_doc_signal(sh);
 		child_here_doc(eof, fd_pipe);
 		exit(0);
 		return (0);
