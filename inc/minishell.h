@@ -6,7 +6,7 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:18:18 by gcontari          #+#    #+#             */
-/*   Updated: 2022/07/24 16:18:18 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/07/25 14:34:42 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@
 # define SPACE_SET " \n\t"
 # define EXP_SET "|&<> \n\t\'\""
 # define INVALID_TERM 0 // Don't know what to use
-
 
 // ALIAS
 typedef unsigned int	t_uint;
@@ -175,7 +174,7 @@ char	*expander(t_shell sh, const char *input);
 t_list	*build_syntax_tree(t_shell *sh);
 
 // signals
-void	set_signals(int opt, t_shell *sh);
+void	set_signals(void (*opt)(int), t_shell *sh);
 
 // terminal
 t_term	ms_config_termios(t_shell *sh);
