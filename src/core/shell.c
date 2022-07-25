@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
+/*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:24:04 by nprimo            #+#    #+#             */
-/*   Updated: 2022/07/08 17:37:49 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/07/25 18:27:41 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,24 @@ static int	exec_input(t_shell *sh);
 
 int	shell_interactive(t_shell sh)
 {
+	ms_set_term(&sh);
 	while (1)
 	{
+		set_signals(NULL, &sh);
 		sh.input = readline(PROMPT);
-		add_history(sh.input);
-		exec_input(&sh);
+		if (!sh.input)
+		{
+			ms_restore_term(&sh);
+			free_shell(sh);
+			write(STDERR_FILENO, "exit\n", 5);
+			exit(0);
+		}
+		else if (ft_strlen(sh.input) > 0)
+		{
+			add_history(sh.input);
+			set_signals(SIG_IGN, &sh);
+			exec_input(&sh);
+		}
 	}
 	return (0);
 }

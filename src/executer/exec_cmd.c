@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
+/*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 12:24:52 by nprimo            #+#    #+#             */
-/*   Updated: 2022/07/08 18:20:52 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/07/25 15:30:35 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,9 +95,10 @@ static int	exec_bin(t_cmd *cmd, t_shell *sh)
 		bin_path = find_bin_path(cmd->av[0], sh->env, *sh);
 	pid = fork();
 	if (pid == -1)
-		exit(1);
+		exit(1); // ?
 	if (pid == 0)
 	{
+		set_signals(SIG_DFL, sh);
 		error_check(redirect(cmd->in.fd, cmd->out.fd), *sh);
 		envp = dict_list_to_av(sh->env, *sh);
 		if (execve(bin_path, cmd->av, envp) == -1)

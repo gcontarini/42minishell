@@ -6,7 +6,7 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 13:16:55 by gcontari          #+#    #+#             */
-/*   Updated: 2022/07/09 11:19:12 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/07/22 17:30:28 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ t_list	*parser(t_shell *sh, const char *inpt)
 	free((char *) inpt);
 	sh->input = inpt_exp;
 	sh->token_list = lexer(*sh, inpt_exp);
-	sh->token_list = build_syntax_tree(sh);
+	if (sh->token_list)
+		sh->token_list = build_syntax_tree(sh);
 	return (sh->token_list);
 }
 

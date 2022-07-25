@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 15:56:01 by nprimo            #+#    #+#             */
-/*   Updated: 2022/07/01 20:28:28 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/07/22 20:20:54 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,11 @@ int	control_operator_pos(t_list *llist)
 		llist = llist->next;
 	}
 	return (pos);
+}
+
+char	*ft_replace(char *original, char *new)
+{
+	if (original)
+		free(original);
+	return (ft_strndup(new, ft_strlen(new)));
 }
