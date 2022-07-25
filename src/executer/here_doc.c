@@ -6,7 +6,7 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 15:36:50 by nprimo            #+#    #+#             */
-/*   Updated: 2022/07/25 20:24:24 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/07/25 20:28:28 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,8 @@ int	here_doc(char *eof, t_shell *sh)
 		set_here_doc_signal(sh);
 		child_here_doc(eof, fd_pipe);
 		exit(0);
-		return (0);
 	}
 	waitpid(0, &status, 0);
-	printf("STATUS: %d\n", status);
 	if (status != 0)
 		return (_close_pipe(fd_pipe, -1)); // error no?
 	close(fd_pipe[1]);
@@ -53,7 +51,7 @@ static void	child_here_doc(char *eof, int fd_pipe[2])
 		ft_putstr_fd("\n", fd_pipe[1]);
 		new_line = readline("> ");
 	}
-	close(fd_pipe[1]);
+	_close_pipe(fd_pipe, 0);
 	free(new_line);
 	return ;
 }
