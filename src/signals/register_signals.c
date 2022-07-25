@@ -6,7 +6,7 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 17:29:09 by gcontari          #+#    #+#             */
-/*   Updated: 2022/07/25 14:20:03 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/07/25 14:21:33 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,10 @@ void	set_signals(void (*opt)(int), t_shell *sh)
 
 static void	sig_handler(int sig, siginfo_t *info, void *ucontext)
 {
-	if (sig == SIGINT)
-	{
-		write(STDERR_FILENO, "\n", 1);
-		rl_replace_line("", 0);
-	}
-	else if (sig == SIGQUIT)
-		write(STDERR_FILENO, "", 0);
+	if (sig == SIGQUIT)
+		return ;
+	write(STDERR_FILENO, "\n", 1);
+	rl_replace_line("", 0);
 	rl_on_new_line();
 	rl_redisplay();
 	(void) info;
