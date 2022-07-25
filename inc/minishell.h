@@ -6,7 +6,7 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:18:18 by gcontari          #+#    #+#             */
-/*   Updated: 2022/07/25 14:18:01 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/07/25 14:34:42 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@
 # define SPACE_SET " \n\t"
 # define EXP_SET "|&<> \n\t\'\""
 # define INVALID_TERM 0 // Don't know what to use
-
 
 // ALIAS
 typedef unsigned int	t_uint;
