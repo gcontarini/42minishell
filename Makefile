@@ -3,12 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+         #
+#    By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/24 19:45:47 by nprimo            #+#    #+#              #
-#    Updated: 2022/07/22 20:03:22 by nprimo           ###   ########.fr        #
+#    Updated: 2022/07/21 15:34:48by gcontari         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+# SYSTEM NAME
+SYS_NAME := $(shell uname)
 
 # COMPILER
 CC = gcc
@@ -27,6 +30,9 @@ LIBFT = libft/libft.a
 
 # LINKER
 LIBS = -lreadline $(LIBFT) 
+ifeq ($(SYS_NAME), Darwin)
+	LIBS = -I/opt/homebrew/Cellar/readline/8.1.2/include -L/opt/homebrew/Cellar/readline/8.1.2/lib -lreadline $(LIBFT) 
+endif
 
 # TARGET
 NAME = minishell
@@ -40,7 +46,7 @@ $(NAME): $(OBJS)
 $(OBJ)/%.o: $(SRC)/*/%.c
 	@mkdir -p $(OBJ)
 	@make -C libft/ 
-	$(CC) $(CFLAGS) -I $(INC) -c $< -o $@
+	$(CC) $(CFLAGS) -I $(INC) -c $< -o $@ 
 
 tester: $(SRCS_TEST)
 	$(CC) -Wall -g -fsanitize=address -I $(INC) $^ $(LIBS) 

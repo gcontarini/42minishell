@@ -6,7 +6,7 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 15:31:54 by nprimo            #+#    #+#             */
-/*   Updated: 2022/07/01 20:02:03 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/07/25 18:18:22 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,15 @@ void	error_check(int ret_value, t_shell sh)
 		free_shell(sh);
 		exit(1);
 	}
+}
+
+int	ofile_checker(int fd, t_shell *sh)
+{
+	if (fd < 0)
+	{
+		write(STDERR_FILENO, "\n", 1);
+		sh->exit_status = 42; // Which errono
+		return (1);
+	}
+	return (0);
 }

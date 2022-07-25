@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_shell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
+/*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 15:05:16 by nprimo            #+#    #+#             */
-/*   Updated: 2022/07/08 17:27:54 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/07/22 14:08:20 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@ t_shell	init_shell(char **envp)
 	sh.cmd_list = NULL;
 	sh.exit_status = 0;
 	sh.homepath = ft_getenv("HOME", sh.env);
+	sh.term_fd = STDERR_FILENO;
+	sh.old_term = ms_get_termios(&sh);
+	sh.new_term = ms_config_termios(&sh);
 	return (sh);
 }
 
