@@ -6,7 +6,7 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 15:36:50 by nprimo            #+#    #+#             */
-/*   Updated: 2022/07/25 15:00:02 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/07/25 17:45:14 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,18 +37,14 @@ int	here_doc(char *eof)
 	{
 		set_signals(SIG_DFL, NULL);
 		signal(SIGINT, sig_exit);
-		// signal(SIGQUIT, SIG_IGN);
+		signal(SIGQUIT, SIG_IGN);
 		child_here_doc(eof, fd_pipe);
 		exit(0);
 		return (0);
 	}
 	waitpid(0, &status, 0);
-	printf("%d\n", status);
 	if (status != 0)
-	{
-		write(2, "TESTE\n", 6);
 		return (_close_pipe(fd_pipe, -1)); // error no?
-	}
 	return (fd_pipe[0]);
 }
 
