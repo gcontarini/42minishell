@@ -6,7 +6,7 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 17:29:09 by gcontari          #+#    #+#             */
-/*   Updated: 2022/07/24 16:20:28 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/07/25 14:18:34 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 static void	sig_handler(int sig, siginfo_t *info, void *ucontext);
 
-void	set_signals(int opt, t_shell *sh)
+void	set_signals(void (*opt)(int), t_shell *sh)
 {
 	struct sigaction	sa;
 
-	if (opt != 0)
+	if (opt)
 	{
 		if (signal(SIGINT, opt) == SIG_ERR
 			|| signal(SIGQUIT, opt) == SIG_ERR)
