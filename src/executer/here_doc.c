@@ -6,7 +6,7 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 15:36:50 by nprimo            #+#    #+#             */
-/*   Updated: 2022/07/25 14:58:11 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/07/25 15:00:02 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	here_doc(char *eof)
 	}
 	waitpid(0, &status, 0);
 	printf("%d\n", status);
-	if (WIFSIGNALED(status))
+	if (status != 0)
 	{
 		write(2, "TESTE\n", 6);
 		return (_close_pipe(fd_pipe, -1)); // error no?
