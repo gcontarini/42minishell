@@ -6,43 +6,28 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 17:29:09 by gcontari          #+#    #+#             */
-/*   Updated: 2022/07/25 14:21:33 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/07/25 14:26:56 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	sig_handler(int sig, siginfo_t *info, void *ucontext);
+static void	sig_handler(int sig);
 
 void	set_signals(void (*opt)(int), t_shell *sh)
 {
-	struct sigaction	sa;
-
-	if (opt)
-	{
-		if (signal(SIGINT, opt) == SIG_ERR
-			|| signal(SIGQUIT, opt) == SIG_ERR)
-		{
-			free_shell(*sh);
-			exit(0); // Which error?
-		}
-		return ;
-	}
-	ft_memset(&sa, '\0', sizeof(sa));
-	sigemptyset(&(sa.sa_mask));
-	sigaddset(&(sa.sa_mask), SIGINT);
-	sigaddset(&(sa.sa_mask), SIGQUIT);
-	sa.sa_flags = SA_SIGINFO;
-	sa.sa_sigaction = sig_handler;
-	if (sigaction(SIGINT, &sa, NULL) == -1
-		|| sigaction(SIGQUIT, &sa, NULL) == -1)
+	if (!opt)
+		opt = sig_handler;
+	if (signal(SIGINT, opt) == SIG_ERR
+		|| signal(SIGQUIT, opt) == SIG_ERR)
 	{
 		free_shell(*sh);
-		exit(0);
+		exit(0); // Which error?
 	}
+	return ;
 }
 
-static void	sig_handler(int sig, siginfo_t *info, void *ucontext)
+static void	sig_handler(int sig)
 {
 	if (sig == SIGQUIT)
 		return ;
@@ -50,7 +35,5 @@ static void	sig_handler(int sig, siginfo_t *info, void *ucontext)
 	rl_replace_line("", 0);
 	rl_on_new_line();
 	rl_redisplay();
-	(void) info;
-	(void) ucontext;
 	return ;
 }
