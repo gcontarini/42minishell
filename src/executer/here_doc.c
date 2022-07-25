@@ -6,7 +6,7 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 15:36:50 by nprimo            #+#    #+#             */
-/*   Updated: 2022/07/25 14:46:51 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/07/25 14:49:16 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ int	here_doc(char *eof)
 	if (pid == 0)
 	{
 		set_signals(SIG_DFL, NULL);
-		signal(SIGQUIT, SIG_IGN);
+		// signal(SIGQUIT, SIG_IGN);
 		child_here_doc(eof, fd_pipe);
-		exit(2);
+		exit(0);
 		return (0);
 	}
-	waitpid(pid, &status, 0);
+	waitpid(0, &status, 0);
 	printf("%d\n", status);
 	if (WIFSIGNALED(status))
 	{
