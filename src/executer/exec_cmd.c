@@ -6,7 +6,7 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 12:24:52 by nprimo            #+#    #+#             */
-/*   Updated: 2022/07/24 16:20:02 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/07/25 14:36:08 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ static int	exec_bin(t_cmd *cmd, t_shell *sh)
 		bin_path = find_bin_path(cmd->av[0], sh->env, *sh);
 	pid = fork();
 	if (pid == -1)
-		exit(1);
+		exit(1); // ?
 	if (pid == 0)
 	{
 		set_signals(SIG_DFL, sh);

@@ -6,7 +6,7 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 15:36:50 by nprimo            #+#    #+#             */
-/*   Updated: 2022/07/25 09:54:20 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/07/25 14:36:45 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	here_doc(char *eof)
 		return (-1);
 	pid = fork();
 	if (pid == -1)
-		return (_close_pipe(fd_pipe, -1));
+		return (_close_pipe(fd_pipe, -1)); // error no?
 	if (pid == 0)
 	{
 		signal(SIGQUIT, SIG_IGN);
@@ -34,7 +34,7 @@ int	here_doc(char *eof)
 	}
 	waitpid(0, &status, 0);
 	if (WIFSIGNALED(status))
-		return (_close_pipe(fd_pipe, -1));
+		return (_close_pipe(fd_pipe, -1)); // error no?
 	return (fd_pipe[0]);
 }
 
