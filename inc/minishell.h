@@ -6,7 +6,7 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:18:18 by gcontari          #+#    #+#             */
-/*   Updated: 2022/07/25 14:34:42 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/07/25 17:58:46 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,6 +158,7 @@ t_dict	*get_dict_var(const char *key, t_list *dict);
 void	*xmc(void *ptr, void *var, t_struct_type type, t_shell sh);
 void	*error_check_pointer(void *pointer);
 void	error_check(int ret_value, t_shell sh);
+int		ofile_checker(int fd, t_shell *sh);
 
 // executer
 int		exec_cmd(t_cmd *cmd, t_shell *sh);

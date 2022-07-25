@@ -44,17 +44,6 @@ static int	get_fd_in(t_list *cmd_list, t_shell *sh)
 	return (ofile_checker(cmd->in.fd, sh));
 }
 
-int	ofile_checker(int fd, t_shell *sh)
-{
-	if (fd < 0)
-	{
-		write(STDERR_FILENO, "Error opening file\n", 19);
-		sh->exit_status = 42; // Which errono
-		return (1);
-	}
-	return (0);
-}
-
 static int	get_fd_out(t_list *cmd_list, t_shell *sh)
 {
 	int		fd_pipe[2];
