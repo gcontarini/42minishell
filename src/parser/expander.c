@@ -6,7 +6,7 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 09:24:17 by gcontari          #+#    #+#             */
-/*   Updated: 2022/07/26 14:55:06 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/07/26 14:56:27 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,8 +136,9 @@ static t_uint	expansionlen(const char *input, t_exp exp, t_shell sh)
 			size += ft_intlen(sh.exit_status);
 		else
 			size += ft_strlen(ft_getenv(*vars, sh.env));
-		input += (*vars && **vars != '?') * ft_strlen(*vars++)
+		input += (*vars && **vars != '?') * ft_strlen(*vars)
 			+ (*vars && **vars == '?');
+		vars++;
 	}
 	return (size);
 }
