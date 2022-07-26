@@ -6,7 +6,7 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 13:16:55 by gcontari          #+#    #+#             */
-/*   Updated: 2022/07/22 17:30:28 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/07/26 17:50:24 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,20 @@
 t_list	*parser(t_shell *sh, const char *inpt)
 {
 	char	*inpt_exp;
+	char	*inpt_tilda;
 
-	inpt_exp = expander(*sh, inpt);
-	free((char *) inpt);
+	inpt_tilda = f_tilda_expander(sh, inpt);
+	if (inpt_tilda)
+	{
+		free((char *) inpt);
+		inpt_exp = expander(*sh, inpt_tilda);
+		free((char *) inpt_tilda);
+	}
+	else
+	{
+		inpt_exp = expander(*sh, inpt);
+		free((char *) inpt);
+	}
 	sh->input = inpt_exp;
 	sh->token_list = lexer(*sh, inpt_exp);
 	if (sh->token_list)
