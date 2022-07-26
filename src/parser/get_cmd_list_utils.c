@@ -6,24 +6,24 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:01:37 by nprimo            #+#    #+#             */
-/*   Updated: 2022/07/26 20:29:19 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/07/26 20:42:55 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 static int	add_cmd_out(t_cmd *cmd, t_list *cmd_token_list);
-static int	add_cmd_in(t_cmd *cmd, t_list *cmd_token_list);
+static int	add_cmd_in(t_cmd *cmd, t_list *cmd_token_list, t_shell *sh);
 static int	is_redirection(const char *str);
 
 char		*ft_replace(char *original, char *new);
 
-int	add_cmd_in_out(t_cmd *cmd, t_list *cmd_token_list)
+int	add_cmd_in_out(t_cmd *cmd, t_list *cmd_token_list, t_shell *sh)
 {
 	int	return_status;
 
 	return_status = 0;
-	return_status = add_cmd_in(cmd, cmd_token_list);
+	return_status = add_cmd_in(cmd, cmd_token_list, sh);
 	if (return_status == 0)
 		return_status = add_cmd_out(cmd, cmd_token_list);
 	return (return_status);
@@ -82,7 +82,36 @@ static int	add_cmd_out(t_cmd *cmd, t_list *cmd_token_list)
 	return (0);
 }
 
-static int	add_cmd_in(t_cmd *cmd, t_list *cmd_token_list)
+static t_fd	update_fd_in(t_fd curr_in, t_token *curr_cont, t_list *curr_token,
+	t_shell *sh)
+{
+	t_fd	in;
+	int		tmp_fd;
+
+	in.fname = NULL;
+	in.red = NULL;
+	if (curr_token->next)
+	{
+		if (curr_in.fname != NULL)
+		{
+			if (ft_strncmp(curr_in.red, "<", 2) == 0)
+				tmp_fd = open(curr_in.fname, O_RDONLY);
+			else
+				tmp_fd = here_doc(curr_in.fname, sh);
+			close(tmp_fd);
+		}
+		in.fname = ft_replace(curr_in.fname,
+				((t_token *) curr_token->next->content)->s);
+		in.red = ft_replace(curr_in.red,
+				curr_cont->s);
+		if (tmp_fd != -1)
+			return (in);
+	}
+	in.fd = -256;
+	return (in);
+}
+
+static int	add_cmd_in(t_cmd *cmd, t_list *cmd_token_list, t_shell *sh)
 {
 	t_list	*curr_token;
 	t_token	*curr_cont;
@@ -94,14 +123,8 @@ static int	add_cmd_in(t_cmd *cmd, t_list *cmd_token_list)
 		if ((ft_strncmp("<", curr_cont->s, 2) == 0
 				|| (ft_strncmp("<<", curr_cont->s, 3) == 0)))
 		{
-			if (curr_token->next)
-			{
-				cmd->in.fname = ft_replace(cmd->in.fname,
-						((t_token *)curr_token->next->content)->s);
-				cmd->in.red = ft_replace(cmd->in.red, curr_cont->s);
-				curr_token = curr_token->next;
-			}
-			else
+			cmd->in = update_fd_in(cmd->in, curr_cont, curr_token, sh);
+			if (cmd->in.fd == -256)
 				return (258);
 		}
 		curr_token = curr_token->next;
