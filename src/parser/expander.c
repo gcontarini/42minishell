@@ -6,7 +6,7 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 09:24:17 by gcontari          #+#    #+#             */
-/*   Updated: 2022/07/26 12:30:23 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/07/26 12:39:30 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static void	cpy_and_exp(char *dst, const char *src, t_exp exp, t_shell sh)
 			while (p && *p)
 				*dst++ = *p++;
 			if (*exp.vars && **exp.vars == '?')
-				free(p);
+				free(p - 1);
 			exp.table++;
 			exp.vars++;
 			continue ;
