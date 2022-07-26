@@ -6,7 +6,7 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 09:24:17 by gcontari          #+#    #+#             */
-/*   Updated: 2022/07/26 14:50:20 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/07/26 14:55:06 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ char	*expander(t_shell sh, const char *input)
 	exp.vars = xmc(
 			malloc((exp.counter + 1) * sizeof(char *)), &exp, T_EXP, sh);
 	split_env_names(input, exp, sh);
-	printf("EXP LEN: %d\n", expansionlen(input, exp, sh));
 	output = xmc(malloc(expansionlen(input, exp, sh) + 1), &exp, T_EXP, sh);
 	cpy_and_exp(output, input, exp, sh);
 	free_exp(&exp);
@@ -137,8 +136,8 @@ static t_uint	expansionlen(const char *input, t_exp exp, t_shell sh)
 			size += ft_intlen(sh.exit_status);
 		else
 			size += ft_strlen(ft_getenv(*vars, sh.env));
-		printf("%s\n", *vars);
-		input += ft_strlen(*vars++);
+		input += (*vars && **vars != '?') * ft_strlen(*vars++)
+			+ (*vars && **vars == '?');
 	}
 	return (size);
 }
