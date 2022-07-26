@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_cmd_list_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
+/*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:01:37 by nprimo            #+#    #+#             */
-/*   Updated: 2022/07/22 21:27:57 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/07/26 12:32:47 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

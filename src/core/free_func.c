@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_func.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
+/*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 12:19:39 by nprimo            #+#    #+#             */
-/*   Updated: 2022/07/22 21:26:49 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/07/26 12:35:34 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,8 @@ void	free_exp(void *exp_void)
 	{
 		if (exp->table)
 			free(exp->table);
-		if (exp->var_names)
-			free_split(exp->var_names);
+		if (exp->vars)
+			free_split(exp->vars);
 	}
 }
 
