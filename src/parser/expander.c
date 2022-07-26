@@ -6,7 +6,7 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 09:24:17 by gcontari          #+#    #+#             */
-/*   Updated: 2022/07/26 12:48:06 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/07/26 13:59:15 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ char	*expander(t_shell sh, const char *input)
 			malloc((exp.counter + 1) * sizeof(char *)), &exp, T_EXP, sh);
 	split_env_names(input, exp, sh);
 	output = xmc(malloc(expansionlen(input, exp, sh) + 1), &exp, T_EXP, sh);
+	printf("%d\n", expansionlen(input, exp, sh));
 	cpy_and_exp(output, input, exp, sh);
 	free_exp(&exp);
 	return (output);
