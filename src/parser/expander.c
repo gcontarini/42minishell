@@ -6,7 +6,7 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 09:24:17 by gcontari          #+#    #+#             */
-/*   Updated: 2022/07/26 14:05:43 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/07/26 14:08:33 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ char	*expander(t_shell sh, const char *input)
 			malloc((exp.counter + 1) * sizeof(char *)), &exp, T_EXP, sh);
 	split_env_names(input, exp, sh);
 	output = xmc(malloc(expansionlen(input, exp, sh) + 1), &exp, T_EXP, sh);
-	printf("%d\n", expansionlen(input, exp, sh));
 	cpy_and_exp(output, input, exp, sh);
 	free_exp(&exp);
 	return (output);
@@ -63,10 +62,11 @@ static void	cpy_and_exp(char *dst, const char *src, t_exp exp, t_shell sh)
 
 	while (src && *src)
 	{
+		printf("%d\n", *src);
 		if (*src == '$' && *exp.table)
 		{
-			src += (*exp.vars && **exp.vars != '?') * (ft_strlen(*exp.vars) + 1)
-				+ (*exp.vars && **exp.vars == '?') * (ft_intlen(sh.exit_status) + 1);
+			src += ((*exp.vars && **exp.vars != '?') * (ft_strlen(*exp.vars) + 1))
+				+ ((*exp.vars && **exp.vars == '?') * (ft_intlen(sh.exit_status) + 1));
 			if (*exp.vars && **exp.vars == '?')
 				p = xmc(ft_itoa(sh.exit_status), &exp, T_EXP, sh);
 			else
