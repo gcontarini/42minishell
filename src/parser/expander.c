@@ -6,7 +6,7 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 09:24:17 by gcontari          #+#    #+#             */
-/*   Updated: 2022/07/26 14:45:34 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/07/26 14:50:20 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,7 @@ static t_uint	expansionlen(const char *input, t_exp exp, t_shell sh)
 			size += ft_intlen(sh.exit_status);
 		else
 			size += ft_strlen(ft_getenv(*vars, sh.env));
+		printf("%s\n", *vars);
 		input += ft_strlen(*vars++);
 	}
 	return (size);
