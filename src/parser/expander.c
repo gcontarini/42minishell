@@ -6,7 +6,7 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 09:24:17 by gcontari          #+#    #+#             */
-/*   Updated: 2022/07/26 14:08:33 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/07/26 14:09:24 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static void	cpy_and_exp(char *dst, const char *src, t_exp exp, t_shell sh)
 
 	while (src && *src)
 	{
-		printf("%d\n", *src);
+		printf("%c\n", *src);
 		if (*src == '$' && *exp.table)
 		{
 			src += ((*exp.vars && **exp.vars != '?') * (ft_strlen(*exp.vars) + 1))
