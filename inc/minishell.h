@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
+/*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:18:18 by gcontari          #+#    #+#             */
-/*   Updated: 2022/07/25 20:45:50 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/07/26 17:49:00 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ typedef struct s_shell
 typedef struct s_expander
 {
 	t_uint	counter;
-	char	**var_names;
+	char	**vars;
 	bool	*table;
 }	t_exp;
 
@@ -172,6 +172,7 @@ t_uint	str_count_char(const char *s, char c);
 t_list	*get_cmd_list(t_list **token_list, t_shell *s_shell);
 t_list	*lexer(t_shell sh, const char *inpt);
 char	*expander(t_shell sh, const char *input);
+char	*f_tilda_expander(t_shell *sh, const char *input);
 t_list	*build_syntax_tree(t_shell *sh);
 
 // signals
