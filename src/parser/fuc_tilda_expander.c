@@ -6,7 +6,7 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 09:24:17 by gcontari          #+#    #+#             */
-/*   Updated: 2022/07/26 17:57:26 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/07/26 18:22:56 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,11 @@ static void	_cpy_home(char *dst, const char *src, t_exp exp, t_shell *sh)
 static void	_create_tilda_exp_table(const char *input, t_exp exp)
 {
 	bool	quote[2];
+	bool	enabled;
 
 	quote[0] = false;
 	quote[1] = false;
+	enabled = true;
 	while (exp.counter != 0)
 	{
 		if (*input == '\'' && !quote[1])
@@ -70,12 +72,12 @@ static void	_create_tilda_exp_table(const char *input, t_exp exp)
 		{
 			if ((!quote[0] || !ft_strchr(input, '\''))
 				|| !quote[1] || !ft_strchr(input, '\"'))
-				*exp.table++ = (bool)(ft_strchr(" /", *(input + 1)));
+				*exp.table++ = (ft_strchr(" /", *(input + 1)) && enabled);
 			else
 				*exp.table++ = false;
 			exp.counter--;
 		}
-		input++;
+		enabled = (*input++ == ' ');
 	}
 	return ;
 }
