@@ -6,7 +6,7 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:18:18 by gcontari          #+#    #+#             */
-/*   Updated: 2022/07/26 17:49:00 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/07/27 09:30:46 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,10 @@
 # define SPACE_SET " \n\t"
 # define EXP_SET "|&<> \n\t\'\""
 # define INVALID_TERM 0 // Don't know what to use
+
+// Error messages
+# define ERRMSG_SYNTAX "Syntax error."
+# define ERRMSG_OPEN_REDIR "Syntax error: unclosed redirection or pipe."
 
 // ALIAS
 typedef unsigned int	t_uint;

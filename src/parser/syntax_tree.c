@@ -6,7 +6,7 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 20:00:15 by gcontari          #+#    #+#             */
-/*   Updated: 2022/07/09 11:25:07 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/07/27 09:44:51 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static void		concat_next(t_list *curr, t_shell *sh);
 static void		remove_empty(t_list *head, t_list *curr, t_shell *sh);
 static t_list	*syntax_error_checker(t_list *curr, t_shell *sh);
+static t_list	*syntax_error(char *err_msg, t_shell *sh);
 
 t_list	*build_syntax_tree(t_shell *sh)
 {
@@ -29,19 +30,18 @@ t_list	*build_syntax_tree(t_shell *sh)
 		token = (t_token *) curr->next->content;
 		if (((t_token *) curr->content)->t < CON_REDIR
 			&& token->t < CON_REDIR && token->t % 2 == 0)
-		{
 			concat_next(curr, sh);
-			continue ;
-		}
-		if (ft_strlen(token->s) == 0)
-		{
+		else if (ft_strlen(token->s) == 0)
 			remove_empty(sh->token_list, curr, sh);
-			continue ;
+		else
+		{
+			if (!syntax_error_checker(curr, sh))
+				return (NULL);
+			curr = curr->next;
 		}
-		if (!syntax_error_checker(curr, sh))
-			return (NULL);
-		curr = curr->next;
 	}
+	if (!syntax_error_checker(curr, sh))
+		return (NULL);
 	return (sh->token_list);
 }
 
@@ -90,12 +90,17 @@ static t_list	*syntax_error_checker(t_list *curr, t_shell *sh)
 	{
 		token_next = (t_token *) curr->next->content;
 		if (token_curr->t >= CON_REDIR && token_next->t >= CON_REDIR)
-		{
-			printf("Syntax error.\n");
-			sh->exit_status = 42; // Which number should use?
-			ft_lstclear(&(sh->token_list), free_token);
-			return (NULL);
-		}
+			return (syntax_error(ERRMSG_SYNTAX, sh));
 	}
+	else if (token_curr->t >= CON_REDIR)
+		return (syntax_error(ERRMSG_OPEN_REDIR, sh));
 	return (curr);
+}
+
+static t_list	*syntax_error(char *err_msg, t_shell *sh)
+{
+	printf("%s\n", err_msg);
+	sh->exit_status = 42; // Which number should use?
+	ft_lstclear(&(sh->token_list), free_token);
+	return (NULL);
 }
