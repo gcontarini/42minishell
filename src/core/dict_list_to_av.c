@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 17:32:13 by nprimo            #+#    #+#             */
-/*   Updated: 2022/06/25 18:30:23 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/07/29 18:29:12 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ static char	*dict_to_str(t_dict *var, t_shell sh)
 	str = xmc(malloc(sizeof(char) * tot_len), NULL, 0, sh);
 	ft_strlcpy(str, var->key, ft_strlen(var->key) + 1);
 	ft_strlcat(str, "=", ft_strlen(str) + 2);
-	ft_strlcat(str, var->value, ft_strlen(str) + ft_strlen(var->value) + 1);
+	if (var->value)
+		ft_strlcat(str, var->value, ft_strlen(str) + ft_strlen(var->value) + 1);
 	return (str);
 }

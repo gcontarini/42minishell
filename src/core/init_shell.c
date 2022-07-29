@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_shell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 15:05:16 by nprimo            #+#    #+#             */
-/*   Updated: 2022/07/22 14:08:20 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/07/29 18:31:39 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static t_list	*envp_to_dict_list(char **envp, t_shell sh);
 static void		unset_oldpwd(t_list **env);
 static void		update_shlvl(t_list *env, t_shell sh);
+static void		add_empty_oldpwd(t_shell sh);
 
 t_shell	init_shell(char **envp)
 {
@@ -24,6 +25,7 @@ t_shell	init_shell(char **envp)
 	sh.env = envp_to_dict_list(envp, sh);
 	update_shlvl(sh.env, sh);
 	unset_oldpwd(&sh.env);
+	add_empty_oldpwd(sh);
 	sh.input = NULL;
 	sh.token_list = NULL;
 	sh.cmd_list = NULL;
@@ -33,6 +35,20 @@ t_shell	init_shell(char **envp)
 	sh.old_term = ms_get_termios(&sh);
 	sh.new_term = ms_config_termios(&sh);
 	return (sh);
+}
+
+static void	add_empty_oldpwd(t_shell sh)
+{
+	t_dict	*var;
+	t_list	*new_el;
+
+	var = xmc(ft_calloc(1, sizeof(t_dict)), NULL, 0, sh);
+	var->key = xmc(malloc(sizeof(char)
+				* (ft_strlen("OLDPWD") + 1)), NULL, 0, sh);
+	ft_strlcpy(var->key, "OLDPWD", ft_strlen("OLDPWD") + 1);
+	var->value = NULL;
+	new_el = xmc(ft_lstnew(var), NULL, 0, sh);
+	ft_lstadd_back(&(sh.env), new_el);
 }
 
 static t_list	*envp_to_dict_list(char **envp, t_shell sh)

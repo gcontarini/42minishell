@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:53:26 by nprimo            #+#    #+#             */
-/*   Updated: 2022/07/08 12:55:29 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/07/29 17:23:20 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	ft_export(t_cmd *cmd, t_shell sh)
 		{
 			if (ft_isdigit(cmd->av[pos][0]))
 				return_status = 1;
-			if (ft_isdigit(cmd->av[pos][0]) == 0)
+			else
 				add_to_env(cmd->av[pos], sh);
 			pos++;
 		}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_func.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 12:19:39 by nprimo            #+#    #+#             */
-/*   Updated: 2022/07/26 17:56:54 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/07/29 18:25:53 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,9 @@ void	free_dict(void *var_void)
 	var = (t_dict *) var_void;
 	if (var)
 	{
-		if (var->key)
+		if (var->key != NULL)
 			free(var->key);
-		if (var->value)
+		if (var->value != NULL)
 			free(var->value);
 		free(var);
 	}
