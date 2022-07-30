@@ -14,6 +14,8 @@
 
 static int	get_fd_in(t_list *cmd_list, t_shell *sh);
 static int	get_fd_out(t_list *cmd_list, t_shell *sh);
+static void	open_empty_pipe(t_list *cmd_list, t_shell *sh);
+
 
 int	open_fd(t_list *cmd_list, t_shell sh)
 {
@@ -44,6 +46,20 @@ static int	get_fd_in(t_list *cmd_list, t_shell *sh)
 	return (ofile_checker(cmd->in.fd, sh));
 }
 
+static void	open_empty_pipe(t_list *cmd_list, t_shell *sh)
+{
+	t_cmd	*next_cmd;
+	int		fd_pipe[2];
+
+	if (cmd_list->next)
+	{
+		next_cmd = (t_cmd *) cmd_list->next->content;
+		error_check(pipe(fd_pipe), *sh);
+		next_cmd->in.fd = fd_pipe[0];
+		close(fd_pipe[1]);
+	}
+}
+
 static int	get_fd_out(t_list *cmd_list, t_shell *sh)
 {
 	int		fd_pipe[2];
@@ -67,5 +83,7 @@ static int	get_fd_out(t_list *cmd_list, t_shell *sh)
 		cmd->out.fd = open(cmd->out.fname, O_WRONLY | O_CREAT | O_TRUNC, 0622);
 	else if (ft_strncmp(">>", cmd->out.red, 3) == 0)
 		cmd->out.fd = open(cmd->out.fname, O_WRONLY | O_APPEND | O_CREAT, 0622);
+	if (cmd->pipe == true && ft_strncmp("|", cmd->out.red, 2) != 0)
+		open_empty_pipe(cmd_list, sh);
 	return (ofile_checker(cmd->out.fd, sh));
 }
