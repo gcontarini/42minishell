@@ -6,7 +6,7 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 09:24:17 by gcontari          #+#    #+#             */
-/*   Updated: 2022/07/26 18:22:56 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/07/30 10:49:24 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,46 +100,3 @@ static t_uint	_tilda_explen(const char *input, t_exp exp, t_shell *sh)
 	}
 	return (size);
 }
-
-// int	main(void) {
-// 	char	*p;
-// 	t_shell	sh;
-
-// 	p = expander(sh, "echo \"Hello\"");
-// 	printf("%s\n", p);
-// 	free(p);
-// 	p = expander(sh, "echo $PWD");
-// 	printf("%s\n", p);
-// 	free(p);
-// 	p = expander(sh, "echo \"$PWD\"");
-// 	printf("%s\n", p);
-// 	free(p);
-// 	p = expander(sh, "echo '$PWD'");
-// 	printf("%s\n", p);
-// 	free(p);
-// 	p = expander(sh, "cd $PWD | echo $SHELL");
-// 	printf("%s\n", p);
-// 	free(p);
-// 	p = expander(sh, "cd $PWD | echo $SHELL > zip $HOME");
-// 	printf("%s\n", p);
-// 	free(p);
-// 	p = expander(sh, "cd $PWD| echo $SHELL > zip $HOME");
-// 	printf("%s\n", p);
-// 	free(p);
-// 	p = expander(sh, "cd \"$PWD lets go\" | echo $SHELL > zip $HOME");
-// 	printf("%s\n", p);
-// 	free(p);
-// 	p = expander(sh, "cd '$PWD lets go' | echo $SHELL > zip $HOME");
-// 	printf("%s\n", p);
-// 	free(p);
-// 	p = expander(sh, "cd \"$PWD let's go\" | echo $SHELL > zip $HOME");
-// 	printf("%s\n", p);
-// 	free(p);
-// 	p = expander(sh, "cd \"'$PWD' let's go\" | echo $SHELL > zip $HOME");
-// 	printf("%s\n", p);
-// 	free(p);
-// 	p = expander(sh, "cd '\"$PWD\" lets go' | echo $SHELL > zip $HOME");
-// 	printf("%s\n", p);
-// 	free(p);
-// 	return (0);
-// }
