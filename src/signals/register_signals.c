@@ -6,7 +6,7 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 17:29:09 by gcontari          #+#    #+#             */
-/*   Updated: 2022/07/25 18:15:25 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/07/30 10:45:28 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,11 @@ void	set_here_doc_signal(t_shell *sh)
 
 static void	sig_handler(int sig)
 {
-	if (sig == SIGQUIT)
-		return ;
-	write(STDERR_FILENO, "\n", 1);
-	rl_replace_line("", 0);
+	if (sig == SIGINT)
+	{
+		write(STDERR_FILENO, "\n", 1);
+		rl_replace_line("", 0);
+	}
 	rl_on_new_line();
 	rl_redisplay();
 	return ;
