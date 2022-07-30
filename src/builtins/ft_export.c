@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:53:26 by nprimo            #+#    #+#             */
-/*   Updated: 2022/07/29 17:23:20 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/07/30 16:32:55 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ static int	add_to_env(char *key_value, t_shell sh)
 			var->value = new_var->value;
 			free(tmp);
 		}
+		free(new_var->key);
+		free(new_var);
 	}
 	else
 	{
