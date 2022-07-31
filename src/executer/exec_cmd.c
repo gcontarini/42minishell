@@ -6,19 +6,16 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 12:24:52 by nprimo            #+#    #+#             */
-/*   Updated: 2022/07/31 16:19:37 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/07/31 18:49:59 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 static int	redirect(int fd_in, int fd_out);
-static int	is_builitin(char *str);
 static int	exec_builtin(t_cmd *cmd, t_shell *sh);
 static int	exec_bin(t_cmd *cmd, t_shell *sh);
-//
-char		*find_bin_path(const char *bin, t_list *env, t_shell *sh);
-void		close_cmd_fd(t_cmd *cmd);
+static void	child_exec_bin(char *bpath, char **envp, t_cmd *cmd, t_shell *sh);
 
 int	exec_cmd(t_cmd *cmd, t_shell *sh)
 {
@@ -50,23 +47,6 @@ static int	redirect(int fd_in, int fd_out)
 	return (0);
 }
 
-static int	is_builitin(char *str)
-{
-	static char	*builtin_list[] = {
-		"echo", "env", "export", "exit", "pwd", "unset", "cd", NULL};
-	int			pos;
-
-	pos = 0;
-	while (builtin_list[pos])
-	{
-		if (ft_strncmp(builtin_list[pos], str,
-				ft_strlen(builtin_list[pos]) + 1) == 0)
-			return (pos);
-		pos++;
-	}
-	return (-1);
-}
-
 static int	exec_builtin(t_cmd *cmd, t_shell *sh)
 {
 	static t_builtins	*builtin_list[] = {
@@ -88,6 +68,7 @@ static int	exec_bin(t_cmd *cmd, t_shell *sh)
 	char	*bin_path;
 	char	**envp;
 
+	envp = NULL;
 	if (access(cmd->av[0], F_OK & X_OK) == 0)
 		bin_path = xmc(ft_strndup(cmd->av[0],
 					ft_strlen(cmd->av[0])), NULL, 0, sh);
@@ -97,17 +78,21 @@ static int	exec_bin(t_cmd *cmd, t_shell *sh)
 	if (pid == -1)
 		exit(1); // ?
 	if (pid == 0)
-	{
-		set_signals(SIG_DFL, sh);
-		error_check(redirect(cmd->in.fd, cmd->out.fd), sh);
-		envp = dict_list_to_av(sh->env, sh);
-		if (execve(bin_path, cmd->av, envp) == -1)
-			sh->exit_status = 1; // find value that makes return = 127
-		free_split(envp);
-		exit(sh->exit_status);
-	}
+		child_exec_bin(bin_path, envp, cmd, sh);
 	close_cmd_fd(cmd);
 	if (bin_path)
 		free(bin_path);
 	return (0);
+}
+
+static void	child_exec_bin(char *bpath, char **envp, t_cmd *cmd, t_shell *sh)
+{
+	set_signals(SIG_DFL, sh);
+	error_check(redirect(cmd->in.fd, cmd->out.fd), sh);
+	envp = dict_list_to_av(sh->env, sh);
+	if (execve(bpath, cmd->av, envp) == -1)
+		sh->exit_status = 1; // find value that makes return = 127
+	free_split(envp);
+	exit(sh->exit_status);
+	return ;
 }

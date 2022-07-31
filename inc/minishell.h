@@ -6,7 +6,7 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:18:18 by gcontari          #+#    #+#             */
-/*   Updated: 2022/07/31 16:19:15 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/07/31 18:43:27 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,6 +170,10 @@ int		exec_cmd(t_cmd *cmd, t_shell *sh);
 int		exec_cmd_list(t_shell *sh);
 int		open_fd(t_list *cmd_list, t_shell *sh);
 int		here_doc(char *eof, t_shell *sh);
+// exec utils
+int		is_builitin(char *str);
+char	*find_bin_path(const char *bin, t_list *env, t_shell *sh);
+void	close_cmd_fd(t_cmd *cmd);
 
 // parser
 t_list	*parser(t_shell *sh, const char *inpt);
