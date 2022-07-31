@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
+/*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 16:06:59 by nprimo            #+#    #+#             */
-/*   Updated: 2022/06/20 18:46:51 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/07/31 16:04:42 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_env(t_cmd *cmd, t_shell sh)
+int	ft_env(t_cmd *cmd, t_shell *sh)
 {
 	t_dict	*var;
 	t_list	*env;
 
-	env = sh.env;
+	env = sh->env;
 	while (env)
 	{
 		var = (t_dict *) env->content;

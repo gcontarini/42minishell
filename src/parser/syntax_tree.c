@@ -6,7 +6,7 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 20:00:15 by gcontari          #+#    #+#             */
-/*   Updated: 2022/07/30 10:48:37 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/07/31 16:12:52 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static void	concat_next(t_list *curr, t_shell *sh)
 	token_next = (t_token *) curr->next->content;
 	tmp = token_curr->s;
 	token_curr->s = xmc(
-			ft_strjoin(token_curr->s, token_next->s), NULL, 0, *sh);
+			ft_strjoin(token_curr->s, token_next->s), NULL, 0, sh);
 	list_tmp = curr->next;
 	curr->next = curr->next->next;
 	free(tmp);

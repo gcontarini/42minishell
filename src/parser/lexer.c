@@ -6,7 +6,7 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 17:13:27 by gcontari          #+#    #+#             */
-/*   Updated: 2022/07/30 11:01:27 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/07/31 16:21:06 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static const char	*normal_handler(const char *inpt, t_uint cat, t_shell *sh);
 static t_list		*create_token(const char *str,
 						t_uint n, t_ttype token_type, t_shell *sh);
 
-t_list	*lexer(t_shell sh, const char *inpt)
+t_list	*lexer(t_shell *sh, const char *inpt)
 {
 	t_uint	cat_token;
 
@@ -28,13 +28,13 @@ t_list	*lexer(t_shell sh, const char *inpt)
 		while (*inpt && ft_strchr(SPACE_SET, *inpt))
 			inpt++;
 		if (*inpt && ft_strchr("\"\'", *inpt))
-			inpt = quote_handler(inpt, cat_token, &sh);
+			inpt = quote_handler(inpt, cat_token, sh);
 		else if (*inpt && ft_strchr(METACHAR_SET, *inpt))
-			inpt = dir_handler(inpt, cat_token, &sh);
+			inpt = dir_handler(inpt, cat_token, sh);
 		else if (*inpt)
-			inpt = normal_handler(inpt, cat_token, &sh);
+			inpt = normal_handler(inpt, cat_token, sh);
 	}
-	return (sh.token_list);
+	return (sh->token_list);
 }
 
 const char	*quote_handler(const char *inpt, t_uint cat, t_shell *sh)
@@ -79,18 +79,18 @@ static t_list	*create_token(const char *str, t_uint n, t_ttype token_type,
 	t_list		*node;
 	t_token		*token;
 
-	token_str = xmc(ft_strndup(str, n), NULL, 0, *sh);
-	token = xmc(malloc(sizeof(t_token)), token_str, T_MEM, *sh);
+	token_str = xmc(ft_strndup(str, n), NULL, 0, sh);
+	token = xmc(malloc(sizeof(t_token)), token_str, T_MEM, sh);
 	token->s = token_str;
 	token->t = token_type;
-	node = xmc(ft_lstnew(token), token, T_TOKEN, *sh);
+	node = xmc(ft_lstnew(token), token, T_TOKEN, sh);
 	ft_lstadd_back(&(sh->token_list), node);
 	return (sh->token_list);
 }
 
 // int main(int argc, char **argv, char **envp)
 // {
-// 	t_shell sh;
+// 	t_shell *sh;
 // 	char	*test_cases[] = {
 // 		"echo adsad > 1412341",
 // 		"\"echo adsad\" > 1412341",

@@ -3,29 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   init_shell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
+/*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 15:05:16 by nprimo            #+#    #+#             */
-/*   Updated: 2022/07/29 18:31:39 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/07/31 16:07:43 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static t_list	*envp_to_dict_list(char **envp, t_shell sh);
+static t_list	*envp_to_dict_list(char **envp, t_shell *sh);
 static void		unset_oldpwd(t_list **env);
-static void		update_shlvl(t_list *env, t_shell sh);
-static void		add_empty_oldpwd(t_shell sh);
+static void		update_shlvl(t_list *env, t_shell *sh);
+static void		add_empty_oldpwd(t_shell *sh);
 
 t_shell	init_shell(char **envp)
 {
 	t_shell	sh;
 
 	sh.input = 0;
-	sh.env = envp_to_dict_list(envp, sh);
-	update_shlvl(sh.env, sh);
+	sh.env = envp_to_dict_list(envp, &sh);
+	update_shlvl(sh.env, &sh);
 	unset_oldpwd(&sh.env);
-	add_empty_oldpwd(sh);
+	add_empty_oldpwd(&sh);
 	sh.input = NULL;
 	sh.token_list = NULL;
 	sh.cmd_list = NULL;
@@ -37,7 +37,7 @@ t_shell	init_shell(char **envp)
 	return (sh);
 }
 
-static void	add_empty_oldpwd(t_shell sh)
+static void	add_empty_oldpwd(t_shell *sh)
 {
 	t_dict	*var;
 	t_list	*new_el;
@@ -48,10 +48,10 @@ static void	add_empty_oldpwd(t_shell sh)
 	ft_strlcpy(var->key, "OLDPWD", ft_strlen("OLDPWD") + 1);
 	var->value = NULL;
 	new_el = xmc(ft_lstnew(var), NULL, 0, sh);
-	ft_lstadd_back(&(sh.env), new_el);
+	ft_lstadd_back(&(sh->env), new_el);
 }
 
-static t_list	*envp_to_dict_list(char **envp, t_shell sh)
+static t_list	*envp_to_dict_list(char **envp, t_shell *sh)
 {
 	int		pos;
 	t_list	*env;
@@ -68,7 +68,7 @@ static t_list	*envp_to_dict_list(char **envp, t_shell sh)
 	return (env);
 }
 
-static void	update_shlvl(t_list *env, t_shell sh)
+static void	update_shlvl(t_list *env, t_shell *sh)
 {
 	t_dict	*var;
 	int		sh_lvl;

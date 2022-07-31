@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   str_to_dict.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
+/*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 18:17:55 by nprimo            #+#    #+#             */
-/*   Updated: 2022/06/25 18:18:01 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/07/31 16:09:25 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_dict	*str_to_dict(char *str, t_shell sh)
+t_dict	*str_to_dict(char *str, t_shell *sh)
 {
 	t_dict	*var;
 	size_t	len_key;

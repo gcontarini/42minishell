@@ -6,13 +6,13 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 15:31:54 by nprimo            #+#    #+#             */
-/*   Updated: 2022/07/25 18:18:22 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/07/31 16:06:17 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	*xmc(void *ptr, void *var, t_struct_type type, t_shell sh)
+void	*xmc(void *ptr, void *var, t_struct_type type, t_shell *sh)
 {
 	static t_free_func	free_func_list[] = {
 		free_split, free_cmd, free_dict, free_fd, free_exp, free_token, free
@@ -29,7 +29,7 @@ void	*xmc(void *ptr, void *var, t_struct_type type, t_shell sh)
 	return (ptr);
 }
 
-void	error_check(int ret_value, t_shell sh)
+void	error_check(int ret_value, t_shell *sh)
 {
 	if (ret_value < 0)
 	{

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
+/*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 12:31:30 by nprimo            #+#    #+#             */
-/*   Updated: 2022/06/25 18:15:09 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/07/31 16:02:01 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_pwd(t_cmd *cmd, t_shell sh)
+int	ft_pwd(t_cmd *cmd, t_shell *sh)
 {
 	char	*cwd;
 

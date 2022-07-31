@@ -3,27 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
+/*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:53:26 by nprimo            #+#    #+#             */
-/*   Updated: 2022/07/30 16:32:55 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/07/31 16:05:29 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 static void	display_env(t_list *env, int fd);
-static int	add_to_env(char *key_value, t_shell sh);
+static int	add_to_env(char *key_value, t_shell *sh);
 int			get_ac(char **av);
 
-int	ft_export(t_cmd *cmd, t_shell sh)
+int	ft_export(t_cmd *cmd, t_shell *sh)
 {
 	int	pos;
 	int	return_status;
 
 	return_status = 0;
 	if (get_ac(cmd->av) == 1)
-		display_env(sh.env, cmd->out.fd);
+		display_env(sh->env, cmd->out.fd);
 	else
 	{
 		pos = 1;
@@ -59,7 +59,7 @@ static void	display_env(t_list *env, int fd)
 	}
 }
 
-static int	add_to_env(char *key_value, t_shell sh)
+static int	add_to_env(char *key_value, t_shell *sh)
 {
 	t_dict	*var;
 	t_dict	*new_var;
@@ -67,9 +67,9 @@ static int	add_to_env(char *key_value, t_shell sh)
 	char	*tmp;
 
 	new_var = str_to_dict(key_value, sh);
-	if (get_dict_var(new_var->key, sh.env))
+	if (get_dict_var(new_var->key, sh->env))
 	{
-		var = get_dict_var(new_var->key, sh.env);
+		var = get_dict_var(new_var->key, sh->env);
 		if (new_var->value)
 		{
 			tmp = var->value;
@@ -82,7 +82,7 @@ static int	add_to_env(char *key_value, t_shell sh)
 	else
 	{
 		new_el = xmc(ft_lstnew(new_var), NULL, 0, sh);
-		ft_lstadd_back(&sh.env, new_el);
+		ft_lstadd_back(&sh->env, new_el);
 	}
 	return (0);
 }

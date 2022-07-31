@@ -6,7 +6,7 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 17:29:09 by gcontari          #+#    #+#             */
-/*   Updated: 2022/07/30 10:45:28 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/07/31 16:13:31 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	set_signals(void (*opt)(int), t_shell *sh)
 	if (signal(SIGINT, opt) == SIG_ERR
 		|| signal(SIGQUIT, opt) == SIG_ERR)
 	{
-		free_shell(*sh);
+		free_shell(sh);
 		exit(0); // Which error?
 	}
 	return ;
@@ -34,7 +34,7 @@ void	set_here_doc_signal(t_shell *sh)
 	if (signal(SIGINT, sig_exit_here_doc) == SIG_ERR
 		|| signal(SIGQUIT, SIG_IGN) == SIG_ERR)
 	{
-		free_shell(*sh);
+		free_shell(sh);
 		exit(0); // ERRO no?
 	}
 	return ;

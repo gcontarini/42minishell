@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_func.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
+/*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 12:19:39 by nprimo            #+#    #+#             */
-/*   Updated: 2022/07/29 18:25:53 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/07/31 16:06:48 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,16 +69,16 @@ void	free_dict(void *var_void)
 	}
 }
 
-void	free_shell(t_shell sh)
+void	free_shell(t_shell *sh)
 {
-	if (sh.env)
-		ft_lstclear(&sh.env, free_dict);
-	if (sh.input)
-		free(sh.input);
-	if (sh.token_list)
-		ft_lstclear(&sh.token_list, free_token);
-	if (sh.cmd_list)
-		ft_lstclear(&sh.cmd_list, free_cmd);
+	if (sh->env)
+		ft_lstclear(&sh->env, free_dict);
+	if (sh->input)
+		free(sh->input);
+	if (sh->token_list)
+		ft_lstclear(&sh->token_list, free_token);
+	if (sh->cmd_list)
+		ft_lstclear(&sh->cmd_list, free_cmd);
 }
 
 void	free_exp(void *exp_void)

@@ -16,16 +16,15 @@ static int	get_fd_in(t_list *cmd_list, t_shell *sh);
 static int	get_fd_out(t_list *cmd_list, t_shell *sh);
 static void	open_empty_pipe(t_list *cmd_list, t_shell *sh);
 
-
-int	open_fd(t_list *cmd_list, t_shell sh)
+int	open_fd(t_list *cmd_list, t_shell *sh)
 {
 	t_list	*curr_cmd;
 
 	curr_cmd = cmd_list;
 	while (curr_cmd)
 	{
-		if (get_fd_in(curr_cmd, &sh)
-			|| get_fd_out(curr_cmd, &sh))
+		if (get_fd_in(curr_cmd, sh)
+			|| get_fd_out(curr_cmd, sh))
 			return (1); // errono?
 		curr_cmd = curr_cmd->next;
 	}
@@ -54,7 +53,7 @@ static void	open_empty_pipe(t_list *cmd_list, t_shell *sh)
 	if (cmd_list->next)
 	{
 		next_cmd = (t_cmd *) cmd_list->next->content;
-		error_check(pipe(fd_pipe), *sh);
+		error_check(pipe(fd_pipe), sh);
 		next_cmd->in.fd = fd_pipe[0];
 		close(fd_pipe[1]);
 	}
@@ -74,7 +73,7 @@ static int	get_fd_out(t_list *cmd_list, t_shell *sh)
 		if (cmd_list->next)
 		{
 			next_cmd = (t_cmd *) cmd_list->next->content;
-			error_check(pipe(fd_pipe), *sh); // Change this?
+			error_check(pipe(fd_pipe), sh); // Change this?
 			next_cmd->in.fd = fd_pipe[0];
 			cmd->out.fd = fd_pipe[1];
 		}

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   llist_to_av.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
+/*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 17:02:05 by nprimo            #+#    #+#             */
-/*   Updated: 2022/07/01 20:34:03 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/07/31 16:02:01 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	**llist_to_av(t_list *llist, t_shell sh)
+char	**llist_to_av(t_list *llist, t_shell *sh)
 {
 	char	**av;
 	t_list	*head;

@@ -6,18 +6,18 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 09:24:17 by gcontari          #+#    #+#             */
-/*   Updated: 2022/07/30 11:03:19 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/07/31 16:11:29 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char		**split_env_names(const char *input, t_exp exp, t_shell sh);
-static void		cpy_and_exp(char *dst, const char *src, t_exp exp, t_shell sh);
+static char		**split_env_names(const char *input, t_exp exp, t_shell *sh);
+static void		cpy_and_exp(char *dst, const char *src, t_exp exp, t_shell *sh);
 static void		create_exp_table(const char *input, t_exp exp);
-static t_uint	expansionlen(const char *input, t_exp exp, t_shell sh);
+static t_uint	expansionlen(const char *input, t_exp exp, t_shell *sh);
 
-char	*expander(t_shell sh, const char *input)
+char	*expander(t_shell *sh, const char *input)
 {
 	t_exp	exp;
 	char	*output;
@@ -34,7 +34,7 @@ char	*expander(t_shell sh, const char *input)
 	return (output);
 }
 
-static char	**split_env_names(const char *input, t_exp exp, t_shell sh)
+static char	**split_env_names(const char *input, t_exp exp, t_shell *sh)
 {
 	char	**tmp;
 	char	*ptr;
@@ -56,7 +56,7 @@ static char	**split_env_names(const char *input, t_exp exp, t_shell sh)
 	return (exp.vars);
 }
 
-static void	cpy_and_exp(char *dst, const char *src, t_exp exp, t_shell sh)
+static void	cpy_and_exp(char *dst, const char *src, t_exp exp, t_shell *sh)
 {
 	char	*p;
 
@@ -67,13 +67,13 @@ static void	cpy_and_exp(char *dst, const char *src, t_exp exp, t_shell sh)
 			src += (*exp.vars && **exp.vars != '?') * ft_strlen(*exp.vars)
 				+ (*exp.vars && **exp.vars == '?') + 1;
 			if (*exp.vars && **exp.vars == '?')
-				p = xmc(ft_itoa(sh.exit_status), &exp, T_EXP, sh);
+				p = xmc(ft_itoa(sh->exit_status), &exp, T_EXP, sh);
 			else
-				p = ft_getenv(*exp.vars, sh.env);
+				p = ft_getenv(*exp.vars, sh->env);
 			while (p && *p)
 				*dst++ = *p++;
 			if (*exp.vars && **exp.vars == '?')
-				free(p - ft_intlen(sh.exit_status));
+				free(p - ft_intlen(sh->exit_status));
 			exp.table++;
 			exp.vars++;
 			continue ;
@@ -114,7 +114,7 @@ static void	create_exp_table(const char *input, t_exp exp)
 	return ;
 }
 
-static t_uint	expansionlen(const char *input, t_exp exp, t_shell sh)
+static t_uint	expansionlen(const char *input, t_exp exp, t_shell *sh)
 {
 	t_uint	size;
 	bool	*exp_tab;
@@ -131,9 +131,9 @@ static t_uint	expansionlen(const char *input, t_exp exp, t_shell sh)
 			continue ;
 		}
 		if (*vars && **vars == '?')
-			size += ft_intlen(sh.exit_status);
+			size += ft_intlen(sh->exit_status);
 		else
-			size += ft_strlen(ft_getenv(*vars, sh.env));
+			size += ft_strlen(ft_getenv(*vars, sh->env));
 		input += (*vars && **vars != '?') * ft_strlen(*vars)
 			+ (*vars && **vars == '?');
 		vars++;

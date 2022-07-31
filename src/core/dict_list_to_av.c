@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   dict_list_to_av.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
+/*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 17:32:13 by nprimo            #+#    #+#             */
-/*   Updated: 2022/07/29 18:29:12 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/07/31 16:06:08 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*dict_to_str(t_dict *var, t_shell sh);
+static char	*dict_to_str(t_dict *var, t_shell *sh);
 
-char	**dict_list_to_av(t_list *dict_list, t_shell sh)
+char	**dict_list_to_av(t_list *dict_list, t_shell *sh)
 {
 	char	**array_string;
 	int		lst_size;
@@ -33,7 +33,7 @@ char	**dict_list_to_av(t_list *dict_list, t_shell sh)
 	return (array_string);
 }
 
-static char	*dict_to_str(t_dict *var, t_shell sh)
+static char	*dict_to_str(t_dict *var, t_shell *sh)
 {
 	char	*str;
 	size_t	tot_len;

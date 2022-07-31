@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   find_bin_path.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
+/*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 12:21:53 by nprimo            #+#    #+#             */
-/*   Updated: 2022/07/08 11:56:57 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/07/31 16:02:01 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	**find_ls_path_dir(t_list *env, t_shell sh);
+static char	**find_ls_path_dir(t_list *env, t_shell *sh);
 
-char	*find_bin_path(const char *bin, t_list *env, t_shell sh)
+char	*find_bin_path(const char *bin, t_list *env, t_shell *sh)
 {
 	char	**ls_path_dir;
 	char	*bin_path;
@@ -42,7 +42,7 @@ char	*find_bin_path(const char *bin, t_list *env, t_shell sh)
 	return (bin_path);
 }
 
-static char	**find_ls_path_dir(t_list *env, t_shell sh)
+static char	**find_ls_path_dir(t_list *env, t_shell *sh)
 {
 	char	**ls_path_dir;
 	char	*path_var;

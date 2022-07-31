@@ -6,7 +6,7 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 09:24:17 by gcontari          #+#    #+#             */
-/*   Updated: 2022/07/30 10:49:24 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/07/31 16:11:41 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ char	*f_tilda_expander(t_shell *sh, const char *input)
 	if (exp.counter == 0)
 		return (NULL);
 	exp.vars = NULL;
-	exp.table = xmc(malloc(exp.counter), NULL, T_CMD, *sh);
+	exp.table = xmc(malloc(exp.counter), NULL, T_CMD, sh);
 	_create_tilda_exp_table(input, exp);
-	output = xmc(malloc(_tilda_explen(input, exp, sh) + 1), &exp, T_EXP, *sh);
+	output = xmc(malloc(_tilda_explen(input, exp, sh) + 1), &exp, T_EXP, sh);
 	_cpy_home(output, input, exp, sh);
 	free_exp(&exp);
 	return (output);

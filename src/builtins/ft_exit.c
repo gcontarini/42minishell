@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
+/*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 19:11:28 by nprimo            #+#    #+#             */
-/*   Updated: 2022/07/08 13:22:13 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/07/31 16:05:02 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 int			get_ac(char **av);
 static int	is_all_digit(char *str);
 
-int	ft_exit(t_cmd *cmd, t_shell sh)
+int	ft_exit(t_cmd *cmd, t_shell *sh)
 {
 	cmd = (void *) cmd;
 	if (get_ac(cmd->av) >= 2)
@@ -29,9 +29,9 @@ int	ft_exit(t_cmd *cmd, t_shell sh)
 				ft_putstr_fd(ERORR_AC, 2);
 				return (1);
 			}
-			sh.exit_status = ft_atoi(cmd->av[1]);
+			sh->exit_status = ft_atoi(cmd->av[1]);
 			free_shell(sh);
-			exit(sh.exit_status);
+			exit(sh->exit_status);
 		}
 		else
 		{
@@ -43,7 +43,7 @@ int	ft_exit(t_cmd *cmd, t_shell sh)
 		}
 	}
 	free_shell(sh);
-	exit(sh.exit_status);
+	exit(sh->exit_status);
 }
 
 static int	is_all_digit(char *str)

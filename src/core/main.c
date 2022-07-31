@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
+/*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:14:41 by gcontarini        #+#    #+#             */
-/*   Updated: 2022/06/20 16:25:46 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/07/31 16:08:18 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ int	main(int ac, char **av, char **envp)
 
 	sh = init_shell(envp);
 	if (ac > 1)
-		shell_from_file(ac, av, sh);
+		shell_from_file(ac, av, &sh);
 	else
-		shell_interactive(sh);
+		shell_interactive(&sh);
 	return (0);
 }

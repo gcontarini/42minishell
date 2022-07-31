@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
+/*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:18:18 by gcontari          #+#    #+#             */
-/*   Updated: 2022/07/30 12:17:09 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/07/31 16:19:15 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,17 +118,17 @@ typedef struct s_token
 }	t_token;
 
 typedef void			(*t_free_func) (void *);
-typedef int				(t_builtins) (t_cmd *, t_shell);
+typedef int				(t_builtins) (t_cmd *, t_shell *);
 
 // FUNCTIONS
 // builtins
-int		ft_echo(t_cmd *cmd, t_shell sh);
-int		ft_env(t_cmd *cmd, t_shell sh);
-int		ft_export(t_cmd *cmd, t_shell sh);
-int		ft_exit(t_cmd *cmd, t_shell sh);
-int		ft_pwd(t_cmd *cmd, t_shell sh);
-int		ft_unset(t_cmd *cmd, t_shell sh);
-int		ft_cd(t_cmd *cmd, t_shell sh);
+int		ft_echo(t_cmd *cmd, t_shell *sh);
+int		ft_env(t_cmd *cmd, t_shell *sh);
+int		ft_export(t_cmd *cmd, t_shell *sh);
+int		ft_exit(t_cmd *cmd, t_shell *sh);
+int		ft_pwd(t_cmd *cmd, t_shell *sh);
+int		ft_unset(t_cmd *cmd, t_shell *sh);
+int		ft_cd(t_cmd *cmd, t_shell *sh);
 
 // core
 void	free_split(void *av_void);
@@ -139,19 +139,19 @@ void	free_exp(void *exp_void);
 void	free_token(void *token_void);
 void	free_t(void *token_void);
 
-void	free_shell(t_shell sh);
+void	free_shell(t_shell *sh);
 // shell
 t_shell	init_shell(char **envp);
-int		shell_interactive(t_shell sh);
-int		shell_from_file(int ac, char **av, t_shell sh);
+int		shell_interactive(t_shell *sh);
+int		shell_from_file(int ac, char **av, t_shell *sh);
 
 //
 void	print_cmd_list(t_list *cmd_list);
 void	print_llist(t_list *llist);
 //
-char	**llist_to_av(t_list *llist, t_shell sh);
-char	**dict_list_to_av(t_list *dict_list, t_shell sh);
-t_dict	*str_to_dict(char *str, t_shell sh);
+char	**llist_to_av(t_list *llist, t_shell *sh);
+char	**dict_list_to_av(t_list *dict_list, t_shell *sh);
+t_dict	*str_to_dict(char *str, t_shell *sh);
 
 //
 int		is_in_set(char *str, char **str_set);
@@ -160,23 +160,23 @@ char	*ft_getenv(const char *name, t_list *env);
 t_dict	*get_dict_var(const char *key, t_list *dict);
 
 // error handling
-void	*xmc(void *ptr, void *var, t_struct_type type, t_shell sh);
+void	*xmc(void *ptr, void *var, t_struct_type type, t_shell *sh);
 void	*error_check_pointer(void *pointer);
-void	error_check(int ret_value, t_shell sh);
+void	error_check(int ret_value, t_shell *sh);
 int		ofile_checker(int fd, t_shell *sh);
 
 // executer
 int		exec_cmd(t_cmd *cmd, t_shell *sh);
 int		exec_cmd_list(t_shell *sh);
-int		open_fd(t_list *cmd_list, t_shell sh);
+int		open_fd(t_list *cmd_list, t_shell *sh);
 int		here_doc(char *eof, t_shell *sh);
 
 // parser
 t_list	*parser(t_shell *sh, const char *inpt);
 t_uint	str_count_char(const char *s, char c);
 t_list	*get_cmd_list(t_list **token_list, t_shell *s_shell);
-t_list	*lexer(t_shell sh, const char *inpt);
-char	*expander(t_shell sh, const char *input);
+t_list	*lexer(t_shell *sh, const char *inpt);
+char	*expander(t_shell *sh, const char *input);
 char	*f_tilda_expander(t_shell *sh, const char *input);
 t_list	*build_syntax_tree(t_shell *sh);
 

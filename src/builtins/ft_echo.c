@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
+/*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 12:21:43 by nprimo            #+#    #+#             */
-/*   Updated: 2022/06/24 21:15:07 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/07/31 16:04:34 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_echo(t_cmd *cmd, t_shell sh)
+int	ft_echo(t_cmd *cmd, t_shell *sh)
 {
 	int		n_flag;
 	int		pos;

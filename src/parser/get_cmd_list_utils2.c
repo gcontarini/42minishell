@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_cmd_list_utils2.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
+/*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 15:56:01 by nprimo            #+#    #+#             */
-/*   Updated: 2022/07/29 17:11:59 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/07/31 16:02:01 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	is_redirection(const char *str)
 	return (0);
 }
 
-char	**token_list_to_av(t_list **tlist, t_shell sh)
+char	**token_list_to_av(t_list **tlist, t_shell *sh)
 {
 	t_list	*curr_t;
 	t_list	*tmp;
