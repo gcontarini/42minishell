@@ -6,7 +6,7 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 17:13:27 by gcontari          #+#    #+#             */
-/*   Updated: 2022/07/31 16:21:06 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/07/31 18:19:09 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ const char	*quote_handler(const char *inpt, t_uint cat, t_shell *sh)
 
 	p = ft_strchr(inpt + 1, *inpt);
 	if (!p)
-		return (normal_handler(inpt + 1, cat, sh));
+		return (normal_handler(inpt, cat, sh));
 	sh->token_list = create_token(inpt + 1, p - inpt - 1, CON_QUOTE + cat, sh);
 	return (p + 1);
 }
@@ -63,9 +63,7 @@ const char	*normal_handler(const char *inpt, t_uint cat, t_shell *sh)
 {
 	char		*p;
 
-	p = (char *) inpt;
-	if (ft_strchr("\"\'", *p))
-		p++;
+	p = (char *) inpt + (1 * (*inpt == '\"' || *inpt == '\''));
 	while (*p && !ft_strchr(EXP_SET, *p))
 		p++;
 	sh->token_list = create_token(inpt, p - inpt, CON_TOKEN + cat, sh);
