@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 21:45:53 by nprimo            #+#    #+#             */
-/*   Updated: 2022/07/31 16:03:53 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/08/01 20:03:44 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ int	ft_cd(t_cmd *cmd, t_shell *sh)
 	cwd = NULL;
 	if (get_ac(cmd->av) == 1 && chdir(sh->homepath) != -1)
 		;
-	else if (chdir(cmd->av[1]) == -1 || get_ac(cmd->av) > 2)
+	else if (chdir(cmd->av[1]) == -1 || get_ac(cmd->av) > 2
+		|| get_ac(cmd->av) > 2)
 		return (1);
 	oldpwd = ft_getenv("PWD", sh->env);
 	var = get_dict_var("OLDPWD", sh->env);
