@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 12:24:52 by nprimo            #+#    #+#             */
-/*   Updated: 2022/08/01 19:57:09 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/08/01 20:32:20 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,19 @@ static int	exec_builtin(t_cmd *cmd, t_shell *sh)
 	};
 	int					pos;
 	int					return_status;
+	pid_t				pid;
 
 	return_status = 0;
-	pos = is_builitin(cmd->av[0]);
-	return_status = builtin_list[pos](cmd, sh);
+	pid = fork();
+	if (pid == -1)
+		exit(1);
+	if (pid == 0)
+	{
+		pos = is_builitin(cmd->av[0]);
+		return_status = builtin_list[pos](cmd, sh);
+		close_cmd_fd(cmd);
+		exit(return_status);
+	}
 	close_cmd_fd(cmd);
 	return (return_status);
 }
@@ -76,7 +85,7 @@ static int	exec_bin(t_cmd *cmd, t_shell *sh)
 		bin_path = find_bin_path(cmd->av[0], sh->env, sh);
 	pid = fork();
 	if (pid == -1)
-		exit(1); // ?
+		exit(1);
 	if (pid == 0)
 		child_exec_bin(bin_path, envp, cmd, sh);
 	close_cmd_fd(cmd);
@@ -91,7 +100,7 @@ static void	child_exec_bin(char *bpath, char **envp, t_cmd *cmd, t_shell *sh)
 	error_check(redirect(cmd->in.fd, cmd->out.fd), sh);
 	envp = dict_list_to_av(sh->env, sh);
 	if (execve(bpath, cmd->av, envp) == -1)
-		sh->exit_status = 127; // find value that makes return = 127
+		sh->exit_status = 127;
 	free_split(envp);
 	exit(sh->exit_status);
 	return ;
