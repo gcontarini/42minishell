@@ -6,7 +6,7 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 20:00:15 by gcontari          #+#    #+#             */
-/*   Updated: 2022/07/31 16:12:52 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/08/01 20:09:38 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,10 +89,12 @@ static t_list	*syntax_error_checker(t_list *curr, t_shell *sh)
 	if (curr->next)
 	{
 		token_next = (t_token *) curr->next->content;
-		if (token_curr->t >= CON_REDIR && token_next->t >= CON_REDIR)
+		if ((token_curr->t >= CON_REDIR && token_next->t >= CON_PIPE)
+			|| ((token_curr->t == CON_PIPE || token_curr->t == I_PIPE)
+				&& (token_next->t == CON_PIPE || token_next->t == I_PIPE)))
 			return (syntax_error(ERRMSG_SYNTAX, sh));
 	}
-	else if (token_curr->t >= CON_REDIR)
+	else if (token_curr->t >= CON_PIPE)
 		return (syntax_error(ERRMSG_OPEN_REDIR, sh));
 	return (curr);
 }

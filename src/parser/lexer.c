@@ -6,7 +6,7 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 17:13:27 by gcontari          #+#    #+#             */
-/*   Updated: 2022/07/31 18:19:09 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/08/01 20:01:07 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,10 @@ const char	*dir_handler(const char *inpt, t_uint cat, t_shell *sh)
 	step = 1;
 	if (*(inpt + 1) == *inpt)
 		step++;
-	sh->token_list = create_token(inpt, step, CON_REDIR + cat, sh);
+	if (*inpt == '|')
+		sh->token_list = create_token(inpt, step, CON_PIPE + cat, sh);
+	else
+		sh->token_list = create_token(inpt, step, CON_REDIR + cat, sh);
 	return (inpt + step);
 }
 

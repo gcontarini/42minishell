@@ -6,7 +6,7 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:18:18 by gcontari          #+#    #+#             */
-/*   Updated: 2022/07/31 18:43:27 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/08/01 20:04:03 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ typedef enum e_token_type
 	I_TOKEN,
 	CON_QUOTE,
 	I_QUOTE,
+	CON_PIPE,
+	I_PIPE,
 	CON_REDIR,
 	I_REDIR
 }	t_ttype;
