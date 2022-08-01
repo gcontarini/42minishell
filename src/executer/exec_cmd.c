@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 12:24:52 by nprimo            #+#    #+#             */
-/*   Updated: 2022/07/31 18:49:59 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/08/01 19:57:09 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ static void	child_exec_bin(char *bpath, char **envp, t_cmd *cmd, t_shell *sh)
 	error_check(redirect(cmd->in.fd, cmd->out.fd), sh);
 	envp = dict_list_to_av(sh->env, sh);
 	if (execve(bpath, cmd->av, envp) == -1)
-		sh->exit_status = 1; // find value that makes return = 127
+		sh->exit_status = 127; // find value that makes return = 127
 	free_split(envp);
 	exit(sh->exit_status);
 	return ;
