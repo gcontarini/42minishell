@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 15:36:50 by nprimo            #+#    #+#             */
-/*   Updated: 2022/07/26 17:50:34 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/08/01 20:39:15 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	here_doc(char *eof, t_shell *sh)
 		return (-1);
 	pid = fork();
 	if (pid == -1)
-		return (_close_pipe(fd_pipe, -1)); // error no?
+		return (_close_pipe(fd_pipe, 1));
 	if (pid == 0)
 	{
 		set_here_doc_signal(sh);
@@ -34,7 +34,7 @@ int	here_doc(char *eof, t_shell *sh)
 	}
 	waitpid(0, &status, 0);
 	if (status != 0)
-		return (_close_pipe(fd_pipe, -1)); // error no?
+		return (_close_pipe(fd_pipe, WEXITSTATUS(status)));
 	close(fd_pipe[1]);
 	return (fd_pipe[0]);
 }
