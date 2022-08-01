@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax_tree.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 20:00:15 by gcontari          #+#    #+#             */
-/*   Updated: 2022/08/01 20:09:38 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/08/01 20:21:02 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ static t_list	*syntax_error_checker(t_list *curr, t_shell *sh)
 static t_list	*syntax_error(char *err_msg, t_shell *sh)
 {
 	printf("%s\n", err_msg);
-	sh->exit_status = 42; // Which number should use?
+	sh->exit_status = 2;
 	ft_lstclear(&(sh->token_list), free_token);
 	return (NULL);
 }
