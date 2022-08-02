@@ -6,7 +6,7 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 17:29:09 by gcontari          #+#    #+#             */
-/*   Updated: 2022/07/31 16:13:31 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/08/02 09:05:20 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	set_signals(void (*opt)(int), t_shell *sh)
 		|| signal(SIGQUIT, opt) == SIG_ERR)
 	{
 		free_shell(sh);
-		exit(0); // Which error?
+		ms_exit(0, ERRMSG_SET_SIGNAL, true, sh); // Which error?
 	}
 	return ;
 }

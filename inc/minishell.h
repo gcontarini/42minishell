@@ -6,7 +6,7 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:18:18 by gcontari          #+#    #+#             */
-/*   Updated: 2022/08/01 20:04:03 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/08/02 09:19:00 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,15 @@
 # define METACHAR_SET "|&<>" // ;()
 # define SPACE_SET " \n\t"
 # define EXP_SET "|&<> \n\t\'\""
-# define INVALID_TERM 0 // Don't know what to use
 
 // Error messages
-# define ERRMSG_SYNTAX "Syntax error."
-# define ERRMSG_OPEN_REDIR "Syntax error: unclosed redirection or pipe."
+# define INVALID_TERM 0 // Don't know what to use
+# define ERRMSG_SYNTAX "Syntax error.\n"
+# define ERRMSG_OPEN_REDIR "Syntax error: unclosed redirection or pipe.\n"
+# define ERRMSG_TERMINAL "Set terminal config error.\n"
+# define ERRMSG_SET_SIGNAL "Set signal handler error.\n"
+# define ERRMSG_MEM_FAIL "Memory allocation failed!\n"
+# define ERRMSG_GENERIC "User perror to print specific things...\n"
 
 // ALIAS
 typedef unsigned int	t_uint;
@@ -161,6 +165,9 @@ int		is_in_set(char *str, char **str_set);
 char	*ft_getenv(const char *name, t_list *env);
 t_dict	*get_dict_var(const char *key, t_list *dict);
 
+// exit
+int		ms_exit(int status, char *err_msg, bool is_exit, t_shell *sh);
+
 // error handling
 void	*xmc(void *ptr, void *var, t_struct_type type, t_shell *sh);
 void	*error_check_pointer(void *pointer);
@@ -185,6 +192,7 @@ t_list	*lexer(t_shell *sh, const char *inpt);
 char	*expander(t_shell *sh, const char *input);
 char	*f_tilda_expander(t_shell *sh, const char *input);
 t_list	*build_syntax_tree(t_shell *sh);
+t_list	*syntax_error_checker(t_list *curr, t_shell *sh);
 
 // signals
 void	set_signals(void (*opt)(int), t_shell *sh);

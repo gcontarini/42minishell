@@ -6,7 +6,7 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 18:44:23 by gcontari          #+#    #+#             */
-/*   Updated: 2022/07/31 16:13:43 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/08/02 09:04:37 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_term	ms_get_termios(t_shell *sh)
 	if (isatty(sh->term_fd) == 0)
 	{
 		free_shell(sh);
-		exit(INVALID_TERM);
+		ms_exit(INVALID_TERM, ERRMSG_TERMINAL, true, sh);
 	}
 	tcgetattr(sh->term_fd, &curr_term);
 	return (curr_term);

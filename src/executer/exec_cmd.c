@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
+/*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 12:24:52 by nprimo            #+#    #+#             */
-/*   Updated: 2022/08/01 20:32:20 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/08/02 09:10:30 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,13 @@ static int	exec_builtin(t_cmd *cmd, t_shell *sh)
 	return_status = 0;
 	pid = fork();
 	if (pid == -1)
-		exit(1);
+		ms_exit(1, NULL, true, sh); // Which number and message?
 	if (pid == 0)
 	{
 		pos = is_builitin(cmd->av[0]);
 		return_status = builtin_list[pos](cmd, sh);
 		close_cmd_fd(cmd);
-		exit(return_status);
+		ms_exit(return_status, NULL, false, sh); // Which number and message?
 	}
 	close_cmd_fd(cmd);
 	return (return_status);
@@ -85,7 +85,7 @@ static int	exec_bin(t_cmd *cmd, t_shell *sh)
 		bin_path = find_bin_path(cmd->av[0], sh->env, sh);
 	pid = fork();
 	if (pid == -1)
-		exit(1);
+		ms_exit(1, NULL, true, sh); // Which number and message?
 	if (pid == 0)
 		child_exec_bin(bin_path, envp, cmd, sh);
 	close_cmd_fd(cmd);
@@ -102,6 +102,6 @@ static void	child_exec_bin(char *bpath, char **envp, t_cmd *cmd, t_shell *sh)
 	if (execve(bpath, cmd->av, envp) == -1)
 		sh->exit_status = 127;
 	free_split(envp);
-	exit(sh->exit_status);
+	ms_exit(sh->exit_status, NULL, true, sh);
 	return ;
 }

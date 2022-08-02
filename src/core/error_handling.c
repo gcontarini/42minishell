@@ -6,7 +6,7 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 15:31:54 by nprimo            #+#    #+#             */
-/*   Updated: 2022/07/31 16:06:17 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/08/02 09:17:41 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,10 @@ void	*xmc(void *ptr, void *var, t_struct_type type, t_shell *sh)
 
 	if (!ptr)
 	{
-		printf("Memory allocation failed!\n");
 		if (var)
 			free_func_list[type](var);
 		free_shell(sh);
-		exit(1);
+		ms_exit(1, ERRMSG_MEM_FAIL, true, sh); // which number
 	}
 	return (ptr);
 }
@@ -35,7 +34,7 @@ void	error_check(int ret_value, t_shell *sh)
 	{
 		printf("User perror to print specific things...\n");
 		free_shell(sh);
-		exit(1);
+		ms_exit(1, ERRMSG_GENERIC, true, sh); // which number
 	}
 }
 
@@ -43,8 +42,7 @@ int	ofile_checker(int fd, t_shell *sh)
 {
 	if (fd < 0)
 	{
-		write(STDERR_FILENO, "\n", 1);
-		sh->exit_status = 42; // Which errono
+		ms_exit(42, "\n", false, sh); // which number and message
 		return (1);
 	}
 	return (0);

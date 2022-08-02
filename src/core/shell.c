@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
+/*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:24:04 by nprimo            #+#    #+#             */
-/*   Updated: 2022/08/01 20:16:06 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/08/02 09:12:13 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@ int	shell_interactive(t_shell *sh)
 		{
 			ms_restore_term(sh);
 			free_shell(sh);
-			write(STDERR_FILENO, "exit\n", 5);
-			exit(0);
+			ms_exit(0, "exit\n", true, sh);
 		}
 		else if (ft_strlen(sh->input) > 0)
 		{
@@ -69,8 +68,8 @@ static int	exec_input(t_shell *sh)
 		sh->exit_status = exec_cmd_list(sh);
 	ft_lstclear(&sh->cmd_list, free_cmd);
 	sh->cmd_list = NULL;
-	if (sh->exit_status != 0)
-		printf("Print error status code (%d) accordingly\n", sh->exit_status);
+	// if (sh->exit_status != 0)
+	// 	printf("Print error status code (%d) accordingly\n", sh->exit_status);
 	free(sh->input);
 	sh->token_list = NULL;
 	return (0);

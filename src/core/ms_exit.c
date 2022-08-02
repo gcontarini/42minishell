@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_set_term.c                                      :+:      :+:    :+:   */
+/*   ms_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/21 18:53:40 by gcontari          #+#    #+#             */
-/*   Updated: 2022/08/02 09:04:51 by gcontari         ###   ########.fr       */
+/*   Created: 2022/04/05 11:14:41 by gcontarini        #+#    #+#             */
+/*   Updated: 2022/08/02 08:56:34 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ms_set_term(t_shell *sh)
+int	ms_exit(int status, char *err_msg, bool is_exit, t_shell *sh)
 {
-	if (isatty(sh->term_fd) == 0
-		|| tcsetattr(sh->term_fd, TCSANOW, &sh->new_term) < 0)
-	{
-		free_shell(sh);
-		ms_exit(INVALID_TERM, ERRMSG_TERMINAL, true, sh); // Check this errno
-	}
-	return ;
+	if (err_msg)
+		write(STDERR_FILENO, err_msg, ft_strlen(err_msg));
+	if (sh)
+		sh->exit_status = status;
+	if (is_exit)
+		exit(status);
+	return (status);
 }
