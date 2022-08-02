@@ -6,7 +6,7 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 12:24:52 by nprimo            #+#    #+#             */
-/*   Updated: 2022/08/02 09:10:30 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/08/02 21:35:38 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static int	exec_builtin(t_cmd *cmd, t_shell *sh)
 		pos = is_builitin(cmd->av[0]);
 		return_status = builtin_list[pos](cmd, sh);
 		close_cmd_fd(cmd);
-		ms_exit(return_status, NULL, false, sh); // Which number and message?
+		ms_exit(return_status, NULL, true, sh); // Which number and message?
 	}
 	close_cmd_fd(cmd);
 	return (return_status);
