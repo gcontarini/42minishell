@@ -6,7 +6,7 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 17:29:09 by gcontari          #+#    #+#             */
-/*   Updated: 2022/08/02 09:05:20 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/08/02 09:25:31 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	set_here_doc_signal(t_shell *sh)
 		|| signal(SIGQUIT, SIG_IGN) == SIG_ERR)
 	{
 		free_shell(sh);
-		exit(0); // ERRO no?
+		ms_exit(0, ERRMSG_SET_SIGNAL, true, sh); // Which error?
 	}
 	return ;
 }
