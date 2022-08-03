@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:18:18 by gcontari          #+#    #+#             */
-/*   Updated: 2022/08/03 20:12:44 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/08/03 20:24:27 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@
 # define ERRMSG_OPENFILE "Error opening file.\n"
 # define ERRMSG_CMDNOTFOUND "Command not found\n"
 # define ERRMSG_PIPE "Pipe broke up\n"
+# define ERRMSG_EXIT2 "exit: Numeric argument required\n"
+# define ERRMSG_EXIT "exit: too many arguments\n"
 
 // ALIAS
 typedef unsigned int	t_uint;

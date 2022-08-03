@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 19:11:28 by nprimo            #+#    #+#             */
-/*   Updated: 2022/07/31 16:05:02 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/08/03 20:31:45 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-#define ERORR_AC "bash: exit: too many arguments\n"
 
 int			get_ac(char **av);
 static int	is_all_digit(char *str);
@@ -25,25 +23,14 @@ int	ft_exit(t_cmd *cmd, t_shell *sh)
 		if (is_all_digit(cmd->av[1]))
 		{
 			if (get_ac(cmd->av) > 2)
-			{
-				ft_putstr_fd(ERORR_AC, 2);
-				return (1);
-			}
-			sh->exit_status = ft_atoi(cmd->av[1]);
-			free_shell(sh);
-			exit(sh->exit_status);
+				return (ms_exit(1, ERRMSG_EXIT, false, sh));
+			sh->exit_status = (char) ft_atoi(cmd->av[1]);
+			ms_exit(sh->exit_status, NULL, true, sh);
 		}
 		else
-		{
-			ft_putstr_fd("bash:exit: ", 2);
-			ft_putstr_fd(cmd->av[1], 2);
-			ft_putstr_fd(": numeric argument required\n", 2);
-			free_shell(sh);
-			exit(2);
-		}
+			ms_exit(2, ERRMSG_EXIT2, true, sh);
 	}
-	free_shell(sh);
-	exit(sh->exit_status);
+	return (ms_exit(sh->exit_status, NULL, true, sh)); // return last exit status
 }
 
 static int	is_all_digit(char *str)
