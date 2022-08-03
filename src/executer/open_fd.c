@@ -73,7 +73,7 @@ static int	get_fd_out(t_list *cmd_list, t_shell *sh)
 		if (cmd_list->next)
 		{
 			next_cmd = (t_cmd *) cmd_list->next->content;
-			error_check(pipe(fd_pipe), sh); // Change this?
+			error_check(pipe(fd_pipe), sh); // Change this? yes
 			next_cmd->in.fd = fd_pipe[0];
 			cmd->out.fd = fd_pipe[1];
 		}

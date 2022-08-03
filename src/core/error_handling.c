@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_handling.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 15:31:54 by nprimo            #+#    #+#             */
-/*   Updated: 2022/08/02 22:00:26 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/08/03 19:07:49 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	ofile_checker(int fd, t_shell *sh)
 {
 	if (fd < 0)
 	{
-		ms_exit(1, "\n", false, sh); // wait
+		ms_exit(1, ERRMSG_OPENFILE, false, sh); // wait
 		return (1);
 	}
 	return (0);

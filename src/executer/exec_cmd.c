@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 12:24:52 by nprimo            #+#    #+#             */
-/*   Updated: 2022/08/02 21:35:38 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/08/03 19:11:19 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ static void	child_exec_bin(char *bpath, char **envp, t_cmd *cmd, t_shell *sh)
 	error_check(redirect(cmd->in.fd, cmd->out.fd), sh);
 	envp = dict_list_to_av(sh->env, sh);
 	if (execve(bpath, cmd->av, envp) == -1)
-		sh->exit_status = 127;
+		ms_exit(127, ERRMSG_CMDNOTFOUND, false, sh);
 	free_split(envp);
 	ms_exit(sh->exit_status, NULL, true, sh);
 	return ;

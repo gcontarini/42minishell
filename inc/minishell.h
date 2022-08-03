@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:18:18 by gcontari          #+#    #+#             */
-/*   Updated: 2022/08/02 09:19:00 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/08/03 19:11:17 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@
 # define ERRMSG_SET_SIGNAL "Set signal handler error.\n"
 # define ERRMSG_MEM_FAIL "Memory allocation failed!\n"
 # define ERRMSG_GENERIC "User perror to print specific things...\n"
+# define ERRMSG_OPENFILE "Error opening file.\n"
+# define ERRMSG_CMDNOTFOUND "Command not found\n"
 
 // ALIAS
 typedef unsigned int	t_uint;
