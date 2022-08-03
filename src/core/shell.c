@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:24:04 by nprimo            #+#    #+#             */
-/*   Updated: 2022/08/02 09:12:13 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/08/03 18:58:15 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,10 @@ int	shell_interactive(t_shell *sh)
 			exec_input(sh);
 		}
 		else
+		{
 			sh->exit_status = 0;
+			free(sh->input);
+		}
 	}
 	return (0);
 }
