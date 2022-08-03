@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 17:21:27 by nprimo            #+#    #+#             */
-/*   Updated: 2022/07/31 18:48:10 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/08/03 19:48:35 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,21 @@ int	is_builitin(char *str)
 		pos++;
 	}
 	return (-1);
+}
+
+int	ms_redirect(int fd_in, int fd_out)
+{
+	if (fd_in != STDIN_FILENO)
+	{
+		if (dup2(fd_in, STDIN_FILENO) == -1
+			|| close(fd_in) == -1)
+			return (-1);
+	}
+	if (fd_out != STDOUT_FILENO)
+	{
+		if (dup2(fd_out, STDOUT_FILENO) == -1
+			|| close(fd_out) == -1)
+			return (-1);
+	}
+	return (0);
 }

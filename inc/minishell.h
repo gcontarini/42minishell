@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:18:18 by gcontari          #+#    #+#             */
-/*   Updated: 2022/08/03 19:11:17 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/08/03 19:46:06 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,6 +183,7 @@ int		open_fd(t_list *cmd_list, t_shell *sh);
 int		here_doc(char *eof, t_shell *sh);
 // exec utils
 int		is_builitin(char *str);
+int		ms_redirect(int fd_in, int fd_out);
 char	*find_bin_path(const char *bin, t_list *env, t_shell *sh);
 void	close_cmd_fd(t_cmd *cmd);
 
