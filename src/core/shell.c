@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:24:04 by nprimo            #+#    #+#             */
-/*   Updated: 2022/08/03 18:58:15 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/08/03 20:10:24 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,16 @@ int	shell_from_file(int ac, char **av, t_shell *sh)
 	if (ac > 1)
 	{
 		fd = open(av[1], O_RDONLY);
-		error_check(fd, sh);
+		if (fd == -1)
+			ms_exit(1, ERRMSG_OPENFILE, true, sh);
 		sh->input = get_next_line(fd);
 		while (sh->input)
 		{
 			exec_input(sh);
 			sh->input = get_next_line(fd);
 		}
-		error_check(close(fd), sh);
+		if (close(fd) == -1)
+			ms_exit(1, ERRMSG_OPENFILE, true, sh);
 	}
 	return (0);
 }
@@ -71,8 +73,6 @@ static int	exec_input(t_shell *sh)
 		sh->exit_status = exec_cmd_list(sh);
 	ft_lstclear(&sh->cmd_list, free_cmd);
 	sh->cmd_list = NULL;
-	// if (sh->exit_status != 0)
-	// 	printf("Print error status code (%d) accordingly\n", sh->exit_status);
 	free(sh->input);
 	sh->token_list = NULL;
 	return (0);

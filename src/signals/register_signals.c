@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   register_signals.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 17:29:09 by gcontari          #+#    #+#             */
-/*   Updated: 2022/08/02 21:56:52 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/08/03 20:06:34 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,7 @@ void	set_signals(void (*opt)(int), t_shell *sh)
 		opt = sig_handler;
 	if (signal(SIGINT, opt) == SIG_ERR
 		|| signal(SIGQUIT, opt) == SIG_ERR)
-	{
-		free_shell(sh);
-		ms_exit(0, ERRMSG_SET_SIGNAL, true, sh); // Which error?
-	}
+		ms_exit(1, ERRMSG_SET_SIGNAL, true, sh);
 	return ;
 }
 
@@ -33,10 +30,7 @@ void	set_here_doc_signal(t_shell *sh)
 	set_signals(SIG_DFL, NULL);
 	if (signal(SIGINT, sig_exit_here_doc) == SIG_ERR
 		|| signal(SIGQUIT, SIG_IGN) == SIG_ERR)
-	{
-		free_shell(sh);
-		ms_exit(0, ERRMSG_SET_SIGNAL, true, sh); // Which error?
-	}
+		ms_exit(1, ERRMSG_SET_SIGNAL, true, sh);
 	return ;
 }
 

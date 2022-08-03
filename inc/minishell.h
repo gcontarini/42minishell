@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:18:18 by gcontari          #+#    #+#             */
-/*   Updated: 2022/08/03 19:46:06 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/08/03 20:12:44 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,10 @@
 # define ERRMSG_TERMINAL "Set terminal config error.\n"
 # define ERRMSG_SET_SIGNAL "Set signal handler error.\n"
 # define ERRMSG_MEM_FAIL "Memory allocation failed!\n"
-# define ERRMSG_GENERIC "User perror to print specific things...\n"
+# define ERRMSG_GENERIC "Something very bad has just happened...\n"
 # define ERRMSG_OPENFILE "Error opening file.\n"
 # define ERRMSG_CMDNOTFOUND "Command not found\n"
+# define ERRMSG_PIPE "Pipe broke up\n"
 
 // ALIAS
 typedef unsigned int	t_uint;
@@ -173,7 +174,6 @@ int		ms_exit(int status, char *err_msg, bool is_exit, t_shell *sh);
 // error handling
 void	*xmc(void *ptr, void *var, t_struct_type type, t_shell *sh);
 void	*error_check_pointer(void *pointer);
-void	error_check(int ret_value, t_shell *sh);
 int		ofile_checker(int fd, t_shell *sh);
 
 // executer

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:14:41 by gcontarini        #+#    #+#             */
-/*   Updated: 2022/08/02 08:56:34 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/08/03 19:58:20 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@ int	ms_exit(int status, char *err_msg, bool is_exit, t_shell *sh)
 	if (sh)
 		sh->exit_status = status;
 	if (is_exit)
+	{
+		if (sh)
+			free_shell(sh);
 		exit(status);
+	}
 	return (status);
 }

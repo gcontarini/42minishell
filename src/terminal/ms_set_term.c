@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_set_term.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 18:53:40 by gcontari          #+#    #+#             */
-/*   Updated: 2022/08/02 09:04:51 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/08/03 20:07:38 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,6 @@ void	ms_set_term(t_shell *sh)
 {
 	if (isatty(sh->term_fd) == 0
 		|| tcsetattr(sh->term_fd, TCSANOW, &sh->new_term) < 0)
-	{
-		free_shell(sh);
-		ms_exit(INVALID_TERM, ERRMSG_TERMINAL, true, sh); // Check this errno
-	}
+		ms_exit(1, ERRMSG_TERMINAL, true, sh);
 	return ;
 }

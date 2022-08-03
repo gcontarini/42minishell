@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 12:24:52 by nprimo            #+#    #+#             */
-/*   Updated: 2022/08/03 19:49:10 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/08/03 20:12:13 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,13 @@ static int	exec_builtin(t_cmd *cmd, t_shell *sh)
 	return_status = 0;
 	pid = fork();
 	if (pid == -1)
-		ms_exit(1, NULL, true, sh); // Which number and message?
+		ms_exit(1, NULL, true, sh);
 	if (pid == 0)
 	{
 		pos = is_builitin(cmd->av[0]);
 		return_status = builtin_list[pos](cmd, sh);
 		close_cmd_fd(cmd);
-		ms_exit(return_status, NULL, true, sh); // Which number and message?
+		ms_exit(return_status, NULL, true, sh);
 	}
 	close_cmd_fd(cmd);
 	return (return_status);
@@ -86,7 +86,7 @@ static int	exec_bin(t_cmd *cmd, t_shell *sh)
 		bin_path = find_bin_path(cmd->av[0], sh->env, sh);
 	pid = fork();
 	if (pid == -1)
-		ms_exit(1, NULL, true, sh); // Which number and message?
+		ms_exit(1, NULL, true, sh);
 	if (pid == 0)
 		child_exec_bin(bin_path, envp, cmd, sh);
 	close_cmd_fd(cmd);
@@ -98,7 +98,8 @@ static int	exec_bin(t_cmd *cmd, t_shell *sh)
 static void	child_exec_bin(char *bpath, char **envp, t_cmd *cmd, t_shell *sh)
 {
 	set_signals(SIG_DFL, sh);
-	error_check(ms_redirect(cmd->in.fd, cmd->out.fd), sh);
+	if (ms_redirect(cmd->in.fd, cmd->out.fd) == -1)
+		ms_exit(1, ERRMSG_GENERIC, true, sh);
 	envp = dict_list_to_av(sh->env, sh);
 	if (execve(bpath, cmd->av, envp) == -1)
 		ms_exit(127, ERRMSG_CMDNOTFOUND, false, sh);
