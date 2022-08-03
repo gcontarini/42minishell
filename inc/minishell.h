@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 11:18:18 by gcontari          #+#    #+#             */
-/*   Updated: 2022/08/03 20:24:27 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/08/03 21:01:12 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,9 @@
 # define ERRMSG_PIPE "Pipe broke up\n"
 # define ERRMSG_EXIT2 "exit: Numeric argument required\n"
 # define ERRMSG_EXIT "exit: too many arguments\n"
+# define ERRMSG_NOPERMISSION "No permissions or no such file or directory\n"
+# define ERRMSG_TOOMANYARGS "Too many arguments\n"
+# define ERRMSG_IDENTIFIER "Invalid identifier\n"
 
 // ALIAS
 typedef unsigned int	t_uint;
@@ -140,7 +143,7 @@ int		ft_exit(t_cmd *cmd, t_shell *sh);
 int		ft_pwd(t_cmd *cmd, t_shell *sh);
 int		ft_unset(t_cmd *cmd, t_shell *sh);
 int		ft_cd(t_cmd *cmd, t_shell *sh);
-
+int		get_ac(char **av);
 // core
 void	free_split(void *av_void);
 void	free_cmd(void *cmd_void);
