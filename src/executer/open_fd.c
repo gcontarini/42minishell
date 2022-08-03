@@ -25,7 +25,7 @@ int	open_fd(t_list *cmd_list, t_shell *sh)
 	{
 		if (get_fd_in(curr_cmd, sh)
 			|| get_fd_out(curr_cmd, sh))
-			return (1); // errono?
+			return (1);
 		curr_cmd = curr_cmd->next;
 	}
 	return (0);

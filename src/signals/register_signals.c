@@ -6,7 +6,7 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 17:29:09 by gcontari          #+#    #+#             */
-/*   Updated: 2022/08/02 09:34:06 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/08/02 21:56:52 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,6 @@ static void	sig_handler(int sig)
 
 static void	sig_exit_here_doc(int sig)
 {
-	exit(128 + sig); // Check this shit
+	exit(-sig);
 	return ;
 }

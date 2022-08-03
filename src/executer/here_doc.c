@@ -6,14 +6,14 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 15:36:50 by nprimo            #+#    #+#             */
-/*   Updated: 2022/08/02 09:07:37 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/08/02 21:50:59 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 static int	_close_pipe(int pipe[2], int status);
-static void	child_here_doc(char *eof, int fd_pipe[2]);
+static int	child_here_doc(char *eof, int fd_pipe[2]);
 
 int	here_doc(char *eof, t_shell *sh)
 {
@@ -34,12 +34,12 @@ int	here_doc(char *eof, t_shell *sh)
 	}
 	waitpid(0, &status, 0);
 	if (status != 0)
-		return (_close_pipe(fd_pipe, WEXITSTATUS(status)));
+		return (_close_pipe(fd_pipe, -WEXITSTATUS(status)));
 	close(fd_pipe[1]);
 	return (fd_pipe[0]);
 }
 
-static void	child_here_doc(char *eof, int fd_pipe[2])
+static int	child_here_doc(char *eof, int fd_pipe[2])
 {
 	char	*new_line;
 
@@ -53,7 +53,7 @@ static void	child_here_doc(char *eof, int fd_pipe[2])
 	}
 	_close_pipe(fd_pipe, 0);
 	free(new_line);
-	return ;
+	return (0);
 }
 
 static int	_close_pipe(int pipe[2], int status)

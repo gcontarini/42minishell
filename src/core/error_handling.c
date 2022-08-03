@@ -6,7 +6,7 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 15:31:54 by nprimo            #+#    #+#             */
-/*   Updated: 2022/08/02 09:17:41 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/08/02 22:00:26 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,8 @@ void	error_check(int ret_value, t_shell *sh)
 {
 	if (ret_value < 0)
 	{
-		printf("User perror to print specific things...\n");
 		free_shell(sh);
-		ms_exit(1, ERRMSG_GENERIC, true, sh); // which number
+		ms_exit(-ret_value, ERRMSG_GENERIC, true, sh); // wait
 	}
 }
 
@@ -42,7 +41,7 @@ int	ofile_checker(int fd, t_shell *sh)
 {
 	if (fd < 0)
 	{
-		ms_exit(42, "\n", false, sh); // which number and message
+		ms_exit(1, "\n", false, sh); // wait
 		return (1);
 	}
 	return (0);
