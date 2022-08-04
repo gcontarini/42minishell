@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:53:26 by nprimo            #+#    #+#             */
-/*   Updated: 2022/08/03 21:15:13 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/08/04 20:04:16 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ static int	check_identifier(char *av)
 {
 	if (ft_isalpha(av[0]) == 0 && av[0] != '_')
 		return (0);
-	while (*av)
+	while (*av && *av != '=')
 	{
 		if (ft_isalnum(*av) == 0 && *av != '_')
 			return (0);
