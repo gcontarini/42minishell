@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
+/*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 19:11:28 by nprimo            #+#    #+#             */
-/*   Updated: 2022/08/03 20:31:45 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/08/04 16:08:22 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	ft_exit(t_cmd *cmd, t_shell *sh)
 		else
 			ms_exit(2, ERRMSG_EXIT2, true, sh);
 	}
-	return (ms_exit(sh->exit_status, NULL, true, sh)); // return last exit status
+	return (ms_exit(sh->last_exit_status, NULL, true, sh));
 }
 
 static int	is_all_digit(char *str)

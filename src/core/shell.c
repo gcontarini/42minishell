@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
+/*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:24:04 by nprimo            #+#    #+#             */
-/*   Updated: 2022/08/03 20:10:24 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/08/04 16:08:58 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ int	shell_from_file(int ac, char **av, t_shell *sh)
 
 static int	exec_input(t_shell *sh)
 {
+	sh->last_exit_status = sh->exit_status;
 	sh->token_list = parser(sh, sh->input);
 	sh->cmd_list = get_cmd_list(&sh->token_list, sh);
 	if (sh->exit_status == 0)
