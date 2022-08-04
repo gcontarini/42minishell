@@ -15,7 +15,7 @@ SYS_NAME := $(shell uname)
 
 # COMPILER
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra -g -fsanitize=address
+CFLAGS = -Wall -Werror -Wextra
 RM = rm -rf
 
 # FILES
