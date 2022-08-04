@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:24:04 by nprimo            #+#    #+#             */
-/*   Updated: 2022/08/04 16:08:58 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/08/04 18:40:47 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,10 @@ static int	exec_input(t_shell *sh)
 	sh->token_list = parser(sh, sh->input);
 	sh->cmd_list = get_cmd_list(&sh->token_list, sh);
 	if (sh->exit_status == 0)
+	{
 		sh->exit_status = open_fd(sh->cmd_list, sh);
-	if (sh->exit_status == 0)
 		sh->exit_status = exec_cmd_list(sh);
+	}
 	ft_lstclear(&sh->cmd_list, free_cmd);
 	sh->cmd_list = NULL;
 	free(sh->input);

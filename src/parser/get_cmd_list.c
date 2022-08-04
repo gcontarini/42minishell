@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_cmd_list.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 16:59:38 by nprimo            #+#    #+#             */
-/*   Updated: 2022/07/31 16:12:05 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/08/04 18:47:34 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ static t_cmd	*init_new_cmd(t_shell *sh)
 	new_cmd = (t_cmd *) xmc(ft_calloc(1, sizeof(t_cmd)), NULL, 0, sh);
 	new_cmd->in.fd = -1;
 	new_cmd->out.fd = -1;
+	new_cmd->exec = true;
 	return (new_cmd);
 }
 

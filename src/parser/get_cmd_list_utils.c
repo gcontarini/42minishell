@@ -6,7 +6,7 @@
 /*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:01:37 by nprimo            #+#    #+#             */
-/*   Updated: 2022/08/03 20:03:52 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/08/04 18:49:17 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ int	add_cmd_in_out(t_cmd *cmd, t_list *cmd_token_list, t_shell *sh)
 
 	return_status = 0;
 	return_status = add_cmd_in(cmd, cmd_token_list, sh);
-	if (return_status == 0)
-		return_status = add_cmd_out(cmd, cmd_token_list);
+	return_status = add_cmd_out(cmd, cmd_token_list);
 	return (return_status);
 }
 
@@ -128,7 +127,10 @@ static int	add_cmd_in(t_cmd *cmd, t_list *cmd_token_list, t_shell *sh)
 		{
 			cmd->in = update_fd_in(cmd->in, curr_cont, curr_token, sh);
 			if (cmd->in.fd == -256)
+			{
+				cmd->exec = false;
 				return (ms_exit(1, ERRMSG_OPENFILE, false, NULL));
+			}
 		}
 		curr_token = curr_token->next;
 	}

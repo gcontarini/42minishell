@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd_list.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 17:19:09 by nprimo            #+#    #+#             */
-/*   Updated: 2022/08/04 16:07:02 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/08/04 18:51:35 by nprimo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,13 @@ int	exec_cmd_list(t_shell *sh)
 	while (head)
 	{
 		cmd = (t_cmd *) head->content;
-		if (exec_cmd(cmd, sh))
-			return (sh->exit_status);
+		if (cmd->exec)
+		{
+			if (exec_cmd(cmd, sh))
+				return (sh->exit_status);
+		}
+		else
+			close_cmd_fd(cmd);
 		head = head->next;
 	}
 	while (wait(&sh->exit_status) != -1)
