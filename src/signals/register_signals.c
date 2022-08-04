@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   register_signals.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nprimo <nprimo@student.42lisboa.com>       +#+  +:+       +#+        */
+/*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 17:29:09 by gcontari          #+#    #+#             */
-/*   Updated: 2022/08/03 20:06:34 by nprimo           ###   ########.fr       */
+/*   Updated: 2022/08/04 19:58:54 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ static void	sig_handler(int sig)
 	{
 		write(STDERR_FILENO, "\n", 1);
 		rl_replace_line("", 0);
+		rl_on_new_line();
+		rl_redisplay();
 	}
-	rl_on_new_line();
-	rl_redisplay();
 	return ;
 }
 
