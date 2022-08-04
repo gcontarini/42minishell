@@ -23,9 +23,8 @@ int	open_fd(t_list *cmd_list, t_shell *sh)
 	curr_cmd = cmd_list;
 	while (curr_cmd)
 	{
-		if (get_fd_in(curr_cmd, sh)
-			|| get_fd_out(curr_cmd, sh))
-			return (1);
+		get_fd_in(curr_cmd, sh);
+		get_fd_out(curr_cmd, sh);
 		curr_cmd = curr_cmd->next;
 	}
 	return (0);
@@ -42,7 +41,13 @@ static int	get_fd_in(t_list *cmd_list, t_shell *sh)
 		cmd->in.fd = open(cmd->in.fname, O_RDONLY);
 	else if (cmd->in.fname && ft_strncmp("<<", cmd->in.red, 2) == 0)
 		cmd->in.fd = here_doc(cmd->in.fname, sh);
-	return (ofile_checker(cmd->in.fd, sh));
+	if (ofile_checker(cmd->in.fd, sh))
+	{
+		cmd->exec = false;
+		open_empty_pipe(cmd_list, sh);
+		return (1);
+	}
+	return (0);
 }
 
 static void	open_empty_pipe(t_list *cmd_list, t_shell *sh)
