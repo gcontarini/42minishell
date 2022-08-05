@@ -6,7 +6,7 @@
 /*   By: gcontari <gcontari@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 09:24:17 by gcontari          #+#    #+#             */
-/*   Updated: 2022/07/31 16:11:29 by gcontari         ###   ########.fr       */
+/*   Updated: 2022/08/05 10:06:00 by gcontari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static char	**split_env_names(const char *input, t_exp exp, t_shell *sh)
 		if (!input || *input != '$')
 			continue ;
 		ptr = (char *)++input;
-		while (*ptr && !ft_strchr(EXP_SET, *ptr))
+		while (*ptr && (ft_isalnum(*ptr) || *ptr == '_'))
 			ptr++;
 		*tmp = xmc(malloc(ptr - input + 1), &exp, T_EXP, sh);
 		ft_strlcpy(*tmp++, input, ptr - input + 1);
